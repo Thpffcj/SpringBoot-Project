@@ -1,7 +1,6 @@
 package cn.edu.nju;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -14,10 +13,9 @@ public class HelloController {
     @Autowired
     private GirlProperties girlProperties;
 
-//    @RequestMapping(value = {"/say/{id}", "/hi"}, method = RequestMethod.GET)
     @GetMapping(value = "/say")
-    public String say(@PathVariable("id") Integer id) {
+    public String say(@RequestParam(value = "id", required = false, defaultValue = "0") Integer myId) {
 //        return girlProperties.getCupSize();
-        return "id: " + id;
+        return "id: " + myId;
     }
 }

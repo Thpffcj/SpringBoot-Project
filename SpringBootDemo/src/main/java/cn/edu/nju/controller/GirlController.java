@@ -1,8 +1,10 @@
 package cn.edu.nju.controller;
 
 import cn.edu.nju.domain.Girl;
+import cn.edu.nju.domain.Result;
 import cn.edu.nju.repository.GirlRepository;
 import cn.edu.nju.service.GirlService;
+import cn.edu.nju.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +42,18 @@ public class GirlController {
      * 添加一个女生
      * @return
      */
-//    @PostMapping(value = "/girls")
-//    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
-//        }
-//
+    @PostMapping(value = "/girls")
+    public Result<Girl> girlAdd(@Valid Girl girl, BindingResult bindingResult) {
+        logger.info("add girl={}", girl);
+        if (bindingResult.hasErrors()) {
+            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
+        }
+
 //        girl.setCupSize(girl.getCupSize());
 //        girl.setAge(girl.getAge());
-//
-//        return ResultUtil.success(girlRepository.save(girl));
-//    }
+
+        return ResultUtil.success(girlRepository.save(girl));
+    }
 
     //查询一个女生
     @GetMapping(value = "/girls/{id}")
@@ -86,5 +89,11 @@ public class GirlController {
     @PostMapping(value = "/girls/two")
     public void girlTwo() {
         girlService.insertTwo();
+    }
+
+    @GetMapping(value = "girls/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception{
+        logger.info("id={}", id);
+        girlService.getAge(id);
     }
 }

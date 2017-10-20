@@ -1,5 +1,6 @@
-package cn.edu.nju;
+package cn.edu.nju.controller;
 
+import cn.edu.nju.properties.GirlProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

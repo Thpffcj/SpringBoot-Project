@@ -1,4 +1,4 @@
-package cn.edu.nju;
+package cn.edu.nju.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

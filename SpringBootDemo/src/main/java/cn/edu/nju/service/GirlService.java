@@ -1,6 +1,6 @@
 package cn.edu.nju.service;
 
-import cn.edu.nju.Girl;
+import cn.edu.nju.domain.Girl;
 import cn.edu.nju.repository.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

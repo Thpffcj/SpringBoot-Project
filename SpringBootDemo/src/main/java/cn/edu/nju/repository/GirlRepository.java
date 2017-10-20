@@ -1,6 +1,6 @@
 package cn.edu.nju.repository;
 
-import cn.edu.nju.Girl;
+import cn.edu.nju.domain.Girl;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

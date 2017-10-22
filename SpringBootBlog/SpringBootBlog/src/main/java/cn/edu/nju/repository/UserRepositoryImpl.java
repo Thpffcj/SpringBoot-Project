@@ -21,7 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User saveOrUpdateUser(User user) {
         Long id = user.getId();
-        if (id == null) {
+        if (id <= 0) {
             id = counter.incrementAndGet();
             user.setId(id);
         }
@@ -41,6 +41,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> listUser() {
-        return (ArrayList<User>) this.userMap.values();
+        return new ArrayList<User>(this.userMap.values());
     }
 }

@@ -1,35 +1,32 @@
 package cn.edu.nju.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by Thpffcj on 2017/10/22.
  * User 实体
  */
+
 public class User {
 
-    private Long id;  // 用户的唯一标识
-
+    private long id; // 用户的唯一标识
     private String name;
-
-    private String email;
+    private int age;
 
     public User() {
-
     }
 
-    public User(Long id, String name, String email) {
-        this.id = id;
+    public User(String name, int age) {
         this.name = name;
-        this.email = email;
+        this.age = age;
     }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
@@ -38,11 +35,11 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public int getAge() {
+        return age;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAge(int age) {
+        this.age = age;
     }
 }

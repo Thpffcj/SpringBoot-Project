@@ -24,16 +24,9 @@ public class BlogController {
     private BlogRepository blogRepository;
 
     @GetMapping
-    public List<Blog> list(@RequestParam(value="title",required=false,defaultValue="") String title,
-                           @RequestParam(value="content",required=false,defaultValue="") String content,
-                           @RequestParam(value="pageIndex",required=false,defaultValue="0") int pageIndex,
-                           @RequestParam(value="pageSize",required=false,defaultValue="10") int pageSize) {
-
-
-        // 数据在 Test 里面先初始化了，这里只管取数据
-        Pageable pageable = new PageRequest(pageIndex, pageSize);
-        Page<Blog> page = blogRepository.findByTitleLikeOrContentLike(title, content, pageable);
-
-        return page.getContent();
+    public String listBlogs(@RequestParam(value="order",required=false,defaultValue="new") String order,
+                            @RequestParam(value="keyword",required=false,defaultValue="" ) String keyword) {
+        System.out.println("order:" +order + ";keyword:" +keyword );
+        return "redirect:/index?order="+order+"&keyword="+keyword;
     }
 }

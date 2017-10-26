@@ -2,6 +2,7 @@ package cn.edu.nju.controller;
 
 import cn.edu.nju.domain.User;
 import cn.edu.nju.repository.UserRepository;
+import cn.edu.nju.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
@@ -50,16 +54,18 @@ public class UserController {
         return new ModelAndView("users/view", "userModel", model);
     }
 
+
     /**
      * 获取 form 表单页面
+     * @param model
      * @return
      */
-    @GetMapping("/form")
+    @GetMapping("/add")
     public ModelAndView createForm(Model model) {
-        model.addAttribute("user", new User(null, 0));
-        model.addAttribute("title", "创建用户");
-        return new ModelAndView("users/form", "userModel", model);
+        model.addAttribute("user", new User(null, null, null, null));
+        return new ModelAndView("users/add", "userModel", model);
     }
+
 
     /**
      * 新建用户
@@ -85,15 +91,15 @@ public class UserController {
     }
 
     /**
-     * 修改用户
+     * 获取修改用户的界面，及数据
+     * @param id
+     * @param model
      * @return
      */
-    @GetMapping(value = "modify/{id}")
+    @GetMapping(value = "edit/{id}")
     public ModelAndView modifyForm(@PathVariable("id") Long id, Model model) {
-        User user = userRepository.findOne(id);
-
+        User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        model.addAttribute("title", "修改用户");
-        return new ModelAndView("users/form", "userModel", model);
+        return new ModelAndView("users/edit", "userModel", model);
     }
 }

@@ -4,10 +4,15 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thpffcj.dto.ShopExecution;
+import com.thpffcj.entity.Area;
 import com.thpffcj.entity.PersonInfo;
 import com.thpffcj.entity.Shop;
+import com.thpffcj.entity.ShopCategory;
 import com.thpffcj.enums.ShopStateEnum;
+import com.thpffcj.service.AreaService;
+import com.thpffcj.service.ShopCategoryService;
 import com.thpffcj.service.ShopService;
+import com.thpffcj.util.CodeUtil;
 import com.thpffcj.util.HttpServletRequestUtil;
 import com.thpffcj.util.ImageUtil;
 import com.thpffcj.util.PathUtil;
@@ -22,7 +27,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,10 +42,41 @@ public class ShopManagementController {
     @Autowired
     private ShopService shopService;
 
+    @Autowired
+    private ShopCategoryService shopCategoryService;
+
+    @Autowired
+    private AreaService areaService;
+
+    @RequestMapping(value = "/getshopinitinfo", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getShopInitInfo() {
+//        System.out.println("---getShopInitInfo---");
+        Map<String, Object> modelMap = new HashMap<>();
+        List<ShopCategory> shopCategoryList = new ArrayList<>();
+        List<Area> areaList = new ArrayList<>();
+        try {
+            shopCategoryList = shopCategoryService.getShopCategoryList(new ShopCategory());
+            areaList = areaService.getAreaList();
+            modelMap.put("shopCategoryList", shopCategoryList);
+            modelMap.put("areaList", areaList);
+            modelMap.put("success", true);
+        } catch (Exception e) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", e.getMessage());
+        }
+        return modelMap;
+    }
+
     @RequestMapping(value = "/registershop", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> registerShop(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
+        if (!CodeUtil.checkVerifyCode(request)) {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "验证码错误");
+            return modelMap;
+        }
         // 1.接收并转化相应的参数，包括店铺信息以及图片信息
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
         ObjectMapper mapper = new ObjectMapper();

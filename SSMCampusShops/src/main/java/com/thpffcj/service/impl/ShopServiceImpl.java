@@ -7,6 +7,7 @@ import com.thpffcj.enums.ShopStateEnum;
 import com.thpffcj.exceptions.ShopOperationException;
 import com.thpffcj.service.ShopService;
 import com.thpffcj.util.ImageUtil;
+import com.thpffcj.util.PageCalculator;
 import com.thpffcj.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Thpffcj on 2017/12/19.
@@ -62,6 +64,21 @@ public class ShopServiceImpl implements ShopService {
             throw new ShopOperationException("addShop error:" + e.getMessage());
         }
         return new ShopExecution(ShopStateEnum.CHECK, shop);
+    }
+
+    @Override
+    public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+        int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
+        List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
+        int count = shopDao.queryShopCount(shopCondition);
+        ShopExecution shopExecution = new ShopExecution();
+        if (shopList != null) {
+            shopExecution.setShopList(shopList);
+            shopExecution.setCount(count);
+        } else {
+            shopExecution.setState(ShopStateEnum.INNER_ERROR.getState());
+        }
+        return shopExecution;
     }
 
     private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) {

@@ -62,4 +62,15 @@ public class ShopServiceTest extends BaseTest {
         ShopExecution shopExecution = shopService.modifyShop(shop, inputStream, "github1.jpg");
         System.out.println("新的图片地址" + shopExecution.getShop().getShopImg());
     }
+
+    @Test
+    public void getShopList() {
+        Shop shopCondition = new Shop();
+        ShopCategory shopCategory = new ShopCategory();
+        shopCategory.setShopCategoryId(1L);
+        shopCondition.setShopCategory(shopCategory);
+        ShopExecution shopExecution = shopService.getShopList(shopCondition, 2, 2);
+        System.out.println("店铺列表数为：" + shopExecution.getShopList().size());
+        System.out.println("店铺总数为：" + shopExecution.getCount());
+    }
 }

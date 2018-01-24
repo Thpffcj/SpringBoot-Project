@@ -4,4 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.thpffcj.dao.ProductImgDao">
+    <insert id="batchInsertProductImg" parameterType="java.util.List">
+        INSERT INTO
+        tb_product_img(img_addr,img_desc,priority,
+        create_time,product_id)
+        VALUES
+        <foreach collection="list" item="productImg" index="index"
+                 separator=",">
+            (
+            #{productImg.imgAddr},
+            #{productImg.imgDesc},
+            #{productImg.priority},
+            #{productImg.createTime},
+            #{productImg.productId}
+            )
+        </foreach>
+    </insert>
 </mapper>

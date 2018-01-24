@@ -2,6 +2,7 @@ package com.thpffcj.service;
 
 import com.thpffcj.BaseTest;
 import com.thpffcj.dao.ShopDao;
+import com.thpffcj.dto.ImageHolder;
 import com.thpffcj.dto.ShopExecution;
 import com.thpffcj.entity.Area;
 import com.thpffcj.entity.PersonInfo;
@@ -48,7 +49,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setAdvice("审核中");
         File shopImg = new File("E://github.jpg");
         InputStream inputStream = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.addShop(shop, inputStream, shopImg.getName());
+        ImageHolder imageHolder = new ImageHolder(shopImg.getName(), inputStream);
+        ShopExecution shopExecution = shopService.addShop(shop, imageHolder);
         assertEquals(ShopStateEnum.CHECK.getState(), shopExecution.getState());
     }
 
@@ -59,7 +61,8 @@ public class ShopServiceTest extends BaseTest {
         shop.setShopName("修改后的店铺名称");
         File shopImg = new File("E://github1.jpg");
         InputStream inputStream = new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.modifyShop(shop, inputStream, "github1.jpg");
+        ImageHolder imageHolder = new ImageHolder("github1.jpg", inputStream);
+        ShopExecution shopExecution = shopService.modifyShop(shop, imageHolder);
         System.out.println("新的图片地址" + shopExecution.getShop().getShopImg());
     }
 

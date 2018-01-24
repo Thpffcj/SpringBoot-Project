@@ -1,8 +1,7 @@
 package com.thpffcj.web.shopadmin;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thpffcj.dto.ImageHolder;
 import com.thpffcj.dto.ShopExecution;
 import com.thpffcj.entity.Area;
 import com.thpffcj.entity.PersonInfo;
@@ -14,8 +13,6 @@ import com.thpffcj.service.ShopCategoryService;
 import com.thpffcj.service.ShopService;
 import com.thpffcj.util.CodeUtil;
 import com.thpffcj.util.HttpServletRequestUtil;
-import com.thpffcj.util.ImageUtil;
-import com.thpffcj.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,6 +99,7 @@ public class ShopManagementController {
         }
         // 1.接收并转化相应的参数，包括店铺信息以及图片信息
         String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
+        // TODO
         ObjectMapper mapper = new ObjectMapper();
         Shop shop = null;
         try {
@@ -143,7 +141,8 @@ public class ShopManagementController {
 //            }
             ShopExecution shopExecution = null;
             try {
-                shopExecution = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(), shopImg.getInputStream());
+                shopExecution = shopService.addShop(shop, imageHolder);
                 if (shopExecution.getState() == ShopStateEnum.CHECK.getState()) {
                     modelMap.put("success", true);
                     // 该用户可以操作的店铺列表
@@ -203,9 +202,10 @@ public class ShopManagementController {
             ShopExecution shopExecution = null;
             try {
                 if (shopImg == null) {
-                    shopExecution = shopService.modifyShop(shop, null, null);
+                    shopExecution = shopService.modifyShop(shop, null);
                 } else {
-                    shopExecution = shopService.modifyShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
+                    ImageHolder imageHolder = new ImageHolder(shopImg.getOriginalFilename(), shopImg.getInputStream());
+                    shopExecution = shopService.modifyShop(shop, imageHolder);
                 }
                 if (shopExecution.getState() == ShopStateEnum.SUCCESS.getState()) {
                     modelMap.put("success", true);

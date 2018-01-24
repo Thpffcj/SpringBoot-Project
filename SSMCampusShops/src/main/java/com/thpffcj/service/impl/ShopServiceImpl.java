@@ -1,6 +1,7 @@
 package com.thpffcj.service.impl;
 
 import com.thpffcj.dao.ShopDao;
+import com.thpffcj.dto.ImageHolder;
 import com.thpffcj.dto.ShopExecution;
 import com.thpffcj.entity.Shop;
 import com.thpffcj.enums.ShopStateEnum;
@@ -34,7 +35,7 @@ public class ShopServiceImpl implements ShopService {
      * 2.保证事务方法的执行时间尽可能短，不要穿插其他网络操作，RPC/HTTP请求或者剥离到事务方法外部
      * 3.不是所有的方法都需要事务，如只有一条修改操作，只读操作不需要事务控制
      */
-    public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) {
+    public ShopExecution addShop(Shop shop, ImageHolder thumbnail) {
         // 空值判断
         if (shop == null) {
             return new ShopExecution(ShopStateEnum.NULL_SHOP_INFO);
@@ -49,9 +50,9 @@ public class ShopServiceImpl implements ShopService {
             if (effectedNum <= 0) {
                 throw new ShopOperationException("店铺创建失败");
             } else {
-                if (shopImgInputStream != null) {
+                if (thumbnail.getImage() != null) {
                     // 存储图片
-                    addShopImg(shop, shopImgInputStream, fileName);
+                    addShopImg(shop, thumbnail);
                     // 更新店铺图片地址
                     effectedNum = shopDao.updateShop(shop);
                     if (effectedNum <= 0) {
@@ -81,10 +82,10 @@ public class ShopServiceImpl implements ShopService {
         return shopExecution;
     }
 
-    private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) {
+    private void addShopImg(Shop shop, ImageHolder thumbnail) {
         // 获取shop图片目录的相对路径
         String dest = PathUtil.getShopImagePath(shop.getShopId());
-        String shopImgAddr = ImageUtil.generateThumbnail(shopImgInputStream, fileName, dest);
+        String shopImgAddr = ImageUtil.generateThumbnail(thumbnail, dest);
         shop.setShopImg(shopImgAddr);
     }
 
@@ -94,18 +95,18 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ShopExecution modifyShop(Shop shop, InputStream shopImgInputStream, String fileName) {
+    public ShopExecution modifyShop(Shop shop, ImageHolder thumbnail) {
         if (shop == null || shop.getShopId() == null) {
             return new ShopExecution(ShopStateEnum.NULL_SHOP_INFO);
         } else {
             try {
                 // 1.判断是否需要处理图片
-                if (shopImgInputStream != null && fileName != null && !fileName.equals("")) {
+                if (thumbnail.getImage() != null && thumbnail.getImageName() != null && !thumbnail.getImageName().equals("")) {
                     Shop tempShop = shopDao.queryByShopId(shop.getShopId());
                     if (tempShop.getShopImg() != null) {
                         ImageUtil.deleteFileOrPath(tempShop.getShopImg());
                     }
-                    addShopImg(shop, shopImgInputStream, fileName);
+                    addShopImg(shop, thumbnail);
                 }
                 // 2.更新店铺信息
                 shop.setLastEditTime(new Date());

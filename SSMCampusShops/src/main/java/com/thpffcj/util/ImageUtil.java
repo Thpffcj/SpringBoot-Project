@@ -1,5 +1,6 @@
 package com.thpffcj.util;
 
+import com.thpffcj.dto.ImageHolder;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -22,14 +23,14 @@ public class ImageUtil {
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random random = new Random();
 
-    public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) {
+    public static String generateThumbnail(ImageHolder thumbnail, String targetAddr) {
         String reanFileName = getRandomFileName();
-        String extension = getFileExtension(fileName);
+        String extension = getFileExtension(thumbnail.getImageName());
         makeDirPath(targetAddr);
         String relativeAddr = targetAddr + reanFileName + extension;
         File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
         try {
-            Thumbnails.of(thumbnailInputStream).size(200, 200).
+            Thumbnails.of(thumbnail.getImage()).size(200, 200).
                     watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f).
                     outputQuality(0.8f).toFile(dest);
         } catch (IOException e) {
@@ -92,5 +93,34 @@ public class ImageUtil {
         Thumbnails.of(new File("E://github.jpg")).size(200, 200).
                 watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f).
                 outputQuality(0.8f).toFile("E://github1.jpg");
+    }
+
+    /**
+     * 处理详情图，并返回新生成图片的相对路径
+     * @param thumbnail
+     * @param targetAddr
+     * @return
+     */
+    public static String generateNormalImg(ImageHolder thumbnail, String targetAddr) {
+        // 获取不重复的随机名
+        String realFileName = getRandomFileName();
+        // 获取文件的扩展名
+        String extension = getFileExtension(thumbnail.getImageName());
+        // 如果目标路径不存在，则自动创建
+        makeDirPath(targetAddr);
+        // 获取文件存储的相对路径(带文件名)
+        String relativeAddr = targetAddr + realFileName + extension;
+        // 获取文件要保存到的目标路径
+        File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+        // 调用Thumbnails生成带有水印的图片
+        try {
+            Thumbnails.of(thumbnail.getImage()).size(337, 640).
+                    watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f).
+                    outputQuality(0.9f).toFile(dest);
+        } catch (IOException e) {
+            throw new RuntimeException("创建缩略图失败：" + e.getMessage());
+        }
+        // 返回图片相对路径
+        return relativeAddr;
     }
 }

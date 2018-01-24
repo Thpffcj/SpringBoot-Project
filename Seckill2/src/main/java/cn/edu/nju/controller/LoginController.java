@@ -1,5 +1,6 @@
 package cn.edu.nju.controller;
 
+import cn.edu.nju.domain.User;
 import cn.edu.nju.result.Result;
 import cn.edu.nju.service.UserService;
 import cn.edu.nju.vo.LoginVo;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -37,5 +39,17 @@ public class LoginController {
         // 登录
         userService.login(response, loginVo);
         return Result.success(true);
+    }
+
+    /**
+     * 为了压测的一个方法，无实际作用
+     * @param model
+     * @param user
+     * @return
+     */
+    @RequestMapping("/info")
+    @ResponseBody
+    public Result<User> info(Model model, User user) {
+        return Result.success(user);
     }
 }

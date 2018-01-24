@@ -29,7 +29,7 @@ public class RedisService {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
-            //生成真正的key
+            // 生成真正的key
             String realKey = prefix.getPrefix() + key;
             String str = jedis.get(realKey);
             T t = stringToBean(str, clazz);

@@ -4,6 +4,8 @@ import cn.edu.nju.dao.OrderDao;
 import cn.edu.nju.domain.OrderInfo;
 import cn.edu.nju.domain.SeckillOrder;
 import cn.edu.nju.domain.User;
+import cn.edu.nju.redis.OrderKey;
+import cn.edu.nju.redis.RedisService;
 import cn.edu.nju.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,16 @@ public class OrderService {
     @Autowired
     OrderDao orderDao;
 
+    @Autowired
+    RedisService redisService;
+
     public SeckillOrder getSeckillOrderByUserIdGoodsId(long userId, long goodsId) {
-        return orderDao.getSeckillOrderByUserIdGoodsId(userId, goodsId);
+//        return orderDao.getSeckillOrderByUserIdGoodsId(userId, goodsId);
+        return redisService.get(OrderKey.getSeckillOrderByUidGid, ""+userId+"_"+goodsId, SeckillOrder.class);
+    }
+
+    public OrderInfo getOrderById(long orderId) {
+        return orderDao.getOrderById(orderId);
     }
 
     @Transactional
@@ -37,14 +47,21 @@ public class OrderService {
         orderInfo.setOrderChannel(1);
         orderInfo.setStatus(0);
         orderInfo.setUserId(user.getId());
-        long orderId = orderDao.insert(orderInfo);
+        orderDao.insert(orderInfo);
 
         SeckillOrder seckillOrder = new SeckillOrder();
         seckillOrder.setGoodsId(goods.getId());
-        seckillOrder.setOrderId(orderId);
+        seckillOrder.setOrderId(orderInfo.getId());
         seckillOrder.setUserId(user.getId());
         orderDao.insertSeckillOrder(seckillOrder);
 
+        redisService.set(OrderKey.getSeckillOrderByUidGid, ""+user.getId()+"_"+goods.getId(), seckillOrder);
+
         return orderInfo;
+    }
+
+    public void deleteOrders() {
+        orderDao.deleteOrders();
+        orderDao.deleteSeckillOrders();
     }
 }

@@ -1,6 +1,7 @@
 package cn.edu.nju.controller;
 
 import cn.edu.nju.domain.User;
+import cn.edu.nju.rabbitmq.MQSender;
 import cn.edu.nju.result.Result;
 import cn.edu.nju.service.UserService;
 import cn.edu.nju.vo.LoginVo;
@@ -27,6 +28,9 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MQSender sender;
+
     @RequestMapping("/to_login")
     public String toLogin() {
         return "login";
@@ -52,4 +56,32 @@ public class LoginController {
     public Result<User> info(Model model, User user) {
         return Result.success(user);
     }
+
+//    @RequestMapping("/mq")
+//    @ResponseBody
+//    public Result<String> mq() {
+//        sender.send("hello,thpffcj");
+//        return Result.success("Hello，world");
+//    }
+//
+//    @RequestMapping("/mq/topic")
+//    @ResponseBody
+//    public Result<String> topic() {
+//        sender.sendTopic("hello,thpffcj");
+//        return Result.success("Hello，world");
+//    }
+//
+//    @RequestMapping("/mq/fanout")
+//    @ResponseBody
+//    public Result<String> fanout() {
+//        sender.sendFanout("hello,thpffcj");
+//        return Result.success("Hello，world");
+//    }
+//
+//    @RequestMapping("/mq/header")
+//    @ResponseBody
+//    public Result<String> header() {
+//		sender.sendHeader("hello,thpffcj");
+//        return Result.success("Hello，world");
+//    }
 }

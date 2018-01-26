@@ -2,11 +2,7 @@ package cn.edu.nju.dao;
 
 import cn.edu.nju.domain.OrderInfo;
 import cn.edu.nju.domain.SeckillOrder;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,4 +22,13 @@ public interface OrderDao {
 
     @Insert("insert into seckill_order (user_id, goods_id, order_id)values(#{userId}, #{goodsId}, #{orderId})")
     public int insertSeckillOrder(SeckillOrder seckillOrder);
+
+    @Select("select * from order_info where id = #{orderId}")
+    public OrderInfo getOrderById(@Param("orderId")long orderId);
+
+    @Delete("delete from order_info")
+    public void deleteOrders();
+
+    @Delete("delete from seckill_order")
+    public void deleteSeckillOrders();
 }

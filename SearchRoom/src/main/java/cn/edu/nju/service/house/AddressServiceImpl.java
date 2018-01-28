@@ -15,6 +15,7 @@ import cn.edu.nju.repository.SubwayRepository;
 import cn.edu.nju.repository.SubwayStationRepository;
 import cn.edu.nju.repository.SupportAddressRepository;
 import cn.edu.nju.service.ServiceMultiResult;
+import cn.edu.nju.service.ServiceResult;
 import cn.edu.nju.web.dto.SubwayDTO;
 import cn.edu.nju.web.dto.SubwayStationDTO;
 import cn.edu.nju.web.dto.SupportAddressDTO;
@@ -106,5 +107,42 @@ public class AddressServiceImpl implements IAddressService {
 
         stations.forEach(station -> result.add(modelMapper.map(station, SubwayStationDTO.class)));
         return result;
+    }
+
+    @Override
+    public Map<SupportAddress.Level, SupportAddressDTO> findCityAndRegion(String cityEnName, String regionEnName) {
+        Map<SupportAddress.Level, SupportAddressDTO> result = new HashMap<>();
+
+        SupportAddress city = supportAddressRepository.findByEnNameAndLevel(cityEnName, SupportAddress.Level.CITY
+                .getValue());
+        SupportAddress region = supportAddressRepository.findByEnNameAndBelongTo(regionEnName, city.getEnName());
+
+        result.put(SupportAddress.Level.CITY, modelMapper.map(city, SupportAddressDTO.class));
+        result.put(SupportAddress.Level.REGION, modelMapper.map(region, SupportAddressDTO.class));
+        return result;
+    }
+
+    @Override
+    public ServiceResult<SubwayDTO> findSubway(Long subwayId) {
+        if (subwayId == null) {
+            return ServiceResult.notFound();
+        }
+        Subway subway = subwayRepository.findOne(subwayId);
+        if (subway == null) {
+            return ServiceResult.notFound();
+        }
+        return ServiceResult.of(modelMapper.map(subway, SubwayDTO.class));
+    }
+
+    @Override
+    public ServiceResult<SubwayStationDTO> findSubwayStation(Long stationId) {
+        if (stationId == null) {
+            return ServiceResult.notFound();
+        }
+        SubwayStation station = subwayStationRepository.findOne(stationId);
+        if (station == null) {
+            return ServiceResult.notFound();
+        }
+        return ServiceResult.of(modelMapper.map(station, SubwayStationDTO.class));
     }
 }

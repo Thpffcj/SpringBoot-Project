@@ -1,4 +1,4 @@
-package cn.edu.nju.web;
+package cn.edu.nju.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

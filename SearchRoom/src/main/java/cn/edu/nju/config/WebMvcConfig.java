@@ -78,4 +78,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
         viewResolver.setTemplateEngine(templateEngine());
         return viewResolver;
     }
+
+    /**
+     * Bean Util
+     * @return
+     */
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }

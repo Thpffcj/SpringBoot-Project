@@ -6,27 +6,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.validation.Valid;
 
+import cn.edu.nju.base.HouseSort;
 import cn.edu.nju.base.HouseStatus;
 import cn.edu.nju.base.LoginUserUtil;
 import cn.edu.nju.entity.*;
 import cn.edu.nju.repository.*;
 import cn.edu.nju.service.ServiceMultiResult;
 import cn.edu.nju.service.ServiceResult;
+import cn.edu.nju.service.search.ISearchService;
 import cn.edu.nju.web.dto.HouseDTO;
 import cn.edu.nju.web.dto.HouseDetailDTO;
 import cn.edu.nju.web.dto.HousePictureDTO;
 import cn.edu.nju.web.form.DatatableSearch;
 import cn.edu.nju.web.form.HouseForm;
 import cn.edu.nju.web.form.PhotoForm;
+import cn.edu.nju.web.form.RentSearch;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
-import org.apache.kafka.common.security.auth.Login;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +33,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,6 +67,9 @@ public class HouseServiceImpl implements IHouseService {
 
     @Autowired
     private IQiNiuService qiNiuService;
+
+//    @Autowired
+//    private ISearchService searchService;
 
     @Value("${qiniu.cdn.prefix}")
     private String cdnPrefix;
@@ -394,5 +394,95 @@ public class HouseServiceImpl implements IHouseService {
 //            searchService.remove(id);
 //        }
         return ServiceResult.success();
+    }
+
+    @Override
+    public ServiceMultiResult<HouseDTO> query(RentSearch rentSearch) {
+//        if (rentSearch.getKeywords() != null && !rentSearch.getKeywords().isEmpty()) {
+//            ServiceMultiResult<Long> serviceResult = searchService.query(rentSearch);
+//            if (serviceResult.getTotal() == 0) {
+//                return new ServiceMultiResult<>(0, new ArrayList<>());
+//            }
+//
+//            return new ServiceMultiResult<>(serviceResult.getTotal(), wrapperHouseResult(serviceResult.getResult()));
+//        }
+
+        return simpleQuery(rentSearch);
+
+    }
+
+    private List<HouseDTO> wrapperHouseResult(List<Long> houseIds) {
+        List<HouseDTO> result = new ArrayList<>();
+
+        Map<Long, HouseDTO> idToHouseMap = new HashMap<>();
+        Iterable<House> houses = houseRepository.findAll(houseIds);
+        houses.forEach(house -> {
+            HouseDTO houseDTO = modelMapper.map(house, HouseDTO.class);
+            houseDTO.setCover(this.cdnPrefix + house.getCover());
+            idToHouseMap.put(house.getId(), houseDTO);
+        });
+
+        wrapperHouseList(houseIds, idToHouseMap);
+
+        // 矫正顺序
+        for (Long houseId : houseIds) {
+            result.add(idToHouseMap.get(houseId));
+        }
+        return result;
+    }
+
+    private ServiceMultiResult<HouseDTO> simpleQuery(RentSearch rentSearch) {
+        Sort sort = HouseSort.generateSort(rentSearch.getOrderBy(), rentSearch.getOrderDirection());
+        int page = rentSearch.getStart() / rentSearch.getSize();
+
+        Pageable pageable = new PageRequest(page, rentSearch.getSize(), sort);
+
+        Specification<House> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            Predicate predicate = criteriaBuilder.equal(root.get("status"), HouseStatus.PASSES.getValue());
+
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("cityEnName"), rentSearch.getCityEnName()));
+
+            if (HouseSort.DISTANCE_TO_SUBWAY_KEY.equals(rentSearch.getOrderBy())) {
+                predicate = criteriaBuilder.and(predicate, criteriaBuilder.gt(root.get(HouseSort.DISTANCE_TO_SUBWAY_KEY), -1));
+            }
+            return predicate;
+        };
+
+        Page<House> houses = houseRepository.findAll(specification, pageable);
+        List<HouseDTO> houseDTOS = new ArrayList<>();
+
+        List<Long> houseIds = new ArrayList<>();
+        Map<Long, HouseDTO> idToHouseMap = Maps.newHashMap();
+        houses.forEach(house -> {
+            HouseDTO houseDTO = modelMapper.map(house, HouseDTO.class);
+            houseDTO.setCover(this.cdnPrefix + house.getCover());
+            houseDTOS.add(houseDTO);
+
+            houseIds.add(house.getId());
+            idToHouseMap.put(house.getId(), houseDTO);
+        });
+
+        wrapperHouseList(houseIds, idToHouseMap);
+        return new ServiceMultiResult<>(houses.getTotalElements(), houseDTOS);
+    }
+
+    /**
+     * 渲染详细信息及标签
+     * @param houseIds
+     * @param idToHouseMap
+     */
+    private void wrapperHouseList(List<Long> houseIds, Map<Long, HouseDTO> idToHouseMap) {
+        List<HouseDetail> details = houseDetailRepository.findAllByHouseIdIn(houseIds);
+        details.forEach(houseDetail -> {
+            HouseDTO houseDTO = idToHouseMap.get(houseDetail.getHouseId());
+            HouseDetailDTO detailDTO = modelMapper.map(houseDetail, HouseDetailDTO.class);
+            houseDTO.setHouseDetail(detailDTO);
+        });
+
+        List<HouseTag> houseTags = houseTagRepository.findAllByHouseIdIn(houseIds);
+        houseTags.forEach(houseTag -> {
+            HouseDTO house = idToHouseMap.get(houseTag.getHouseId());
+            house.getTags().add(houseTag.getName());
+        });
     }
 }

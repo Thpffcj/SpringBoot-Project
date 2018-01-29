@@ -5,6 +5,7 @@ import cn.edu.nju.service.ServiceResult;
 import cn.edu.nju.web.dto.HouseDTO;
 import cn.edu.nju.web.form.DatatableSearch;
 import cn.edu.nju.web.form.HouseForm;
+import cn.edu.nju.web.form.RentSearch;
 
 /**
  * Created by Thpffcj on 2018/1/28.
@@ -67,4 +68,11 @@ public interface IHouseService {
      * @return
      */
     ServiceResult updateStatus(Long id, int status);
+
+    /**
+     * 查询房源信息集
+     * @param rentSearch
+     * @return
+     */
+    ServiceMultiResult<HouseDTO> query(RentSearch rentSearch);
 }

@@ -58,7 +58,7 @@
           "type": "text",
           "index": "analyzed"
         },
-        "layoutDesc" : {
+        "layoutDesc": {
           "type": "text",
           "index": "analyzed"
         },

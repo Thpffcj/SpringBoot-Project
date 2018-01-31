@@ -68,8 +68,8 @@ public class HouseServiceImpl implements IHouseService {
     @Autowired
     private IQiNiuService qiNiuService;
 
-//    @Autowired
-//    private ISearchService searchService;
+    @Autowired
+    private ISearchService searchService;
 
     @Value("${qiniu.cdn.prefix}")
     private String cdnPrefix;
@@ -207,9 +207,9 @@ public class HouseServiceImpl implements IHouseService {
         house.setLastUpdateTime(new Date());
         houseRepository.save(house);
 
-//        if (house.getStatus() == HouseStatus.PASSES.getValue()) {
-//            searchService.index(house.getId());
-//        }
+        if (house.getStatus() == HouseStatus.PASSES.getValue()) {
+            searchService.index(house.getId());
+        }
 
         return ServiceResult.success();
     }
@@ -388,24 +388,24 @@ public class HouseServiceImpl implements IHouseService {
         houseRepository.updateStatus(id, status);
 
         // 上架更新索引 其他情况都要删除索引
-//        if (status == HouseStatus.PASSES.getValue()) {
-//            searchService.index(id);
-//        } else {
-//            searchService.remove(id);
-//        }
+        if (status == HouseStatus.PASSES.getValue()) {
+            searchService.index(id);
+        } else {
+            searchService.remove(id);
+        }
         return ServiceResult.success();
     }
 
     @Override
     public ServiceMultiResult<HouseDTO> query(RentSearch rentSearch) {
-//        if (rentSearch.getKeywords() != null && !rentSearch.getKeywords().isEmpty()) {
-//            ServiceMultiResult<Long> serviceResult = searchService.query(rentSearch);
-//            if (serviceResult.getTotal() == 0) {
-//                return new ServiceMultiResult<>(0, new ArrayList<>());
-//            }
-//
-//            return new ServiceMultiResult<>(serviceResult.getTotal(), wrapperHouseResult(serviceResult.getResult()));
-//        }
+        if (rentSearch.getKeywords() != null && !rentSearch.getKeywords().isEmpty()) {
+            ServiceMultiResult<Long> serviceResult = searchService.query(rentSearch);
+            if (serviceResult.getTotal() == 0) {
+                return new ServiceMultiResult<>(0, new ArrayList<>());
+            }
+
+            return new ServiceMultiResult<>(serviceResult.getTotal(), wrapperHouseResult(serviceResult.getResult()));
+        }
 
         return simpleQuery(rentSearch);
 

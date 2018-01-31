@@ -58,11 +58,11 @@ public class WebFileUploadConfig {
     }
 
     /**
-     * 华南机房
+     * 华东机房
      */
     @Bean
     public com.qiniu.storage.Configuration qiniuConfig() {
-        return new com.qiniu.storage.Configuration(Zone.zone2());
+        return new com.qiniu.storage.Configuration(Zone.zone0());
     }
 
     /**

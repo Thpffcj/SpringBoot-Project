@@ -12,8 +12,8 @@
     <meta name="keywords" content="寻屋"/>
     <link href="/static/css/main.css" rel='stylesheet' type='text/css'/>
     <link href="/static/css/list.css" rel='stylesheet' type='text/css'/>
-    <link href="/static/lib/layui/layui.css" rel="stylesheet" type="text/css" />
-    <link href="/static/lib/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/layui/layui.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/lib/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -28,9 +28,9 @@
                         <i class="icon" data-bl="switch"></i>
                         <div data-bl="switch" class="check">关键词</div>
                         <div class="txt-search">
-                            <input class="left txt" name="keyword" autocomplete="off"
+                            <input class="left-txt" name="keyword" autocomplete="off"
                                    placeholder="如小区名、地铁站等" id="keyword-box"
-                                    th:value="${searchBody.keywords != null} ? ${searchBody.keywords} : ''"/>
+                                   th:value="${searchBody.keywords != null} ? ${searchBody.keywords} : ''"/>
                         </div>
                     </div>
                     <button type="submit" class="act-search btn home-ico ico-search LOGCLICKEVTID">
@@ -319,10 +319,10 @@
 <div th:include="common :: footer"></div>
 <script type="text/javascript" src="/static/lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[i] = m[i] || function() {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
+    (function (m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
         j = ei.createElement(q),
             s = ei.getElementsByTagName(q)[0];
         j.async = true;
@@ -334,12 +334,14 @@
 </script>
 <script src="/static/lib/layui/layui.js" type="text/javascript"></script>
 <script th:inline="javascript" type="text/javascript">
+
     $('.xunwu-header .rent-page').addClass('on');
 
     var data = {};
 
     function locate_url(start, size) {
         var keywords = $('#keyword-box').val();
+        // alert(keywords);
         if (typeof(keywords) !== 'undefined' && keywords !== null && keywords.length > 0) {
             data.keywords = keywords;
         }
@@ -393,7 +395,7 @@
         $('.room-select a[data-bind="' + [[${searchBody.room}]] + '"]').addClass('on');
         $('.direction-select a[data-bind="' + [[${searchBody.direction}]] + '"]').addClass('on');
         $('.rent-way-select a[data-bind="' + [[${searchBody.rentWay}]] + '"]').addClass('on');
-        $('#sort-bar').find('div[data-bind="' + data.orderBy +  '"]').addClass('on');
+        $('#sort-bar').find('div[data-bind="' + data.orderBy + '"]').addClass('on');
 
         if (data.orderBy === 'area') {
             var areaSpanText = '';
@@ -450,10 +452,10 @@
             },
             select: function (event, ui) { // 选中事件
                 $('#keyword-box').text(ui.item.value);
+                $('#keyword-box').val(ui.item.value);
                 window.location.href = locate_url(start, size);
             }
         });
-
     });
 
     layui.use('laypage', function () {

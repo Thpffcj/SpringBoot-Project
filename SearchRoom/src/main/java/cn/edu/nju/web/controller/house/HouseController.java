@@ -16,8 +16,10 @@ import cn.edu.nju.service.house.IHouseService;
 import cn.edu.nju.service.search.HouseBucketDTO;
 import cn.edu.nju.service.search.ISearchService;
 import cn.edu.nju.web.dto.*;
+import cn.edu.nju.web.form.MapSearch;
 import cn.edu.nju.web.form.RentSearch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -240,12 +242,30 @@ public class HouseController {
 
         ServiceMultiResult<SupportAddressDTO> regions = addressService.findAllRegionsByCityName(cityEnName);
 
-
         ServiceMultiResult<HouseBucketDTO> serviceResult = searchService.mapAggregate(cityEnName);
 
         model.addAttribute("aggData", serviceResult.getResult());
         model.addAttribute("total", serviceResult.getTotal());
         model.addAttribute("regions", regions.getResult());
         return "rent-map";
+    }
+
+    @GetMapping("rent/house/map/houses")
+    @ResponseBody
+    public ApiResponse rentMapHouses(@ModelAttribute MapSearch mapSearch) {
+        if (mapSearch.getCityEnName() == null) {
+            return ApiResponse.ofMessage(HttpStatus.BAD_REQUEST.value(), "必须选择城市");
+        }
+        ServiceMultiResult<HouseDTO> serviceMultiResult;
+        if (mapSearch.getLevel() < 13) {
+            serviceMultiResult = houseService.wholeMapQuery(mapSearch);
+        } else {
+            // 小地图查询必须要传递地图边界参数
+            serviceMultiResult = houseService.boundMapQuery(mapSearch);
+        }
+
+        ApiResponse response = ApiResponse.ofSuccess(serviceMultiResult.getResult());
+        response.setMore(serviceMultiResult.getTotal() > (mapSearch.getStart() + mapSearch.getSize()));
+        return response;
     }
 }

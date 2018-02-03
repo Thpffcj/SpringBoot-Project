@@ -2,6 +2,7 @@ package cn.edu.nju.service.search;
 
 import cn.edu.nju.service.ServiceMultiResult;
 import cn.edu.nju.service.ServiceResult;
+import cn.edu.nju.web.form.MapSearch;
 import cn.edu.nju.web.form.RentSearch;
 
 import java.util.List;
@@ -47,4 +48,17 @@ public interface ISearchService {
      * @return
      */
     ServiceMultiResult<HouseBucketDTO> mapAggregate(String cityEnName);
+
+    /**
+     * 城市级别查询
+     * @return
+     */
+    ServiceMultiResult<Long> mapQuery(String cityEnName, String orderBy,
+                                      String orderDirection, int start, int size);
+    /**
+     * 精确范围数据查询
+     * @param mapSearch
+     * @return
+     */
+    ServiceMultiResult<Long> mapQuery(MapSearch mapSearch);
 }

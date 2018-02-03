@@ -3,6 +3,7 @@ package cn.edu.nju.service.house;
 import cn.edu.nju.entity.SupportAddress;
 import cn.edu.nju.service.ServiceMultiResult;
 import cn.edu.nju.service.ServiceResult;
+import cn.edu.nju.service.search.BaiduMapLocation;
 import cn.edu.nju.web.dto.SubwayDTO;
 import cn.edu.nju.web.dto.SubwayStationDTO;
 import cn.edu.nju.web.dto.SupportAddressDTO;
@@ -71,4 +72,22 @@ public interface IAddressService {
      * @return
      */
     ServiceResult<SupportAddressDTO> findCity(String cityEnName);
+
+    /**
+     * 根据城市以及具体地位获取百度地图的经纬度
+     */
+    ServiceResult<BaiduMapLocation> getBaiduMapLocation(String city, String address);
+
+    /**
+     * 上传百度LBS数据
+     */
+    ServiceResult lbsUpload(BaiduMapLocation location, String title, String address,
+                            long houseId, int price, int area);
+
+    /**
+     * 移除百度LBS数据
+     * @param houseId
+     * @return
+     */
+    ServiceResult removeLbs(Long houseId);
 }

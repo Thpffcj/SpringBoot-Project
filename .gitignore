@@ -15,6 +15,9 @@
 /Tickets/target
 /SearchRoom/.idea
 /SearchRoom/target
+/weather-project/.idea
+/weather-project/.gradle
+/weather-project/out
 /SSMCampusShops/SSMCampusShops.iml
 /SpringGroupBuy/SpringGroupBuy.iml
 /PublicComment/Comment/Comment.iml

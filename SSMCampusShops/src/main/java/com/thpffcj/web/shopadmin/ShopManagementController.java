@@ -255,7 +255,7 @@ public class ShopManagementController {
     private Map<String, Object> getShopManagementInfo(HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<>();
         long shopId = HttpServletRequestUtil.getLong(request, "shopId");
-        System.out.println(shopId);
+//        System.out.println(shopId);
         if (shopId <= 0) {
             Object currentShopObj = request.getSession().getAttribute("currentShop");
             if (currentShopObj == null) {

@@ -57,4 +57,29 @@ public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
         }
         return super.determineUrlToUseForThisRequest(request, response, exception);
     }
+
+    /**
+     * 如果是Api接口 返回json数据 否则按照一般流程处理
+     * @param request
+     * @param response
+     * @param authException
+     * @throws IOException
+     * @throws ServletException
+     */
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException) throws IOException, ServletException {
+        String uri = request.getRequestURI();
+        if (uri.startsWith(API_PREFIX)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType(CONTENT_TYPE);
+
+            PrintWriter pw = response.getWriter();
+            pw.write(API_CODE_403);
+            pw.close();
+        } else {
+            super.commence(request, response, authException);
+        }
+
+    }
 }

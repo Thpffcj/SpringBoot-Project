@@ -61,7 +61,8 @@ public class AddressServiceImpl implements IAddressService {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final String BAIDU_MAP_KEY = "6QtSF673D1pYl3eQkEXfwp8ZgsQpB77U";
+    // TODO 这里需要换配置
+    private static final String BAIDU_MAP_KEY = "XXXXXXXXXXXXXX";
 
     private static final String BAIDU_MAP_GEOCONV_API = "http://api.map.baidu.com/geocoder/v2/?";
 
@@ -254,6 +255,7 @@ public class AddressServiceImpl implements IAddressService {
         nvps.add(new BasicNameValuePair("latitude", String.valueOf(location.getLatitude())));
         nvps.add(new BasicNameValuePair("longitude", String.valueOf(location.getLongitude())));
         nvps.add(new BasicNameValuePair("coord_type", "3")); // 百度坐标系
+        // TODO 这里需要换配置
         nvps.add(new BasicNameValuePair("geotable_id", "175730"));
         nvps.add(new BasicNameValuePair("ak", BAIDU_MAP_KEY));
         nvps.add(new BasicNameValuePair("houseId", String.valueOf(houseId)));
@@ -297,6 +299,7 @@ public class AddressServiceImpl implements IAddressService {
     private boolean isLbsDataExists(Long houseId) {
         HttpClient httpClient = HttpClients.createDefault();
         StringBuilder sb = new StringBuilder(LBS_QUERY_API);
+        // TODO 这里需要换配置
         sb.append("geotable_id=").append("175730").append("&")
                 .append("ak=").append(BAIDU_MAP_KEY).append("&")
                 .append("houseId=").append(houseId).append(",").append(houseId);
@@ -337,6 +340,7 @@ public class AddressServiceImpl implements IAddressService {
     public ServiceResult removeLbs(Long houseId) {
         HttpClient httpClient = HttpClients.createDefault();
         List<NameValuePair> nvps = new ArrayList<>();
+        // TODO 这里需要换配置
         nvps.add(new BasicNameValuePair("geotable_id", "175730"));
         nvps.add(new BasicNameValuePair("ak", BAIDU_MAP_KEY));
         nvps.add(new BasicNameValuePair("houseId", String.valueOf(houseId)));

@@ -11,13 +11,13 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  * Created by Thpffcj on 2018/1/28.
  * session会话
  */
-//@Configuration
-//@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400)
-//public class RedisSessionConfig {
-//
-//    @Bean
-//    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-//
-//        return new StringRedisTemplate(factory);
-//    }
-//}
+@Configuration
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400)
+public class RedisSessionConfig {
+
+    @Bean
+    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
+
+        return new StringRedisTemplate(factory);
+    }
+}

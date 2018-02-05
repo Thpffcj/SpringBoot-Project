@@ -2,4 +2,6 @@ include 'msa-weather-collection-server'
 include 'msa-weather-data-server'
 include 'msa-weather-report-server'
 include 'msa-weather-city-server'
+include 'micro-weather-eureka-server'
+include 'micro-weather-eureka-client'
 

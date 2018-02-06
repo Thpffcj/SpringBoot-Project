@@ -59,6 +59,9 @@ dependencies {
     // Eureka Client
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 
+    // Feign
+    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+
     // 该依赖用于测试阶段
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

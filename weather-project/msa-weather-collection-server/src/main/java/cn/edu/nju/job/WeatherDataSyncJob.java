@@ -1,8 +1,8 @@
 package cn.edu.nju.job;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.nju.service.CityClient;
 import cn.edu.nju.service.WeatherDataCollectionService;
 import cn.edu.nju.vo.City;
 import org.quartz.JobExecutionContext;
@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Thpffcj on 2018/2/5.
@@ -22,21 +23,18 @@ public class WeatherDataSyncJob extends QuartzJobBean {
     @Autowired
     private WeatherDataCollectionService weatherDataCollectionService;
 
+    @Autowired
+    private CityClient cityClient;
+
     @Override
-    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+    public void executeInternal(JobExecutionContext context) throws JobExecutionException {
         logger.info("Weather Data Sync Job. Start！");
         // 获取城市ID列表
-        // TODO 改为由城市数据API微服务来提供数据
         List<City> cityList = null;
 
         try {
-
-            // TODO 改为由城市数据API微服务提供数据
-            cityList = new ArrayList<>();
-            City city = new City();
-            city.setCityId("101280601");
-            cityList.add(city);
-
+            // 由城市数据API微服务提供数据
+            cityList = cityClient.listCity();
         } catch (Exception e) {
             logger.error("Exception!", e);
         }

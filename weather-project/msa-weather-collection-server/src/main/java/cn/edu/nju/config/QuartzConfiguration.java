@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class QuartzConfiguration {
 
-    private static final int TIME = 1800; // 更新频率
+    // 不知道为什么启动后没有执行定时任务，等一个更新频率之后执行了定时任务
+    private static final int TIME = 30; // 更新频率
 
     // JobDetail
     @Bean

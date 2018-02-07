@@ -50,12 +50,6 @@ ext {
 // 依赖关系
 dependencies {
 
-    // 该依赖用于编译阶段
-    compile('org.springframework.boot:spring-boot-starter-web')
-
-    // 添加 Spring Boot Thymeleaf Starter 的依赖
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-
     // Eureka Client
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 

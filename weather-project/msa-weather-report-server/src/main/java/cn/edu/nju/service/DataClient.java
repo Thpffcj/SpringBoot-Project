@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Thpffcj on 2018/2/6.
  */
-@FeignClient("msa-weather-eureka-client-zuul")
+@FeignClient(name="msa-weather-eureka-client-zuul", fallback=DataClientFallback.class)
 public interface DataClient {
 
     /**

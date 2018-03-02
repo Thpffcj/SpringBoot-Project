@@ -13,4 +13,9 @@ public class MemberController {
     public String loginPage() {
         return "user/login";
     }
+
+    @GetMapping("/user/center")
+    public String centerPage() {
+        return "user/center";
+    }
 }

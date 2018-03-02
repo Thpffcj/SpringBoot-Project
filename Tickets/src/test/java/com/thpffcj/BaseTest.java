@@ -1,16 +1,14 @@
 package com.thpffcj;
 
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Created by Thpffcj on 2018/1/21.
- * 配置spring和junit整合，junit启动时加载springIOC容器 spring-test,junit
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-// 告诉junit spring配置文件
-@ContextConfiguration({ "classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml" })
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class BaseTest {
 
 }

@@ -13,18 +13,27 @@ public class VenueController {
      * 欢迎页
      * @return
      */
-    @GetMapping("/admin/welcome")
+    @GetMapping("/venue/welcome")
     public String welcomePage() {
-        return "admin/welcome";
+        return "venue/welcome";
     }
 
     /**
      * 后台管理中心
      * @return
      */
-    @GetMapping("/admin/center")
+    @GetMapping("/venue/center")
     public String adminCenterPage() {
-        return "admin/center";
+        return "venue/center";
+    }
+
+    /**
+     * 新增场馆功能页
+     * @return
+     */
+    @GetMapping("venue/add/venue")
+    public String addHousePage() {
+        return "venue/venue-add";
     }
 
 }

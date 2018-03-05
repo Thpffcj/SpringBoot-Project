@@ -1,5 +1,6 @@
 package com.thpffcj.service.impl;
 
+import com.thpffcj.base.VenueStatus;
 import com.thpffcj.entity.Venue;
 import com.thpffcj.repository.VenueRepository;
 import com.thpffcj.service.result.ServiceResult;
@@ -9,6 +10,8 @@ import com.thpffcj.web.form.VenueForm;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Thpffcj on 2018/2/9.
@@ -31,6 +34,8 @@ public class VenueServiceImpl implements VenueService {
     public ServiceResult save(VenueForm venueForm) {
         Venue venue = new Venue();
         modelMapper.map(venueForm, venue);
+        // TODO 生成场馆编号
+        venue.setStatus(VenueStatus.NOT_AUDITED.getValue());
 
         venueRepository.save(venue);
 
@@ -47,5 +52,24 @@ public class VenueServiceImpl implements VenueService {
     @Override
     public Venue getVenueByVenueId(Long venueId) {
         return venueRepository.findById(venueId);
+    }
+
+    /**
+     * 查找所有待审核场馆
+     * @return
+     */
+    @Override
+    public List<Venue> getAllPendingVenue() {
+        return venueRepository.findAllByStatus(VenueStatus.NOT_AUDITED.getValue());
+    }
+
+    /**
+     * 修改场馆状态
+     * @param venueId
+     * @param status
+     */
+    @Override
+    public void updateVenueStatus(Long venueId, int status) {
+        venueRepository.updateStatus(venueId, status);
     }
 }

@@ -17,6 +17,7 @@ public class Venue {
     private String name;
     private String address;
     private String description;
+    private int status;
 
     public Long getId() {
         return id;
@@ -56,5 +57,13 @@ public class Venue {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -10,6 +10,13 @@ CREATE TABLE `member` (
   PRIMARY KEY (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `admin` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `pay` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `phone` varchar(255) NOT NULL,
@@ -24,6 +31,14 @@ CREATE TABLE `venue_seat` (
   `name` varchar(255) DEFAULT NULL,
   `number` int DEFAULT '0',
   `price` double DEFAULT '0.0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `venue_finance` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `venue_id` int(11) NOT NULL,
+  `show_number` int DEFAULT '0',
+  `total_benefit` double DEFAULT '0.0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

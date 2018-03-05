@@ -1,5 +1,6 @@
 package com.thpffcj.service.impl;
 
+import com.thpffcj.entity.Member;
 import com.thpffcj.entity.VenueSeat;
 import com.thpffcj.repository.MemberRepository;
 import com.thpffcj.service.MemberService;
@@ -12,6 +13,8 @@ import com.thpffcj.web.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by Thpffcj on 2018/3/3.
@@ -56,5 +59,10 @@ public class MemberServiceImpl implements MemberService {
         venueSeatService.updateSeat(venueSeat.getId(), remainingSeat);
 
         return orderService.createOrder(memberId, showId, seatName, number);
+    }
+
+    @Override
+    public List<Member> listMember() {
+        return (List<Member>) memberRepository.findAll();
     }
 }

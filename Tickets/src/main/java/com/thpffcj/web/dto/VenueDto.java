@@ -12,6 +12,7 @@ public class VenueDto implements Serializable {
     private String name;
     private String address;
     private String description;
+    private int status;
 
     public Long getId() {
         return id;
@@ -51,5 +52,13 @@ public class VenueDto implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

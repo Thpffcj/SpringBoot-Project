@@ -125,8 +125,8 @@
                     return false;
                 }
             } else {
-                var username = $('.login-form form').find('input[name="username"]').val();
-                if (username.length < 1) {
+                var mail = $('.login-form form').find('input[name="username"]').val();
+                if (mail.length < 1) {
                     layer.msg('请输入用户名/手机号', {icon: 5, time: 2000});
                     return false;
                 }
@@ -141,7 +141,7 @@
                 url: "/member/do_login",
                 type: "POST",
                 data:{
-                    username: username,
+                    mail: mail,
                     password: password
                 },
                 success:function(data){

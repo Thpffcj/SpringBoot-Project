@@ -3,7 +3,7 @@ package com.thpffcj.service.impl;
 import com.thpffcj.entity.Pay;
 import com.thpffcj.repository.PayRepository;
 import com.thpffcj.service.PayService;
-import com.thpffcj.service.ServiceResult;
+import com.thpffcj.service.result.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

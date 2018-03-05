@@ -7,4 +7,6 @@ import org.springframework.data.repository.CrudRepository;
  * Created by Thpffcj on 2018/2/9.
  */
 public interface VenueRepository extends CrudRepository<Venue, Long> {
+
+    Venue findById(Long venueId);
 }

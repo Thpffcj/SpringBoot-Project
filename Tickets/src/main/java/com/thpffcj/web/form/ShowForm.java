@@ -7,9 +7,18 @@ import java.util.Date;
  */
 public class ShowForm {
 
+    private String name;
     private String type;
     private Date performanceTime;
     private String description;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getType() {
         return type;

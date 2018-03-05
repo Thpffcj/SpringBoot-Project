@@ -2,7 +2,7 @@ package com.thpffcj.service.impl;
 
 import com.thpffcj.entity.Venue;
 import com.thpffcj.repository.VenueRepository;
-import com.thpffcj.service.ServiceResult;
+import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.service.VenueService;
 import com.thpffcj.web.dto.VenueDto;
 import com.thpffcj.web.form.VenueForm;
@@ -37,5 +37,15 @@ public class VenueServiceImpl implements VenueService {
         VenueDto venueDto = modelMapper.map(venue, VenueDto.class);
 
         return new ServiceResult<VenueDto>(true, null, venueDto);
+    }
+
+    /**
+     * 根据venueId查找场馆
+     * @param venueId
+     * @return
+     */
+    @Override
+    public Venue getVenueByVenueId(Long venueId) {
+        return venueRepository.findById(venueId);
     }
 }

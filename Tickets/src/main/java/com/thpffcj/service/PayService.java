@@ -1,5 +1,7 @@
 package com.thpffcj.service;
 
+import com.thpffcj.service.result.ServiceResult;
+
 /**
  * Created by Thpffcj on 2018/2/9.
  */

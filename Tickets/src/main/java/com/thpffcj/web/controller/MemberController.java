@@ -1,7 +1,10 @@
 package com.thpffcj.web.controller;
 
+import com.thpffcj.base.ApiResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Thpffcj on 2018/1/30.
@@ -9,13 +12,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MemberController {
 
-    @GetMapping("/user/login")
+    @GetMapping("/member/login")
     public String loginPage() {
-        return "user/login";
+        return "member/login";
     }
 
-    @GetMapping("/user/center")
+    @PostMapping("/member/do_login")
+    @ResponseBody
+    public ApiResponse login() {
+        System.out.println("-----------------------------------");
+        return ApiResponse.ofSuccess("");
+    }
+
+    @GetMapping("/member/center")
     public String centerPage() {
-        return "user/center";
+        return "member/center";
     }
 }

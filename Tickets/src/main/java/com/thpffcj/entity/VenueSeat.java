@@ -17,6 +17,8 @@ public class VenueSeat {
     private String name;
     private int number;
     private double price;
+    @Column(name = "remaining_seat")
+    private int remainingSeat;
 
     public Long getId() {
         return id;
@@ -56,5 +58,13 @@ public class VenueSeat {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getRemainingSeat() {
+        return remainingSeat;
+    }
+
+    public void setRemainingSeat(int remainingSeat) {
+        this.remainingSeat = remainingSeat;
     }
 }

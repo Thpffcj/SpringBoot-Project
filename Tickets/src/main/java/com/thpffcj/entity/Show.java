@@ -7,12 +7,15 @@ import java.util.Date;
  * Created by Thpffcj on 2018/3/2.
  */
 @Entity
-@Table(name = "show")
+@Table(name = "shows")
 public class Show {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "venue_id")
+    private Long venueId;
+    private String name;
     private String type;
     @Column(name = "performance_time")
     private Date performanceTime;
@@ -24,6 +27,22 @@ public class Show {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(Long venueId) {
+        this.venueId = venueId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
@@ -48,5 +67,17 @@ public class Show {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Show{" +
+                "id=" + id +
+                ", venueId=" + venueId +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", performanceTime=" + performanceTime +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

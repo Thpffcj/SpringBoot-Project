@@ -13,7 +13,8 @@ import javax.persistence.Table;
 public class Member {
 
     @Id
-    private String memberId;
+    @Column(name = "member_id")
+    private Long memberId;
     @Column(name = "user_name")
     private String userName;
     private String password;
@@ -25,11 +26,11 @@ public class Member {
     private Double point;
     private boolean delete;
 
-    public String getMemberId() {
+    public Long getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(String memberId) {
+    public void setMemberId(Long memberId) {
         this.memberId = memberId;
     }
 

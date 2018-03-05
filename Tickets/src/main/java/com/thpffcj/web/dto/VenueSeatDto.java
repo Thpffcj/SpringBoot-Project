@@ -2,10 +2,12 @@ package com.thpffcj.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by Thpffcj on 2018/3/2.
  */
-public class VenueSeatDto {
+public class VenueSeatDto implements Serializable {
 
     private Long id;
     @JsonProperty(value = "venue_id")

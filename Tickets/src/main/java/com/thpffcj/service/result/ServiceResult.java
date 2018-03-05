@@ -1,4 +1,4 @@
-package com.thpffcj.service;
+package com.thpffcj.service.result;
 
 /**
  * Created by Thpffcj on 2018/2/9.

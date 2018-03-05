@@ -2,7 +2,7 @@ package com.thpffcj.service.impl;
 
 import com.thpffcj.entity.VenueSeat;
 import com.thpffcj.repository.VenueSeatRepository;
-import com.thpffcj.service.ServiceResult;
+import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.service.VenueSeatService;
 import com.thpffcj.web.dto.VenueSeatDto;
 import com.thpffcj.web.form.VenueSeatForm;
@@ -32,5 +32,21 @@ public class VenueSeatServiceImpl implements VenueSeatService {
 
         VenueSeatDto venueSeatDto = modelMapper.map(venueSeat, VenueSeatDto.class);
         return new ServiceResult<VenueSeatDto>(true, null, venueSeatDto);
+    }
+
+    @Override
+    public void updateSeat(Long id, int remainingSeat) {
+        venueSeatRepository.updateSeat(id, remainingSeat);
+    }
+
+    /**
+     * 根据场馆名称和座位名获得座位
+     * @param venueId
+     * @param seatName
+     * @return
+     */
+    @Override
+    public VenueSeat getSeat(Long venueId, String seatName) {
+        return venueSeatRepository.getByVenueIdAndName(venueId, seatName);
     }
 }

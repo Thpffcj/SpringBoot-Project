@@ -2,14 +2,18 @@ package com.thpffcj.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Thpffcj on 2018/3/2.
  */
-public class ShowDto {
+public class ShowDto implements Serializable {
 
     private Long id;
+    @JsonProperty(value = "venue_id")
+    private Long venueId;
+    private String name;
     private String type;
     @JsonProperty(value = "performance_time")
     private Date performanceTime;
@@ -21,6 +25,22 @@ public class ShowDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(Long venueId) {
+        this.venueId = venueId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {

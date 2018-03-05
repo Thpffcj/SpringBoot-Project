@@ -42,3 +42,14 @@ CREATE TABLE `show` (
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `order` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(11) NOT NULL,
+  `show_id` int(11) NOT NULL,
+  `create_time` datetime,
+  `seat_name` varchar(255) DEFAULT NULL,
+  `number` int DEFAULT '0',
+  `status` int DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

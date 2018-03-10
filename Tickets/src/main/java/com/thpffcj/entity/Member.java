@@ -1,9 +1,6 @@
 package com.thpffcj.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Thpffcj on 2018/1/19.
@@ -13,8 +10,8 @@ import javax.persistence.Table;
 public class Member {
 
     @Id
-    @Column(name = "member_id")
-    private Long memberId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "user_name")
     private String userName;
     private String password;
@@ -22,16 +19,16 @@ public class Member {
     private String mail;
     // 消费金额
     private Double consumption;
-    private Integer level;
+    private int level;
     private Double point;
     private boolean delete;
 
-    public Long getMemberId() {
-        return memberId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -66,11 +63,11 @@ public class Member {
         this.consumption = consumption;
     }
 
-    public Integer getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 

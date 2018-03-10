@@ -4,7 +4,6 @@ import com.thpffcj.base.VenueStatus;
 import com.thpffcj.entity.Member;
 import com.thpffcj.entity.Venue;
 import com.thpffcj.entity.VenueFinance;
-import com.thpffcj.repository.VenueRepository;
 import com.thpffcj.service.AdminService;
 import com.thpffcj.service.MemberService;
 import com.thpffcj.service.VenueFinanceService;
@@ -44,8 +43,19 @@ public class AdminServiceImpl implements AdminService {
      * @return
      */
     @Override
-    public ServiceMultiResult<VenueDto> listPendingVenue() {
-        List<Venue> venues = venueService.getAllPendingVenue();
+    public ServiceMultiResult<VenueDto> getAllOpenApplication() {
+        List<Venue> venues = venueService.getVenueByStatus(VenueStatus.NOT_AUDITED.getValue());
+        List<VenueDto> result = new ArrayList<>();
+        venues.forEach(venue -> {
+            VenueDto venueDto = modelMapper.map(venue, VenueDto.class);
+            result.add(venueDto);
+        });
+        return new ServiceMultiResult<>(result.size(), result);
+    }
+
+    @Override
+    public ServiceMultiResult<VenueDto> getAllModifyApplication() {
+        List<Venue> venues = venueService.getVenueByStatus(VenueStatus.MODIFY.getValue());
         List<VenueDto> result = new ArrayList<>();
         venues.forEach(venue -> {
             VenueDto venueDto = modelMapper.map(venue, VenueDto.class);

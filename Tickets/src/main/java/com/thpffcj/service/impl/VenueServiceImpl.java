@@ -54,13 +54,20 @@ public class VenueServiceImpl implements VenueService {
         return venueRepository.findById(venueId);
     }
 
+    @Override
+    public ServiceResult<VenueDto> getVenueDtoByVenueId(Long venueId) {
+        VenueDto venueDto =  modelMapper.map(venueRepository.findById(venueId), VenueDto.class);
+        return new ServiceResult<VenueDto>(true, null, venueDto);
+    }
+
     /**
-     * 查找所有待审核场馆
+     * 根据状态查询场馆
+     * @param status
      * @return
      */
     @Override
-    public List<Venue> getAllPendingVenue() {
-        return venueRepository.findAllByStatus(VenueStatus.NOT_AUDITED.getValue());
+    public List<Venue> getVenueByStatus(int status) {
+        return venueRepository.findAllByStatus(status);
     }
 
     /**

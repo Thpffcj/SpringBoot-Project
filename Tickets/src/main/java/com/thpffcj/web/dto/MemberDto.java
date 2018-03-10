@@ -9,22 +9,21 @@ import java.io.Serializable;
  */
 public class MemberDto implements Serializable {
 
-    @JsonProperty(value = "member_id")
-    private Long memberId;
+    private Long id;
     @JsonProperty(value = "user_name")
     private String userName;
     private String mail;
     // 消费金额
     private Double consumption;
-    private Integer level;
+    private int level;
     private Double point;
 
-    public Long getMemberId() {
-        return memberId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -51,11 +50,11 @@ public class MemberDto implements Serializable {
         this.consumption = consumption;
     }
 
-    public Integer getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 

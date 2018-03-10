@@ -1,5 +1,6 @@
 package com.thpffcj.service.impl;
 
+import com.thpffcj.base.MemberStatus;
 import com.thpffcj.entity.Member;
 import com.thpffcj.entity.VenueSeat;
 import com.thpffcj.repository.MemberRepository;
@@ -9,7 +10,9 @@ import com.thpffcj.service.ShowService;
 import com.thpffcj.service.VenueSeatService;
 import com.thpffcj.service.result.ServiceMultiResult;
 import com.thpffcj.service.result.ServiceResult;
+import com.thpffcj.web.dto.MemberDto;
 import com.thpffcj.web.dto.OrderDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,9 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
 
     @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     private MemberRepository memberRepository;
 
     @Autowired
@@ -33,6 +39,28 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private OrderService orderService;
+
+    @Override
+    public ServiceResult<MemberDto> login(String mail, String password) {
+        Member member = memberRepository.findByMailAndPasswordAndDelete(mail, password, MemberStatus.NORMAL.getValue());
+        if (member == null) {
+            return new ServiceResult<MemberDto>(false, "用户不存在");
+        }
+        MemberDto memberDto = modelMapper.map(member, MemberDto.class);
+        return new ServiceResult<MemberDto>(true, null, memberDto);
+    }
+
+    /**
+     * 查找用户信息
+     * @param id
+     * @return
+     */
+    @Override
+    public ServiceResult<MemberDto> getMemberProfile(Long id) {
+        Member member = memberRepository.findById(id);
+        MemberDto memberDto = modelMapper.map(member, MemberDto.class);
+        return new ServiceResult<MemberDto>(true, null, memberDto);
+    }
 
     /**
      * 会员选座购买
@@ -64,5 +92,14 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> listMember() {
         return (List<Member>) memberRepository.findAll();
+    }
+
+    /**
+     * 停止会员服务
+     * @param memberId
+     */
+    @Override
+    public void stopMember(Long memberId) {
+//        memberRepository.updateDelete(memberId, MemberStatus.DELETED.getValue());
     }
 }

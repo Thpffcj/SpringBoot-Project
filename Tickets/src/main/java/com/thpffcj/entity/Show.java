@@ -20,6 +20,7 @@ public class Show {
     @Column(name = "performance_time")
     private Date performanceTime;
     private String description;
+    private String img;
 
     public Long getId() {
         return id;
@@ -67,6 +68,14 @@ public class Show {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     @Override

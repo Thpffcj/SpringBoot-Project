@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:include="venue/common :: head"></div>
-    <link rel="stylesheet" type="tetcfxt/css" href="/static/lib/webuploader/0.1.5/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/webuploader/0.1.5/webuploader.css">
     <link rel="stylesheet" type="text/css" href="/static/css/venue/add-venue.css">
-    <title>增加场馆</title>
+    <title>增加演出</title>
 </head>
 <body>
 <div>
     <content class="page-container">
         <form class="form form-horizontal" id="form-house-add">
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>大标题：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>演出名称：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="标题信息" id="title"
+                    <input type="text" class="input-text" value="" placeholder="演出名称" id="title"
                            name="title">
                 </div>
             </div>

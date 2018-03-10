@@ -129,7 +129,6 @@ $(function () {
             return false;
         }
 
-
         $.ajax({
             url: '/api/user/info',
             data: {
@@ -181,6 +180,7 @@ $(function () {
 
 });
 
+// TODO
 function selectDataSource(bind) {
     switch (bind) {
         case '.wait-record':

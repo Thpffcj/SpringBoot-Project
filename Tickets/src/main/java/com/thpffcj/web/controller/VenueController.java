@@ -19,11 +19,20 @@ public class VenueController {
     }
 
     /**
+     * 场馆管理员登录
+     * @return
+     */
+    @GetMapping("/venue/login")
+    public String venueLoginPage() {
+        return "venue/login";
+    }
+
+    /**
      * 后台管理中心
      * @return
      */
     @GetMapping("/venue/center")
-    public String adminCenterPage() {
+    public String venueCenterPage() {
         return "venue/center";
     }
 
@@ -31,9 +40,9 @@ public class VenueController {
      * 新增场馆功能页
      * @return
      */
-    @GetMapping("venue/add/venue")
+    @GetMapping("venue/add/show")
     public String addHousePage() {
-        return "venue/venue-add";
+        return "venue/show-add";
     }
 
 }

@@ -15,7 +15,13 @@ public interface AdminService {
      * 列出待审核场馆
      * @return
      */
-    ServiceMultiResult<VenueDto> listPendingVenue();
+    ServiceMultiResult<VenueDto> getAllOpenApplication();
+
+    /**
+     * 列出修改场馆信息的申请
+     * @return
+     */
+    ServiceMultiResult<VenueDto> getAllModifyApplication();
 
     /**
      * 审核场馆

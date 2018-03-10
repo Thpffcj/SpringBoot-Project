@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
+    <link rel="stylesheet" href="../../static/css/other.css" th:href="@{/css/other.css}"/>
+    <title>Member Index</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html" th:href="@{index}">Hotel<span
+                        class="sr-only">(current)</span></a></li>
+                <li><a href="statistics.html" th:href="@{statistics}">Statistics</a></li>
+                <li><a href="profile.html" th:href="@{profile}">Profile</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Welcome, Smith <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../account/index.html" th:href="@{../logout}">Sign out</a></li>
+                        <li><a href="../account/register.html" th:href="@{../register}">Register</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="mainpage">
+    <div id="carousel-example-generic" class="carousel slide " data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner " role="listbox">
+            <div class="item active my-carousel-image">
+
+                <!--<img src="../../static/img/show/show1.JPG" th:src="${shows[0].picUrl}" alt="Hotel One"/>-->
+                <div class="carousel-cover" style="background-image:url('/static/images/show/徐佳莹.jpg')"></div>
+                <div class="carousel-caption">
+                    <h2>
+                        <a href="show-detail.html" th:href="@{/member/detail(showId=${shows[0].id})}"
+                           th:text="${shows[0].name}"></a>
+                    </h2></div>
+            </div>
+            <div class="item my-carousel-image">
+                <div class="carousel-cover" style="background-image:url('/static/images/show/鹿先生.jpg')"></div>
+                <!--<img src="../../static/img/show/show2.jpeg" th:src="${shows[1].picUrl}" alt="Hotel 2"/>-->
+                <div class="carousel-caption">
+                    <h2><a href="show-detail.html" th:href="@{/member/detail(showId=${shows[1].id})}"
+                           th:text="${shows[1].name}"></a>
+                    </h2></div>
+            </div>
+            <div class="item my-carousel-image">
+                <!--<a href="detail.html" th:href="@{/member/detail(showId=${shows[2].id})}"></a>-->
+                <div class="carousel-cover" style="background-image:url('/static/images/show/五月天.jpg')"></div>
+                <!--<img src="../../static/img/show/show3.jpg" style="background-image:url('../../static/img/show/show3.jpeg')" th:src="${shows[2].picUrl}" alt="Hotel 3"/>-->
+                <div class="carousel-caption">
+                    <h2><a href="show-detail.html" th:href="@{/member/detail(showId=${shows[2].id})}"
+                           th:text="${shows[2].name}"></a></h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="row">
+        <div th:each="show : ${shows}" class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <!--<img src="../../static/img/show/show1.JPG" alt="show pic" th:src="${show.picUrl}"/>-->
+                <div class="cover" th:style="'background-image: url(' + ${show.img} + ')'"></div>
+                <div class="caption">
+                    <h3 th:text="${show.name}">Shanghai Hotel</h3>
+                    <p th:text="${show.description}"></p>
+                    <div>
+                        <!--<a data-target="#bookModal" href="#" class="btn btn-primary" role="button" "></a>-->
+                        <a href="show-detail.html" th:href="@{/member/detail(showId=${show.id})}" class="btn btn-info"
+                           role="button">More</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation" class="col-md-offset-4 col-md-4">
+        <ul class="pagination pagination-lg">
+            <li>
+                <a id="previous" href="#" th:disabled="${current == 0} ? 'disabled' : 'not'"
+                   th:href="@{/member/index(page=${current} - 1)}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li><a href="#" th:href="@{/member/index(page=${current})}" th:text="${current} + 1">1</a></li>
+            <li><a href="#" th:href="@{/member/index(page=${current} + 1)}" th:text="${current} + 2">2</a></li>
+            <li><a href="#" th:href="@{/member/index(page=${current} + 2)}" th:text="${current} + 3">3</a></li>
+            <li><a href="#" th:href="@{/member/index(page=${current} + 3)}" th:text="${current} + 4">4</a></li>
+            <li><a href="#" th:href="@{/member/index(page=${current} + 4)}" th:text="${current} + 5">5</a></li>
+            <li>
+                <a href="#" th:href="@{/member/index(page=${current} + 1)}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!--Scripts-->
+<script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        var current = /*[[${current}]]*/ 0;
+//        console.log(current);
+        var $pageList = $('a');
+        if (current == 0) {
+            $('#previous').attr("disabled", 'disabled');
+        }
+        $pageList.each(function () {
+//            console.log($(this).text());
+            if ($(this).text() == (current + 1)) {
+//                console.log($(this).text());
+                $(this).parent().addClass("active");
+            }
+        })
+
+    });
+</script>
+</body>
+</html>

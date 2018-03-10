@@ -41,19 +41,19 @@ function parent_reload() {
     window.parent.location.reload();
 }
 
-function mySelfInfo(userId) {
-    $.get('/admin/user/' + userId, function (res) {
-        layer.open({
-            type: 1,
-            title: false, //不显示标题栏
-            closeBtn: false,
-            area: '300px;',
-            shade: 0.8,
-            id: 'LAY_layuipro', //设定一个id，防止重复弹出
-            btn: ['Close'],
-            moveType: 1, //拖拽模式，0或者1
-            content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff;' +
-            ' font-weight: 300;">用户名：' + res.data.name + '<br>联系电话：' + res.data.phoneNumber + '</div>'
-        });
-    });
-}
+// function mySelfInfo(userId) {
+//     $.get('/admin/user/' + userId, function (res) {
+//         layer.open({
+//             type: 1,
+//             title: false, //不显示标题栏
+//             closeBtn: false,
+//             area: '300px;',
+//             shade: 0.8,
+//             id: 'LAY_layuipro', //设定一个id，防止重复弹出
+//             btn: ['Close'],
+//             moveType: 1, //拖拽模式，0或者1
+//             content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff;' +
+//             ' font-weight: 300;">用户名：' + res.data.name + '<br>联系电话：' + res.data.phoneNumber + '</div>'
+//         });
+//     });
+// }

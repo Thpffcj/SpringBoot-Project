@@ -16,7 +16,9 @@ public interface VenueService {
 
     Venue getVenueByVenueId(Long venueId);
 
-    List<Venue> getAllPendingVenue();
+    ServiceResult<VenueDto> getVenueDtoByVenueId(Long venueId);
+
+    List<Venue> getVenueByStatus(int status);
 
     void updateVenueStatus(Long venueId, int status);
 

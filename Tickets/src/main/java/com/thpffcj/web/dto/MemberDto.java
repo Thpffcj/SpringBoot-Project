@@ -17,6 +17,7 @@ public class MemberDto implements Serializable {
     private Double consumption;
     private int level;
     private Double point;
+    private int type;
 
     public Long getId() {
         return id;
@@ -64,5 +65,13 @@ public class MemberDto implements Serializable {
 
     public void setPoint(Double point) {
         this.point = point;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

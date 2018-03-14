@@ -11,12 +11,12 @@ import org.springframework.data.repository.query.Param;
  */
 public interface MemberRepository extends CrudRepository<Member, Long> {
 
-    Member findByMailAndPasswordAndDelete(String mail, String password, int delete);
+    Member findByMailAndPasswordAndStatus(String mail, String password, int status);
 
     Member findById(Long id);
 
     // member也是sql关键字
     @Modifying
-    @Query("update Member as m set m.delete = :delete where m.id = :id")
-    void updateDelete(@Param(value = "id") Long id, @Param(value = "delete") int delete);
+    @Query("update Member as m set m.status = :status where m.id = :id")
+    void updateDelete(@Param(value = "id") Long id, @Param(value = "status") int status);
 }

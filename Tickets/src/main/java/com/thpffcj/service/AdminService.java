@@ -3,6 +3,7 @@ package com.thpffcj.service;
 import com.thpffcj.service.result.ServiceMultiResult;
 import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.web.dto.MemberDto;
+import com.thpffcj.web.dto.SettleAccountDto;
 import com.thpffcj.web.dto.VenueDto;
 import com.thpffcj.web.dto.VenueFinanceDto;
 
@@ -29,6 +30,12 @@ public interface AdminService {
      * @return
      */
     ServiceResult auditingVenue(Long venueId);
+
+    /**
+     * 结算
+     * @return
+     */
+    ServiceMultiResult<SettleAccountDto> settleAccounts();
 
     /**
      * 场馆统计信息

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
+    <script src="../../static/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
+    <title>Tickets经理</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a class="" href="index.html" th:href="@{index}">消息<span
+                        class="badge">4</span><span
+                        class="sr-only">(current)</span></a></li>
+                <li><a href="settle-account.html" th:href="@{settlements}">演出结算</a></li>
+                <li class="active"><a href="statistics.html" th:href="@{statistics}">网站统计</a></li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="mainpage">
+
+    <h2>场馆演出次数统计</h2>
+    <div id="venue-show-times" style="width: 1100px;height:400px;"></div>
+
+    <h2>场馆演出收入统计</h2>
+    <div id="venue-show-income" style="width: 1100px;height:400px;"></div>
+
+    <h2> Finance Status</h2>
+    <div id="finance" style="width: 1100px;height:400px;"></div>
+    <div class="err-msg"></div>
+
+</div>
+
+<!--Scripts-->
+<script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var venueShowTimesChart = echarts.init(document.getElementById('venue-show-times'));
+    var venueShowIncomeChart = echarts.init(document.getElementById('venue-show-income'));
+    var financeChart = echarts.init(document.getElementById('finance'));
+    var newData = {};
+
+    // first chart
+    var venueShowTimesOption = {
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data:['演出次数']
+        },
+        grid: {
+            left: '5%',
+            right: '6%',
+            bottom: '4%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                name: '场馆编号',
+                type : 'category',
+                data : ['Hotel Name', 'Hotel Name', 'Hotel Name', 'Hotel Name']
+            }
+        ],
+        yAxis : [
+            {
+                name: '次数',
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'演出次数',
+                type:'bar',
+                data:[60, 72, 71, 74]
+            }
+        ]
+    };
+    venueShowTimesChart.setOption(venueShowTimesOption);
+
+    $.ajax({
+        url: '/admin/venueShowTimes',
+        data: '',
+        dataType: 'json',
+        success: function (data) {
+           // console.log(data);
+            if (data.message) {
+                newData = data.data;
+                venueShowTimesOption.xAxis[0].data = Object.keys(newData);
+                // console.log(hotelOption.xAxis.data);
+                venueShowTimesOption.series[0].data = Object.keys(newData).map(function(k) { return newData[k] });
+                // console.log(hotelOption);
+                venueShowTimesChart.setOption(venueShowTimesOption);
+            } else {
+                var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+                $(".err-msg").html(error_msg);
+            }
+        }
+    });
+
+    // ******************************** second chart  *******************************
+    var venueShowIncomeOption = {
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data:['场馆收入']
+        },
+        grid: {
+            left: '5%',
+            right: '6%',
+            bottom: '4%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                name: '场馆编号',
+                type : 'category',
+                data : ['Hotel Name', 'Hotel Name', 'Hotel Name', 'Hotel Name']
+            }
+        ],
+        yAxis : [
+            {
+                name: '总收入',
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'场馆收入',
+                type:'bar',
+                data:[60, 72, 71, 74]
+            }
+        ]
+    };
+    venueShowIncomeChart.setOption(venueShowIncomeOption);
+    $.ajax({
+        url: '/admin/venueShowIncome',
+        data: '',
+        dataType: 'json',
+        success: function (data) {
+            if (data.message) {
+                newData = data.data;
+                venueShowIncomeOption.xAxis[0].data = Object.keys(newData);
+                venueShowIncomeOption.series[0].data = Object.keys(newData).map(function(k) { return newData[k] });
+                venueShowIncomeChart.setOption(venueShowIncomeOption);
+            } else {
+                var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+                $(".err-msg").html(error_msg);
+            }
+        }
+    });
+    //
+    // var financeOption = {
+    //         tooltip : {
+    //             trigger: 'axis',
+    //             axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+    //                 type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+    //             }
+    //         },
+    //         legend: {
+    //             data:['Member Card','Cash','Credit Card']
+    //         },
+    //         grid: {
+    //             left: '3%',
+    //             right: '4%',
+    //             bottom: '3%',
+    //             containLabel: true
+    //         },
+    //         xAxis : [
+    //             {
+    //                 name: 'Time',
+    //                 type : 'category',
+    //                 data : ["12-7","12-8","12-9","12-10","12-11","12-12"]
+    //             }
+    //         ],
+    //     yAxis : [
+    //         {
+    //             name: 'Income',
+    //             type : 'value'
+    //         }
+    //     ],
+    //     series : [
+    //         {
+    //             name:'Member Card',
+    //             type:'bar',
+    //             stack: 'Day Income',
+    //             data:[620, 732, 701, 734, 1090, 1130, 1120]
+    //         },
+    //         {
+    //             name:'Cash',
+    //             type:'bar',
+    //             stack: 'Day Income',
+    //             data:[120, 132, 101, 134, 290, 230, 220]
+    //         },
+    //         {
+    //             name:'Credit Card',
+    //             type:'bar',
+    //             stack: 'Day Income',
+    //             data:[60, 72, 71, 74, 190, 130, 110]
+    //         }
+    //     ]
+    // };
+    //
+    // financeChart.setOption(financeOption);
+    // $.ajax({
+    //     url: '/manager/financeStatus',
+    //     data: '',
+    //     dataType: 'json',
+    //     success: function (data) {
+    //         console.log(data);
+    //         if (data.result) {
+    //             financeOption.xAxis[0].data = Object.keys(data.date).map(function(k) { return data.date[k] });
+    //             financeOption.series[0].data = Array.from(data.memberCardList);
+    //             financeOption.series[1].data = Array.from(data.cashList);
+    //             financeOption.series[2].data = Array.from(data.creditCardList);
+    //             console.log(liveOption);
+    //             financeChart.setOption(liveOption);
+    //         } else {
+    //             var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+    //             $(".err-msg").html(error_msg);
+    //         }
+    //         financeChart.setOption(financeOption);
+    //     }
+    //
+    // });
+
+
+</script>
+</body>
+</html>

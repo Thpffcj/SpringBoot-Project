@@ -147,7 +147,20 @@
                 success:function(data){
                     // layer.closeAll();
                     if(data.code == 200){
-                        window.location.href="/member/center";
+                        // console.log(data.data);
+                        switch (data.data.type) {
+                            case 0:
+                                window.location.href="/member/index";
+                                break;
+                            case 1:
+                                window.location.href="/venue/center";
+                                break;
+                            case 2:
+                                window.location.href="/admin/index";
+                                break;
+                            default:
+                                window.location.href="/member/login";
+                        }
                     }else{
                         layer.msg(data.msg);
                     }

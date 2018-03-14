@@ -19,6 +19,8 @@ public class ShowDto implements Serializable {
     private Date performanceTime;
     private String description;
     private String img;
+    private double benefit;
+    private int status;
 
     public Long getId() {
         return id;
@@ -74,5 +76,21 @@ public class ShowDto implements Serializable {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public double getBenefit() {
+        return benefit;
+    }
+
+    public void setBenefit(double benefit) {
+        this.benefit = benefit;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

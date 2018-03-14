@@ -1,5 +1,6 @@
 package com.thpffcj.service.impl;
 
+import com.thpffcj.base.ShowStatus;
 import com.thpffcj.entity.Show;
 import com.thpffcj.repository.ShowRepository;
 import com.thpffcj.service.result.ServiceMultiResult;
@@ -54,6 +55,15 @@ public class ShowServiceImpl implements ShowService {
     @Override
     public Show getShowByShowId(Long showId) {
         return showRepository.findShowById(showId);
+    }
+
+    /**
+     * 找到所有未结算的演出
+     * @return
+     */
+    @Override
+    public List<Show> getUnsettlementShow() {
+        return showRepository.getAllByStatus(ShowStatus.UNSETTLEMENT.getValue());
     }
 
     @Override

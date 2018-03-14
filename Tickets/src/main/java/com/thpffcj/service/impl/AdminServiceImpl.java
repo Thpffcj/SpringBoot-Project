@@ -2,15 +2,14 @@ package com.thpffcj.service.impl;
 
 import com.thpffcj.base.VenueStatus;
 import com.thpffcj.entity.Member;
+import com.thpffcj.entity.Show;
 import com.thpffcj.entity.Venue;
 import com.thpffcj.entity.VenueFinance;
-import com.thpffcj.service.AdminService;
-import com.thpffcj.service.MemberService;
-import com.thpffcj.service.VenueFinanceService;
-import com.thpffcj.service.VenueService;
+import com.thpffcj.service.*;
 import com.thpffcj.service.result.ServiceMultiResult;
 import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.web.dto.MemberDto;
+import com.thpffcj.web.dto.SettleAccountDto;
 import com.thpffcj.web.dto.VenueDto;
 import com.thpffcj.web.dto.VenueFinanceDto;
 import org.modelmapper.ModelMapper;
@@ -26,6 +25,8 @@ import java.util.List;
 @Service
 public class AdminServiceImpl implements AdminService {
 
+    public static final double RADIO = 0.9;
+
     @Autowired
     private ModelMapper modelMapper;
 
@@ -37,6 +38,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private ShowService showService;
 
     /**
      * 查找待审核的场馆
@@ -76,6 +80,28 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
+     * 清算
+     * @return
+     */
+    @Override
+    public ServiceMultiResult<SettleAccountDto> settleAccounts() {
+        List<SettleAccountDto> result = new ArrayList<>();
+        List<Show> shows = showService.getUnsettlementShow();
+        shows.forEach(show -> {
+            SettleAccountDto settleAccountDto = new SettleAccountDto();
+            settleAccountDto.setVenueName(venueService.getVenueByVenueId(show.getVenueId()).getName());
+            settleAccountDto.setShowName(show.getName());
+            settleAccountDto.setPerformanceTime(show.getPerformanceTime());
+            settleAccountDto.setTotalBenefit(show.getBenefit());
+            settleAccountDto.setRatio(RADIO);
+            settleAccountDto.setSettlementAmount(show.getBenefit() * RADIO);
+            settleAccountDto.setStatus(show.getStatus());
+            result.add(settleAccountDto);
+        });
+        return  new ServiceMultiResult<>(result.size(), result);
+    }
+
+    /**
      * 场馆统计信息
      * @return
      */
@@ -86,7 +112,9 @@ public class AdminServiceImpl implements AdminService {
         List<VenueFinanceDto> result = new ArrayList<>();
         venueFinances.forEach(venueFinance -> {
             VenueFinanceDto venueFinanceDto = modelMapper.map(venueFinance, VenueFinanceDto.class);
-            String venueName = venueService.getVenueByVenueId(venueFinanceDto.getVenueId()).getName();
+            // TODO
+//            String venueName = venueService.getVenueByVenueId(venueFinanceDto.getVenueId()).getName();
+            String venueName = "测试";
             venueFinanceDto.setVenueName(venueName);
             result.add(venueFinanceDto);
         });

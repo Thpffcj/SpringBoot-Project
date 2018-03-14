@@ -21,6 +21,8 @@ public class Show {
     private Date performanceTime;
     private String description;
     private String img;
+    private double benefit;
+    private int status;
 
     public Long getId() {
         return id;
@@ -78,15 +80,19 @@ public class Show {
         this.img = img;
     }
 
-    @Override
-    public String toString() {
-        return "Show{" +
-                "id=" + id +
-                ", venueId=" + venueId +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", performanceTime=" + performanceTime +
-                ", description='" + description + '\'' +
-                '}';
+    public double getBenefit() {
+        return benefit;
+    }
+
+    public void setBenefit(double benefit) {
+        this.benefit = benefit;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

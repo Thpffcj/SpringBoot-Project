@@ -3,10 +3,13 @@ package com.thpffcj.web.controller;
 import com.thpffcj.base.ApiResponse;
 import com.thpffcj.entity.Show;
 import com.thpffcj.service.MemberService;
+import com.thpffcj.service.OrderService;
 import com.thpffcj.service.ShowService;
 import com.thpffcj.service.VenueService;
+import com.thpffcj.service.result.ServiceMultiResult;
 import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.web.dto.MemberDto;
+import com.thpffcj.web.dto.OrderDto;
 import com.thpffcj.web.dto.ShowDto;
 import com.thpffcj.web.dto.VenueDto;
 import org.apache.http.HttpStatus;
@@ -34,6 +37,9 @@ public class MemberController {
     @Autowired
     private VenueService venueService;
 
+    @Autowired
+    private OrderService orderService;
+
     @GetMapping("/login")
     public String loginPage() {
         return "member/login";
@@ -47,15 +53,10 @@ public class MemberController {
         ServiceResult<MemberDto> result = memberService.login(mail, password);
         if (result.isSuccess()) {
             session.setAttribute("memberId", result.getResult().getId());
-            return ApiResponse.ofSuccess("");
+            return ApiResponse.ofSuccess(result.getResult());
         } else {
             return ApiResponse.ofMessage(HttpStatus.SC_BAD_REQUEST, result.getMessage());
         }
-    }
-
-    @GetMapping("/center")
-    public String centerPage() {
-        return "member/center";
     }
 
     @GetMapping("/profile")
@@ -92,5 +93,17 @@ public class MemberController {
         model.addAttribute("show", showDto);
         model.addAttribute("venue", venueDto);
         return "member/show-detail";
+    }
+
+    @RequestMapping("/statistics")
+    public String statistics(HttpSession session, Model model) {
+        Long id = (Long) session.getAttribute("memberId");
+        ServiceMultiResult<OrderDto> bookOrderDto = orderService.getAllBookOrder(id);
+        ServiceMultiResult<OrderDto> checkOrderDto = orderService.getAllCheckOrder(id);
+        ServiceMultiResult<OrderDto> refundOrderDto = orderService.getAllRefundOrder(id);
+        model.addAttribute("bookOrders" , bookOrderDto.getResult());
+        model.addAttribute("checkOrders" , checkOrderDto.getResult());
+        model.addAttribute("refundOrders" , refundOrderDto.getResult());
+        return "member/statistics";
     }
 }

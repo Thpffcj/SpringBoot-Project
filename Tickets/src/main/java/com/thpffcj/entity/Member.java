@@ -21,7 +21,8 @@ public class Member {
     private Double consumption;
     private int level;
     private Double point;
-    private boolean delete;
+    private int type;
+    private int status;
 
     public Long getId() {
         return id;
@@ -79,11 +80,19 @@ public class Member {
         this.point = point;
     }
 
-    public boolean isDelete() {
-        return delete;
+    public int getType() {
+        return type;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

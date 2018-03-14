@@ -5,6 +5,7 @@ import com.thpffcj.entity.Order;
 import com.thpffcj.entity.Show;
 import com.thpffcj.repository.OrderRepository;
 import com.thpffcj.service.OrderService;
+import com.thpffcj.service.result.ServiceMultiResult;
 import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.service.ShowService;
 import com.thpffcj.service.VenueService;
@@ -13,7 +14,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Thpffcj on 2018/3/2.
@@ -51,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCreateTime(new Date());
         order.setSeatName(seatName);
         order.setNumber(number);
-        order.setStatus(OrderStatus.PASSES.getValue());
+        order.setStatus(OrderStatus.BOOK.getValue());
         orderRepository.save(order);
 
         OrderDto orderDto = modelMapper.map(order, OrderDto.class);
@@ -61,5 +64,47 @@ public class OrderServiceImpl implements OrderService {
         orderDto.setVenueName(venueService.getVenueByVenueId(venueId).getName());
 
         return new ServiceResult<OrderDto>(true, null, orderDto);
+    }
+
+    @Override
+    public ServiceMultiResult<OrderDto> getAllBookOrder(Long memberId) {
+        List<OrderDto> result = new ArrayList<>();
+        List<Order> orders = orderRepository.getAllByMemberIdAndStatus(memberId, OrderStatus.BOOK.getValue());
+        result = wrapOrder(orders);
+        return new ServiceMultiResult<>(result.size(), result);
+    }
+
+    @Override
+    public ServiceMultiResult<OrderDto> getAllCheckOrder(Long memberId) {
+        List<OrderDto> result = new ArrayList<>();
+        List<Order> orders = orderRepository.getAllByMemberIdAndStatus(memberId, OrderStatus.CHECK.getValue());
+        result = wrapOrder(orders);
+        return new ServiceMultiResult<>(result.size(), result);
+    }
+
+    @Override
+    public ServiceMultiResult<OrderDto> getAllRefundOrder(Long memberId) {
+        List<OrderDto> result = new ArrayList<>();
+        List<Order> orders = orderRepository.getAllByMemberIdAndStatus(memberId, OrderStatus.REFUND.getValue());
+        result = wrapOrder(orders);
+        return new ServiceMultiResult<>(result.size(), result);
+    }
+
+    /**
+     * Order转OrderDto
+     * @param orders
+     * @return
+     */
+    private List<OrderDto> wrapOrder(List<Order> orders) {
+        List<OrderDto> result = new ArrayList<>();
+        orders.forEach(order -> {
+            OrderDto orderDto = modelMapper.map(order, OrderDto.class);
+            Show show = showService.getShowByShowId(order.getShowId());
+            orderDto.setShowName(show.getName());
+            orderDto.setShowTime(show.getPerformanceTime());
+            orderDto.setVenueName(venueService.getVenueByVenueId(show.getVenueId()).getName());
+            result.add(orderDto);
+        });
+        return result;
     }
 }

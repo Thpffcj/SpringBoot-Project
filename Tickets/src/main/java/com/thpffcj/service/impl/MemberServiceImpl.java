@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ServiceResult<MemberDto> login(String mail, String password) {
-        Member member = memberRepository.findByMailAndPasswordAndDelete(mail, password, MemberStatus.NORMAL.getValue());
+        Member member = memberRepository.findByMailAndPasswordAndStatus(mail, password, MemberStatus.NORMAL.getValue());
         if (member == null) {
             return new ServiceResult<MemberDto>(false, "用户不存在");
         }

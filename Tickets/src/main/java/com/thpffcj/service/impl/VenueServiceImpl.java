@@ -56,7 +56,11 @@ public class VenueServiceImpl implements VenueService {
 
     @Override
     public ServiceResult<VenueDto> getVenueDtoByVenueId(Long venueId) {
-        VenueDto venueDto =  modelMapper.map(venueRepository.findById(venueId), VenueDto.class);
+        Venue venue = venueRepository.findById(venueId);
+        VenueDto venueDto = null;
+        if (venue != null) {
+            venueDto =  modelMapper.map(venue, VenueDto.class);
+        }
         return new ServiceResult<VenueDto>(true, null, venueDto);
     }
 

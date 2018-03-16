@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
     <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
     <link rel="stylesheet" href="../../static/css/other.css" th:href="@{/css/other.css}"/>
-    <title>show Detail</title>
+    <title>演出详情</title>
 </head>
 <body>
 
@@ -22,27 +22,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html" th:href="@{index}">Hostel World</a>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="index.html" th:href="@{index}">show<span
+                <li class="active"><a href="index.html" th:href="@{index}">演出<span
                         class="sr-only">(current)</span></a></li>
-                <li><a href="statistics.html" th:href="@{statistics}">Statistics</a></li>
-                <li><a href="profile.html" th:href="@{profile}">Profile</a></li>
-
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Welcome, Smith <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="../account/index.html" th:href="@{../logout}">Sign out</a></li>
-                        <li><a href="../account/register.html" th:href="@{../register}">Register</a></li>
-                    </ul>
-                </li>
+                <li><a href="statistics.html" th:href="@{statistics}">个人统计</a></li>
+                <li><a href="profile.html" th:href="@{profile}">个人信息</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -53,13 +42,12 @@
     <div class="jumbotron">
         <div class="container">
             <h1 th:text="${show.name}"></h1>
-            <p th:text="演出类型 ${show.type}"></p>
-            <p th:text="演出时间 ${show.performanceTime}"></p>
+            <!--<p th:text="演出类型 ${show.type}"></p>-->
+            <!--<p th:text="演出时间 ${show.performanceTime}"></p>-->
             <p th:text="${show.description}"></p>
             <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
         </div>
     </div>
-
 </div>
 
 <div class="modal fade" id="reserveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

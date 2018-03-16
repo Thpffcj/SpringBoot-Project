@@ -11,4 +11,6 @@ import java.util.List;
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
     List<Order> getAllByMemberIdAndStatus(Long memberId, int status);
+
+    List<Order> getAllByVenueIdAndStatus(Long venueId, int status);
 }

@@ -1,7 +1,10 @@
 package com.thpffcj.web.controller;
 
 import com.thpffcj.base.ApiResponse;
+import com.thpffcj.service.OrderService;
 import com.thpffcj.service.VenueService;
+import com.thpffcj.service.result.ServiceMultiResult;
+import com.thpffcj.web.dto.OrderDto;
 import com.thpffcj.web.dto.VenueDto;
 import com.thpffcj.web.form.ShowForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class VenueController {
 
     @Autowired
     private VenueService venueService;
+
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 欢迎页
@@ -76,6 +82,35 @@ public class VenueController {
     @ResponseBody
     public ApiResponse addHouse(@ModelAttribute("form-show-add") ShowForm showForm) {
         return null;
+    }
+
+    @GetMapping("/check")
+    public String checkPage() {
+        return "venue/check-ticket";
+    }
+
+    /**
+     * 检票
+     * @param memberId
+     * @param showId
+     * @return
+     */
+    @PostMapping("/check")
+    @ResponseBody
+    public ApiResponse checkTicket(@RequestParam(value = "memberId") String memberId,
+                                   @RequestParam(value = "showId") String showId) {
+        return null;
+    }
+
+    @RequestMapping("/statistics")
+    public String statistics(HttpSession session, Model model) {
+//        Long venueId = session.getAttribute();
+        Long venueId = 1000000L;
+        ServiceMultiResult<OrderDto> bookOrderDto = orderService.getAllVenueBookOrder(venueId);
+        ServiceMultiResult<OrderDto> refundOrderDto = orderService.getAllVenueRefundOrder(venueId);
+        model.addAttribute("bookOrders" , bookOrderDto.getResult());
+        model.addAttribute("refundOrders" , refundOrderDto.getResult());
+        return "venue/statistics";
     }
 
 }

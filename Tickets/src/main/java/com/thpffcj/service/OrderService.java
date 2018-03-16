@@ -16,4 +16,8 @@ public interface OrderService {
     ServiceMultiResult<OrderDto> getAllCheckOrder(Long memberId);
 
     ServiceMultiResult<OrderDto> getAllRefundOrder(Long memberId);
+
+    ServiceMultiResult<OrderDto> getAllVenueBookOrder(Long venueId);
+
+    ServiceMultiResult<OrderDto> getAllVenueRefundOrder(Long venueId);
 }

@@ -90,6 +90,22 @@ public class OrderServiceImpl implements OrderService {
         return new ServiceMultiResult<>(result.size(), result);
     }
 
+    @Override
+    public ServiceMultiResult<OrderDto> getAllVenueBookOrder(Long venueId) {
+        List<OrderDto> result = new ArrayList<>();
+        List<Order> orders = orderRepository.getAllByVenueIdAndStatus(venueId, OrderStatus.BOOK.getValue());
+        result = wrapOrder(orders);
+        return new ServiceMultiResult<>(result.size(), result);
+    }
+
+    @Override
+    public ServiceMultiResult<OrderDto> getAllVenueRefundOrder(Long venueId) {
+        List<OrderDto> result = new ArrayList<>();
+        List<Order> orders = orderRepository.getAllByVenueIdAndStatus(venueId, OrderStatus.REFUND.getValue());
+        result = wrapOrder(orders);
+        return new ServiceMultiResult<>(result.size(), result);
+    }
+
     /**
      * Order转OrderDto
      * @param orders

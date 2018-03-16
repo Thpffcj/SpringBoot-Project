@@ -15,6 +15,8 @@ public class Order {
     private Long id;
     @Column(name = "member_id")
     private Long memberId;
+    @Column(name = "venue_id")
+    private Long venueId;
     @Column(name = "show_id")
     private Long showId;
     @Column(name = "create_time")
@@ -38,6 +40,14 @@ public class Order {
 
     public void setMemberId(Long memberId) {
         this.memberId = memberId;
+    }
+
+    public Long getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(Long venueId) {
+        this.venueId = venueId;
     }
 
     public Long getShowId() {

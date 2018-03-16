@@ -16,14 +16,17 @@
     <link rel="stylesheet" type="text/css" href="/static/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="/static/lib/h-ui.admin/skin/default/skin.css" id="skin"/>
     <link rel="stylesheet" type="text/css" href="/static/lib/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="/static/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
 
-    <title>寻屋后台管理系统</title>
+    <title>寻票场馆管理系统</title>
     <meta name="keywords" content="寻屋">
-    <meta name="description" content="寻屋后台管理系统">
+    <meta name="description" content="寻票场馆管理系统">
 </head>
 <!-- 定义需引入的公共资源 end -->
 
@@ -49,19 +52,6 @@
             </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
-                    <li class="dropDown dropDown_hover">
-                        <a href="#" class="dropDown_A">
-                            <div sec:authentication="name">
-                                用户名
-                            </div>
-
-                            <i class="Hui-iconfont">&#xe6d5;</i></a>
-                        <ul class="dropDown-menu menu radius box-shadow">
-                            <!--<li><a href="javascript:;" th:onclick="'mySelfInfo(' + ${adminId} + ')'">个人信息</a></li>-->
-                            <li><a href="/venue/login">切换账户</a></li>
-                            <li><a href="/logout">退出</a></li>
-                        </ul>
-                    </li>
                     <li id="Hui-msg"><a href="#" title="消息"><span class="badge badge-danger">1</span><i
                             class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a></li>
                     <li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" class="dropDown_A"
@@ -92,17 +82,21 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="/venue/info" data-title="信息管理"
-                               href="javascript:void(0)">信息管理</a></li>
+                        <li><a data-href="/venue/info" data-title="场馆基本信息"
+                               href="javascript:void(0)">场馆基本信息</a></li>
                     </ul>
                 </dd>
             </dl>
             <dl id="menu-picture">
-                <dt><i class="Hui-iconfont">&#xe620;</i> 预约管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                <dt><i class="Hui-iconfont">&#xe620;</i> 场馆<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="/admin/house/subscribe" data-title="预约管理" href="javascript:void(0)">预约管理
+                        <li><a data-href="/venue/check" data-title="检票登记" href="javascript:void(0)">检票登记
+                        </a></li>
+                    </ul>
+                    <ul>
+                        <li><a data-href="/venue/statistics" data-title="场馆统计信息" href="javascript:void(0)">场馆统计信息
                         </a></li>
                     </ul>
                 </dd>

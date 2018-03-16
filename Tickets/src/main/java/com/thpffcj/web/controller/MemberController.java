@@ -95,6 +95,12 @@ public class MemberController {
         return "member/show-detail";
     }
 
+    /**
+     * 查看本人统计信息
+     * @param session
+     * @param model
+     * @return
+     */
     @RequestMapping("/statistics")
     public String statistics(HttpSession session, Model model) {
         Long id = (Long) session.getAttribute("memberId");

@@ -15,13 +15,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 自定义配置
+     * @param http
+     * @throws Exception
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/css/**", "/js/**", "/fonts/**", "/index").permitAll() // 都可以访问
+        http.authorizeRequests()
+                .antMatchers("/css/**", "/js/**", "/fonts/**", "/index").permitAll() // 都可以访问
                 .antMatchers("/users/**").hasRole("ADMIN") // 需要相应的角色才能访问
                 .and()
-                .formLogin()   //基于 Form 表单登录验证
+                .formLogin()   // 基于 Form 表单登录验证
                 .loginPage("/login").failureUrl("/login-error");
     }
 
@@ -32,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("Thpffcj").password("000000").roles("ADMIN");
+        auth.inMemoryAuthentication()
+                .withUser("Thpffcj").password("000000").roles("ADMIN");
     }
 }

@@ -42,8 +42,8 @@
     <div class="jumbotron">
         <div class="container">
             <h1 th:text="${show.name}"></h1>
-            <!--<p th:text="演出类型 ${show.type}"></p>-->
-            <!--<p th:text="演出时间 ${show.performanceTime}"></p>-->
+            <p th:text="${show.type}"></p>
+            <p th:text="${show.performanceTime}"></p>
             <p th:text="${show.description}"></p>
             <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
         </div>
@@ -56,14 +56,26 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Reserve Room</h4>
+                <h4 class="modal-title">买票</h4>
             </div>
             <div class="modal-body">
-                Are you sure to reserve this room?
+
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">支付账户</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="支付账户"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="password" id="password" placeholder="密码"/>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary reserve">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary reserve">购买</button>
             </div>
             <div class="err-msg"></div>
         </div>
@@ -97,7 +109,6 @@
                     var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
                     $(".err-msg").html(error_msg);
                 }
-
             }
         });
     });

@@ -95,11 +95,27 @@ public class MemberServiceImpl implements MemberService {
     }
 
     /**
+     * 修改个人信息
+     * @param id
+     * @param memberName
+     * @param password
+     * @return
+     */
+    @Transactional
+    @Override
+    public ServiceResult<MemberDto> edit(Long id, String memberName, String password) {
+        memberRepository.updateProfile(id, memberName, password);
+        Member member = memberRepository.findById(id);
+        MemberDto memberDto = modelMapper.map(member, MemberDto.class);
+        return new ServiceResult<MemberDto>(true, null, memberDto);
+    }
+
+    /**
      * 停止会员服务
      * @param memberId
      */
     @Override
     public void stopMember(Long memberId) {
-//        memberRepository.updateDelete(memberId, MemberStatus.DELETED.getValue());
+        memberRepository.updateStatus(memberId, MemberStatus.DELETED.getValue());
     }
 }

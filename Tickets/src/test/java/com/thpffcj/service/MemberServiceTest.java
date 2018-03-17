@@ -17,4 +17,9 @@ public class MemberServiceTest extends BaseTest {
     @Test
     public void seatReservation() {
     }
+
+    @Test
+    public void edit() {
+        memberService.edit(1L, "thpffcj", "123");
+    }
 }

@@ -21,5 +21,7 @@ public interface MemberService {
 
     List<Member> listMember();
 
+    ServiceResult<MemberDto> edit(Long id, String memberName, String password);
+
     void stopMember(Long memberId);
 }

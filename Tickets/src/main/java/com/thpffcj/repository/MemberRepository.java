@@ -18,5 +18,10 @@ public interface MemberRepository extends CrudRepository<Member, Long> {
     // member也是sql关键字
     @Modifying
     @Query("update Member as m set m.status = :status where m.id = :id")
-    void updateDelete(@Param(value = "id") Long id, @Param(value = "status") int status);
+    void updateStatus(@Param(value = "id") Long id, @Param(value = "status") int status);
+
+    @Modifying
+    @Query("update Member as m set m.userName = :memberName, m.password = :password where m.id = :id")
+    void updateProfile(@Param(value = "id") Long id, @Param(value = "memberName") String memberName,
+                       @Param(value = "password") String password);
 }

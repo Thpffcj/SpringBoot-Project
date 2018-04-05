@@ -1,5 +1,6 @@
 package com.thpffcj.service.impl;
 
+import com.thpffcj.base.ShowStatus;
 import com.thpffcj.base.VenueStatus;
 import com.thpffcj.entity.Member;
 import com.thpffcj.entity.Show;
@@ -57,6 +58,10 @@ public class AdminServiceImpl implements AdminService {
         return new ServiceMultiResult<>(result.size(), result);
     }
 
+    /**
+     * 查看修改信息待审核的场馆
+     * @return
+     */
     @Override
     public ServiceMultiResult<VenueDto> getAllModifyApplication() {
         List<Venue> venues = venueService.getVenueByStatus(VenueStatus.MODIFY.getValue());
@@ -70,17 +75,22 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核场馆
+     * @param isApprove
      * @param venueId
      * @return
      */
     @Override
-    public ServiceResult<VenueDto> auditingVenue(Long venueId) {
-        venueService.updateVenueStatus(venueId, VenueStatus.PASSES.getValue());
+    public ServiceResult auditingVenue(boolean isApprove, Long venueId) {
+        if (isApprove) {
+            venueService.updateVenueStatus(venueId, VenueStatus.PASSES.getValue());
+        } else {
+            venueService.updateVenueStatus(venueId, VenueStatus.DENY.getValue());
+        }
         return ServiceResult.success();
     }
 
     /**
-     * 清算
+     * 找到未结算演出
      * @return
      */
     @Override
@@ -99,6 +109,23 @@ public class AdminServiceImpl implements AdminService {
             result.add(settleAccountDto);
         });
         return  new ServiceMultiResult<>(result.size(), result);
+    }
+
+    /**
+     * 对演出进行结算
+     * @param isApprove
+     * @param showName
+     * @return
+     */
+    @Override
+    public ServiceResult settlement(boolean isApprove, String showName) {
+        Long showId = showService.getShowByShowName(showName).getId();
+        if (isApprove) {
+            showService.updateShowStatus(showId, ShowStatus.SETTLEMENT.getValue());
+        } else {
+            showService.updateShowStatus(showId, ShowStatus.UNSETTLEMENT.getValue());
+        }
+        return ServiceResult.success();
     }
 
     /**

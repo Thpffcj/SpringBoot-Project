@@ -19,8 +19,8 @@ public class PayServiceImpl implements PayService {
 
     @Override
     @Transactional
-    public ServiceResult payOrder(String phone, String password, double money) {
-        Pay pay = payRepository.findIdByPhoneAndPassword(phone, password);
+    public ServiceResult payOrder(String account, String password, double money) {
+        Pay pay = payRepository.findIdByPhoneAndPassword(account, password);
         if (pay == null) {
             return new ServiceResult(false, "");
         }
@@ -29,6 +29,14 @@ public class PayServiceImpl implements PayService {
             return new ServiceResult(false, "");
         }
         payRepository.updateMoney(pay.getId(), balance - money);
+        return ServiceResult.success();
+    }
+
+    @Override
+    @Transactional
+    public ServiceResult recharge(String account, double money) {
+        Pay pay = payRepository.findByPhone(account);
+        payRepository.updateMoney(pay.getId(), pay.getMoney() + money);
         return ServiceResult.success();
     }
 }

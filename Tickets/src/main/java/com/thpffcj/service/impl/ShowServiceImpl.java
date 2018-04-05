@@ -13,8 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,13 +37,21 @@ public class ShowServiceImpl implements ShowService {
 
     /**
      * 发布演出计划
+     * @param venueId
      * @param showForm
      * @return
      */
     @Override
-    public ServiceResult<ShowDto> releasePlan(ShowForm showForm) {
+    public ServiceResult<ShowDto> releasePlan(Long venueId, ShowForm showForm) {
         Show show = new Show();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos = new ParsePosition(0);
+        Date performanceTime = formatter.parse(showForm.getTime(), pos);
+
         modelMapper.map(showForm, show);
+        show.setVenueId(venueId);
+        show.setPerformanceTime(performanceTime);
 
         showRepository.save(show);
 
@@ -55,6 +67,11 @@ public class ShowServiceImpl implements ShowService {
     @Override
     public Show getShowByShowId(Long showId) {
         return showRepository.findShowById(showId);
+    }
+
+    @Override
+    public Show getShowByShowName(String showName) {
+        return showRepository.findShowByName(showName);
     }
 
     /**
@@ -94,5 +111,16 @@ public class ShowServiceImpl implements ShowService {
             });
         }
         return new ServiceMultiResult<>(result.size(), result);
+    }
+
+    /**
+     * 修改演出状态
+     * @param showId
+     * @param status
+     */
+    @Transactional
+    @Override
+    public void updateShowStatus(Long showId, int status) {
+        showRepository.updateStatus(showId, status);
     }
 }

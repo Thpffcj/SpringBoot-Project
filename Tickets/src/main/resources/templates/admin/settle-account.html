@@ -57,7 +57,7 @@
                 <tr th:each="settle : ${settlements}"
                     th:class="info">
                     <td th:text="${settle.venueName}"></td>
-                    <td th:text="${settle.showName}"></td>
+                    <td id = "showName" th:text="${settle.showName}"></td>
                     <td th:text="${settle.performanceTime}"></td>
                     <td th:text="${settle.totalBenefit}"></td>
                     <td th:text="${settle.ratio}"></td>
@@ -108,13 +108,10 @@
             operationArray.push($(this).parent().parent().find('input[type="checkbox"]').attr('name'));
         }
 
-        if (operationArray.length == 0) {
-            var error_msg = '<p class="errtip">	<strong>Error</strong>：' + 'No rows are selected' + '</p>';
-            $(".alert-danger").html(error_msg).removeClass("invisible");
-            return;
-        }
+        var showName = $("#showName").text();
+        console.log(showName);
 
-        var inputs = {isApprove: isApprove, operationArray: operationArray};
+        var inputs = {isApprove: isApprove, showName: showName};
         console.log(inputs);
         $.ajax({
             type: "POST",
@@ -122,7 +119,7 @@
             data: inputs,
             dataType: 'json',
             success: function (data) {
-                if (data.result) {
+                if (data.code == 200) {
                     location.reload();
                 } else {
                     var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>'

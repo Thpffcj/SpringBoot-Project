@@ -42,13 +42,13 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>状态：</label>
                 <label class="form-label col-xs-8 col-sm-9" control-label
-                       th:text="(${venue.status == 0}) ? 'Not Activated' : 'Activated'"></label>
+                       th:text="(${venue.status == 0}) ? '未审核' : '审核通过'"></label>
             </div>
 
             <div class="row cl">
                 <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                    <p style="margin-top: 10px"><a href="javascript:" class="btn btn-primary my-pop-1" role="button">Edit Apply</a>
-                        <a href="#" class="btn btn-info my-pop-2" role="button" th:unless="${venue.status==1}">Apply for open</a>
+                    <p style="margin-top: 10px">
+                        <a href="javascript:" class="btn btn-primary my-pop-1" role="button">修改信息</a>
                     </p>
                 </div>
             </div>
@@ -60,56 +60,42 @@
     <div class="cd-user-modal-container">
         <div class="panel panel-info">
             <!-- Default panel contents -->
-            <div class="panel-heading">Hotel Message Change Apply</div>
-            <form class="form-horizontal" action="info.html" th:action="@{/hotel/edit}" method="post">
+            <div class="panel-heading">场馆信息修改申请</div>
+            <form class="form-horizontal" action="info.html" th:action="@{/venue/edit}" method="post">
                 <div class="row cl">
-                    <label for="name" class="col-sm-2 control-label">Name</label>
+                    <label for="name" class="col-sm-2 control-label">场馆名称</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Hotel Name"
+                        <input type="text" class="form-control" name="name" id="name" placeholder="场馆名称"
                                required="required"/>
                     </div>
                 </div>
+
+                <br/>
+
                 <div class="row cl">
-                    <label for="address" class="col-sm-2 control-label">Address</label>
+                    <label for="address" class="col-sm-2 control-label">场馆地址</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="address" id="address" placeholder="Address"
+                        <input type="text" class="form-control" name="address" id="address" placeholder="场馆地址"
                                required="required"/>
                     </div>
                 </div>
+
+                <br/>
+
                 <div class="row cl">
-                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <label for="description" class="col-sm-2 control-label">场馆描述</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="description" id="description"
-                               placeholder="Description" required="required"/>
+                               placeholder="场馆描述" required="required"/>
                     </div>
                 </div>
+
+                <br/>
+
                 <div class="row cl">
                     <div class="col-sm-offset-2 col-sm-10 col-md-4">
-                        <button type="submit" class=" btn btn-primary">Apply</button>
-                        <a href="#" class="btn btn-danger modal-cancel">Cancel</a>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="cd-user-modal cd-user-modal-2">
-    <div class="cd-user-modal-container">
-        <div class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Hotel Open Application</div>
-            <form class="form-horizontal" action="info.html" th:action="@{/hotel/open}" method="post">
-                <div class="form-group">
-                    <label for="reason" class="col-sm-2 control-label">Reason</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="reason" id="reason" placeholder="Your Reason"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10   col-md-4">
-                        <button type="submit" class=" btn btn-primary">Apply</button>
-                        <a href="#" class="btn btn-danger modal-cancel">Cancel</a>
+                        <button type="submit" class=" btn btn-primary">确定</button>
+                        <a href="#" class="btn btn-danger modal-cancel">取消</a>
                     </div>
                 </div>
             </form>

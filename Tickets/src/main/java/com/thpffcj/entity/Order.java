@@ -23,6 +23,9 @@ public class Order {
     private Date createTime;
     @Column(name = "seat_name")
     private String seatName;
+    private double total;
+    @Column(name = "discount_price")
+    private double discountPrice;
     private int number;
     private int status;
 
@@ -80,6 +83,22 @@ public class Order {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
     }
 
     public int getStatus() {

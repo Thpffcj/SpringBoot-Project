@@ -9,19 +9,12 @@
 <body>
 <div>
     <content class="page-container">
-        <form class="form form-horizontal" id="form-show-add" th:action="@{/venue/check}">
+        <form class="form form-horizontal" id="form-show-add" th:action="@{/venue/check}" method="post">
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>会员id：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>订单id：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="会员id" id="memberId"
-                           name="id">
-                </div>
-            </div>
-
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>演出id：</label>
-                <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="演出类型" id="showId" name="showId">
+                    <input type="text" class="input-text" value="" placeholder="订单id" id="orderId"
+                           name="orderId">
                 </div>
             </div>
 

@@ -17,7 +17,7 @@ public class OrderServiceTest extends BaseTest {
 
     @Test
     public void createOrder() {
-        OrderDto orderDto = orderService.createOrder(1L, 1L, "测试", 100).getResult();
+        OrderDto orderDto = orderService.createOrder(1L, 1L, "VIP", 1, 500).getResult();
         System.out.println(orderDto);
     }
 }

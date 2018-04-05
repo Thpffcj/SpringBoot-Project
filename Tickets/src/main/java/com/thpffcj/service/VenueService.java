@@ -2,6 +2,7 @@ package com.thpffcj.service;
 
 import com.thpffcj.entity.Venue;
 import com.thpffcj.service.result.ServiceResult;
+import com.thpffcj.web.dto.OrderDto;
 import com.thpffcj.web.dto.VenueDto;
 import com.thpffcj.web.form.VenueForm;
 
@@ -14,7 +15,11 @@ public interface VenueService {
 
     ServiceResult<VenueDto> save(VenueForm venueForm);
 
+    ServiceResult<VenueDto> edit(Long venueId, String name, String address, String description);
+
     Venue getVenueByVenueId(Long venueId);
+
+    Venue getVenueByManagerId(Long managerId);
 
     ServiceResult<VenueDto> getVenueDtoByVenueId(Long venueId);
 
@@ -22,4 +27,5 @@ public interface VenueService {
 
     void updateVenueStatus(Long venueId, int status);
 
+    ServiceResult<OrderDto> checkOrder(Long orderId);
 }

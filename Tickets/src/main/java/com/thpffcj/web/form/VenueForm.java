@@ -6,8 +6,9 @@ package com.thpffcj.web.form;
 public class VenueForm {
 
     private Long id;
-    private String password;
     private String name;
+    private Long managerId;
+    private String password;
     private String address;
     private String description;
 
@@ -17,6 +18,14 @@ public class VenueForm {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Long managerId) {
+        this.managerId = managerId;
     }
 
     public String getPassword() {

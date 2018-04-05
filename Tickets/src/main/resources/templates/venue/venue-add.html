@@ -4,37 +4,43 @@
     <div th:include="venue/common :: head"></div>
     <link rel="stylesheet" type="text/css" href="/static/lib/webuploader/0.1.5/webuploader.css">
     <!--<link rel="stylesheet" type="text/css" href="/static/css/venue/add-venue.css">-->
-    <title>增加演出</title>
+    <title>申请场馆</title>
 </head>
 <body>
 <div>
     <content class="page-container">
-        <form class="form form-horizontal" id="form-show-add">
+        <form class="form form-horizontal" id="form-venue-add">
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>演出名称：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>场馆名称：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="演出名称" id="name"
+                    <input type="text" class="input-text" value="" placeholder="场馆名称" id="name"
                            name="name">
                 </div>
             </div>
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>演出类型：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>管理员ID：</label>
                 <div class="formControls col-xs-8 col-sm-9">
-                    <input type="text" class="input-text" value="" placeholder="演出类型" id="type" name="type">
+                    <input type="text" class="input-text" value="" placeholder="管理员ID" id="managerId" name="managerId">
                 </div>
             </div>
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>演出时间：</label>
-                <div class="formControls col-xs-8 col-sm-2">
-                    <input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-                           id="time" name="time" class="input-text Wdate">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>场馆密码：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text" value="" placeholder="场馆密码" id="password" name="password">
                 </div>
             </div>
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-2">演出描述：</label>
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>场馆地址：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text" value="" placeholder="场馆地址" id="address" name="address">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">场馆描述：</label>
                 <div class="formControls col-xs-8 col-sm-9">
                 <textarea name="description" cols="" rows="" class="textarea" placeholder="说点什么演出相关之类的..."
                           datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！"></textarea>
@@ -72,11 +78,11 @@
     $(function () {
 
         //表单验证
-        $("#form-show-add").validate({
+        $("#form-venue-add").validate({
             submitHandler: function (form) {
                 $(form).ajaxSubmit({
                     type: 'post',
-                    url: '/venue/add/show', // 提交地址
+                    url: '/venue/add/venue', // 提交地址
                     success: function (data) {
                         if (data.code === 200) {
                             alert('提交成功！');

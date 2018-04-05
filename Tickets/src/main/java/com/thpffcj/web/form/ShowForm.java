@@ -9,7 +9,7 @@ public class ShowForm {
 
     private String name;
     private String type;
-    private String performanceTime;
+    private String time;
     private String description;
 
     public String getName() {
@@ -28,12 +28,12 @@ public class ShowForm {
         this.type = type;
     }
 
-    public String getPerformanceTime() {
-        return performanceTime;
+    public String getTime() {
+        return time;
     }
 
-    public void setPerformanceTime(String performanceTime) {
-        this.performanceTime = performanceTime;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getDescription() {
@@ -44,13 +44,4 @@ public class ShowForm {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "ShowForm{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", performanceTime=" + performanceTime +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

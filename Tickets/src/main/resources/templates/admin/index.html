@@ -43,7 +43,7 @@
     <div>
         <div class="panel panel-info">
             <!-- Default panel contents -->
-            <div class="panel-heading">场馆注册申请</div>
+            <div class="panel-heading">场馆申请</div>
             <div class="table-responsive ">
                 <table class="table table-hover" id="openTable">
                     <tr>
@@ -55,7 +55,7 @@
                     </tr>
                     <tr th:each="open : ${opens}"
                         th:class="info">
-                        <td th:text="${#numbers.formatInteger(open.id,7)}">0000001</td>
+                        <td id="openId" th:name="openId" th:text="${#numbers.formatInteger(open.id,7)}">0000001</td>
                         <td th:text="${open.name}">测试</td>
                         <td th:text="${open.address}">测试</td>
                         <td th:text="${open.description}">测试</td>
@@ -76,41 +76,7 @@
             </div>
         </div>
     </div><!-- End of The first open application part -->
-    <div id="editTable" style="margin-top: 20px">
-        <div class="panel panel-info" >
-            <div class="panel-heading">场馆修改申请</div>
-            <div class="table-responsive ">
-                <table class="table table-hover"  >
-                    <tr>
-                        <th>编号</th>
-                        <th>名称</th>
-                        <th>地址</th>
-                        <th>描述</th>
-                        <th>状态</th>
-                    </tr>
-                    <tr th:each="edit : ${edits}"
-                        th:class="info">
-                        <td th:text="${#numbers.formatInteger(edit.id,7)}">0000001</td>
-                        <td th:text="${edit.name}">测试</td>
-                        <td th:text="${edit.address}">测试</td>
-                        <td th:text="${edit.description}">测试</td>
-                        <td th:text="(${edit.status == 0}) ? '修改待审核' : '审核通过' ">
-                            测试
-                        </td>
-                        <td><a href="javascript:" id="detail">更多细节</a></td>
-                        <td>
-                            <a  class="btn-primary operation editTable" name="singleApprove"><span
-                                    class="glyphicon glyphicon-ok"
-                                    aria-hidden="true"></span></a>
-                            <a  class="btn-danger operation editTable" name="singleDeny"><span
-                                    class="glyphicon glyphicon-remove"
-                                    aria-hidden="true"></span></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
+
     <!--TODO Add some hints-->
     <div class="alert alert-danger invisible" role="alert"></div>
 </div>
@@ -145,32 +111,22 @@
                 break;
         }
 
-        var operationArray = [];
+        var venueId = "";
         if (isSingle) {
-            operationArray.push($(this).parent().parent().find('input[type="checkbox"]').attr('name'));
-        } else {
-            var checkList = $("#editTable").find('input[type="checkbox"]:checked');
-            checkList.each(function () {
-                operationArray.push($(this).attr('name'));
-            });
-        }
-        if (operationArray.length == 0) {
-            var error_msg = '<p class="errtip">	<strong>Error</strong>：' + 'No rows are selected' + '</p>';
-            $(".alert-danger").html(error_msg).removeClass("invisible");
-            return;
+            venueId = $("#openId").text();
         }
 
         console.log('is SIngle ' + isSingle);
-        var inputs = {isApprove: isApprove, openOrModify: openOrModify, operationArray: operationArray};
+        var inputs = {isApprove: isApprove, venueId: venueId};
         console.log(inputs);
 //        var $table = $('.table-responsive');
         $.ajax({
             type: "POST",
-            url: '/manager/approve',
+            url: '/admin/approve',
             data: inputs,
             dataType: 'json',
             success: function (data) {
-                if (data.result) {
+                if (data.code == 200) {
                     location.reload();
                 } else {
                     var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>'

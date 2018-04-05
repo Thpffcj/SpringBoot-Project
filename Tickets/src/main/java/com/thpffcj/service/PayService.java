@@ -9,10 +9,12 @@ public interface PayService {
 
     /**
      * 支付订单
-     * @param phone
+     * @param account
      * @param password
      * @param money
      * @return
      */
-    ServiceResult payOrder(String phone, String password, double money);
+    ServiceResult payOrder(String account, String password, double money);
+
+    ServiceResult recharge(String account, double money);
 }

@@ -1,15 +1,19 @@
 package com.thpffcj.service.impl;
 
+import com.thpffcj.base.OrderStatus;
 import com.thpffcj.base.VenueStatus;
 import com.thpffcj.entity.Venue;
 import com.thpffcj.repository.VenueRepository;
+import com.thpffcj.service.OrderService;
 import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.service.VenueService;
+import com.thpffcj.web.dto.OrderDto;
 import com.thpffcj.web.dto.VenueDto;
 import com.thpffcj.web.form.VenueForm;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +29,9 @@ public class VenueServiceImpl implements VenueService {
     @Autowired
     private VenueRepository venueRepository;
 
+    @Autowired
+    private OrderService orderService;
+
     /**
      * 注册场馆
      * @param venueForm
@@ -34,13 +41,31 @@ public class VenueServiceImpl implements VenueService {
     public ServiceResult save(VenueForm venueForm) {
         Venue venue = new Venue();
         modelMapper.map(venueForm, venue);
-        // TODO 生成场馆编号
         venue.setStatus(VenueStatus.NOT_AUDITED.getValue());
 
         venueRepository.save(venue);
 
         VenueDto venueDto = modelMapper.map(venue, VenueDto.class);
 
+        return new ServiceResult<VenueDto>(true, null, venueDto);
+    }
+
+    /**
+     * 修改场馆信息
+     * @param venueId
+     * @param name
+     * @param address
+     * @param description
+     * @return
+     */
+    @Override
+    @Transactional
+    public ServiceResult<VenueDto> edit(Long venueId, String name, String address, String description) {
+        venueRepository.updateVenue(venueId, name, address, description);
+        venueRepository.updateStatus(venueId, VenueStatus.NOT_AUDITED.getValue());
+
+        Venue venue = venueRepository.findById(venueId);
+        VenueDto venueDto = modelMapper.map(venue, VenueDto.class);
         return new ServiceResult<VenueDto>(true, null, venueDto);
     }
 
@@ -52,6 +77,16 @@ public class VenueServiceImpl implements VenueService {
     @Override
     public Venue getVenueByVenueId(Long venueId) {
         return venueRepository.findById(venueId);
+    }
+
+    /**
+     * 根据场馆管理员查询场馆
+     * @param managerId
+     * @return
+     */
+    @Override
+    public Venue getVenueByManagerId(Long managerId) {
+        return venueRepository.findByManagerId(managerId);
     }
 
     @Override
@@ -79,8 +114,19 @@ public class VenueServiceImpl implements VenueService {
      * @param venueId
      * @param status
      */
+    @Transactional
     @Override
     public void updateVenueStatus(Long venueId, int status) {
         venueRepository.updateStatus(venueId, status);
+    }
+
+    /**
+     * 检票
+     * @param orderId
+     * @return
+     */
+    @Override
+    public ServiceResult<OrderDto> checkOrder(Long orderId) {
+        return orderService.changeOrderStatus(orderId, OrderStatus.CHECK.getValue());
     }
 }

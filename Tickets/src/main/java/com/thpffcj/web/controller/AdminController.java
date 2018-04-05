@@ -3,11 +3,13 @@ package com.thpffcj.web.controller;
 import com.thpffcj.base.ApiResponse;
 import com.thpffcj.service.AdminService;
 import com.thpffcj.service.result.ServiceMultiResult;
+import com.thpffcj.service.result.ServiceResult;
 import com.thpffcj.web.dto.VenueFinanceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,6 +38,19 @@ public class AdminController {
     }
 
     /**
+     * 通过或拒绝场馆申请
+     * @param isApprove
+     * @param venueId
+     * @return
+     */
+    @PostMapping("/approve")
+    @ResponseBody
+    public ApiResponse approve(boolean isApprove, Long venueId) {
+        ServiceResult serviceResult = adminService.auditingVenue(isApprove, venueId);
+        return ApiResponse.ofSuccess(serviceResult);
+    }
+
+    /**
      * 结算页面
      * @param model
      * @return
@@ -47,6 +62,19 @@ public class AdminController {
     }
 
     /**
+     * 对演出进行结算
+     * @param isApprove
+     * @param showName
+     * @return
+     */
+    @PostMapping("/settlements")
+    @ResponseBody
+    public ApiResponse settlementShow(boolean isApprove, String showName) {
+        ServiceResult serviceResult = adminService.settlement(isApprove, showName);
+        return ApiResponse.ofSuccess(serviceResult);
+    }
+
+    /**
      * 查看Tickets统计信息
      * @return
      */
@@ -55,6 +83,10 @@ public class AdminController {
         return "admin/statistics";
     }
 
+    /**
+     * 场馆演出次数统计
+     * @return
+     */
     @GetMapping("/venueShowTimes")
     @ResponseBody
     public ApiResponse getVenueShowTimes() {
@@ -66,6 +98,10 @@ public class AdminController {
         return ApiResponse.ofSuccess(result);
     }
 
+    /**
+     * 场馆演出收入统计
+     * @return
+     */
     @GetMapping("/venueShowIncome")
     @ResponseBody
     public ApiResponse getVenueShowIncome() {
@@ -74,6 +110,21 @@ public class AdminController {
         serviceMultiResult.getResult().forEach(venueFinanceDto -> {
             result.put(String.valueOf(venueFinanceDto.getVenueId()), venueFinanceDto.getTotalBenefit());
         });
+        return ApiResponse.ofSuccess(result);
+    }
+
+    /**
+     * 会员等级分布统计
+     * @return
+     */
+    @GetMapping("/memberLevel")
+    @ResponseBody
+    public ApiResponse getMemberLevel() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("等级1", 50);
+        result.put("等级2", 56);
+        result.put("等级3", 39);
+        result.put("等级4", 12);
         return ApiResponse.ofSuccess(result);
     }
 

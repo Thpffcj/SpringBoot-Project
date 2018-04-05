@@ -13,7 +13,7 @@
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                    aria-expanded="true" aria-controls="collapseOne">
-                    已预订订单
+                    已付款订单
                 </a>
             </h4>
         </div>
@@ -31,7 +31,8 @@
                             <th>下单时间</th>
                             <th>状态</th>
                         </tr>
-                        <tr th:each="bookOrder : ${bookOrders}">
+                        <tr th:each="bookOrder : ${bookOrders}"
+                            th:class="success">
                             <td th:text="${#numbers.formatInteger(bookOrder.id,7)}"></td>
                             <td th:text="${bookOrder.showName}"></td>
                             <td th:text="${bookOrder.venueName}"></td>
@@ -39,7 +40,7 @@
                             <td th:text="${bookOrder.seatName}"></td>
                             <td th:text="${bookOrder.number}"></td>
                             <td th:text="${bookOrder.orderTime}"></td>
-                            <td th:text="${(bookOrder.status == 0) ? '已预定' : '错误' }"></td>
+                            <td th:text="${(bookOrder.status == 1) ? '已付款' : '错误' }"></td>
                         </tr>
                     </table>
                 </div>
@@ -71,7 +72,7 @@
                             <th>状态</th>
                         </tr>
                         <tr th:each="refundOrder : ${refundOrders}"
-                            th:class="success">
+                            th:class="warning">
                             <td th:text="${#numbers.formatInteger(refundOrder.id,7)}"></td>
                             <td th:text="${refundOrder.showName}"></td>
                             <td th:text="${refundOrder.venueName}"></td>
@@ -79,7 +80,7 @@
                             <td th:text="${refundOrder.seatName}"></td>
                             <td th:text="${refundOrder.number}"></td>
                             <td th:text="${refundOrder.orderTime}"></td>
-                            <td th:text="${(refundOrder.status == 2) ? '已退票' : '错误' }"></td>
+                            <td th:text="${(refundOrder.status == 3) ? '已退票' : '错误' }"></td>
                         </tr>
                     </table>
                 </div>

@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class VenueDto implements Serializable {
 
     private Long id;
+    private Long managerId;
     private String password;
     private String name;
     private String address;
@@ -20,6 +21,14 @@ public class VenueDto implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Long managerId) {
+        this.managerId = managerId;
     }
 
     public String getPassword() {

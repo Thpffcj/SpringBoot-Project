@@ -6,8 +6,8 @@ package com.thpffcj.base;
 public enum MemberType {
 
     USER(0),            // 普通用户
-    VENUE_MANAGER(2),   // 逻辑删除
-    SYSTEM_MANAGER(3);  // 系统管理员
+    VENUE_MANAGER(1),   // 场馆管理员
+    SYSTEM_MANAGER(2);  // 系统管理员
 
     private int value;
 

@@ -17,6 +17,7 @@ public class Member {
     private String password;
     // 邮箱，验证后可登录
     private String mail;
+    private String code;
     // 消费金额
     private Double consumption;
     private int level;
@@ -54,6 +55,14 @@ public class Member {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Double getConsumption() {

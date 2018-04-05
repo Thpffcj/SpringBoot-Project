@@ -5,8 +5,8 @@ package com.thpffcj.base;
  */
 public enum  ShowStatus {
 
-    SETTLEMENT(0), // 未审核
-    UNSETTLEMENT(1); // 审核通过
+    SETTLEMENT(0), // 已清算
+    UNSETTLEMENT(1); // 未清算
 
     private int value;
 

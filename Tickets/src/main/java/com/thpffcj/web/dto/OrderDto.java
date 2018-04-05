@@ -15,6 +15,8 @@ public class OrderDto implements Serializable {
     private Date showTime;
     private String seatName;
     private int number;
+    private double total;
+    private double discount;
     private Date orderTime;
     private int status;
 
@@ -66,6 +68,22 @@ public class OrderDto implements Serializable {
         this.number = number;
     }
 
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
     public Date getOrderTime() {
         return orderTime;
     }
@@ -91,6 +109,8 @@ public class OrderDto implements Serializable {
                 ", showTime=" + showTime +
                 ", seatName='" + seatName + '\'' +
                 ", number=" + number +
+                ", total=" + total +
+                ", discount=" + discount +
                 ", orderTime=" + orderTime +
                 ", status=" + status +
                 '}';

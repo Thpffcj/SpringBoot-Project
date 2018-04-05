@@ -6,7 +6,8 @@ package com.thpffcj.base;
 public enum  MemberStatus {
 
     NORMAL(0), // 正常状态
-    DELETED(1); // 逻辑删除
+    TO_BE_VERIFIED(1), // 正常状态
+    DELETED(2); // 逻辑删除
 
     private int value;
 

@@ -13,13 +13,18 @@ import java.util.List;
  */
 public interface ShowService {
 
-    ServiceResult<ShowDto> releasePlan(ShowForm showForm);
+    ServiceResult<ShowDto> releasePlan(Long venueId, ShowForm showForm);
 
     Show getShowByShowId(Long showId);
+
+    Show getShowByShowName(String showName);
 
     List<Show> getUnsettlementShow();
 
     ServiceResult<ShowDto> getShowDtoByShowId(Long showId);
 
     ServiceMultiResult<ShowDto> getShowsByPage(int page);
+
+    void updateShowStatus(Long showId, int status);
+
 }

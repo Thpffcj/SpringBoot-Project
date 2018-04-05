@@ -11,6 +11,8 @@ import org.springframework.data.repository.query.Param;
  */
 public interface PayRepository extends CrudRepository<Pay, Integer> {
 
+    Pay findByPhone(String phone);
+
     /**
      * 查询账户
      * @param phone

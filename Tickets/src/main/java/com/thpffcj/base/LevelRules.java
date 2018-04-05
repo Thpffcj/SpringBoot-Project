@@ -5,8 +5,11 @@ package com.thpffcj.base;
  */
 public enum LevelRules {
 
-    LEVEL1(1, 100, 1.0),
-    LEVEL2(2, 200, 0.9);
+    LEVEL0(0, Integer.MIN_VALUE, 1.0),
+    LEVEL1(1, 1000, 0.9),
+    LEVEL2(2, 2000, 0.8),
+    LEVEL4(3, 3000, 0.7),
+    LEVEL5(4, 4000, 0.6);
 
     private int level;
     private double grade;
@@ -31,7 +34,7 @@ public enum LevelRules {
     }
 
     /**
-     * 根据等级寻找升级所需积分
+     * 根据等级寻找升级所需金额
      * @param level
      * @return
      */

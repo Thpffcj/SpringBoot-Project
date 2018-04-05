@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
     <link rel="stylesheet" href="../../static/css/other.css" th:href="@{/css/other.css}"/>
     <link rel="stylesheet" href="../../static/css/w3.css" th:href="@{/css/w3.css}"/>
-    <title>Member Profile</title>
+    <title>会员信息</title>
 </head>
 <body>
 
@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html" th:href="@{index}">Hostel World</a>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,10 +73,10 @@
     </div>
     <p style="margin-top: 10px">
         <button type="button" class="btn btn-info editButton" data-toggle="modal"
-                data-target="#editModal">Edit
+                data-target="#editModal">修改用户信息
         </button>
         <button type="button" class="btn btn-danger deleteButton" data-toggle="modal"
-                data-target="#deleteModal">Delete Account
+                data-target="#deleteModal">会员资格取消
         </button>
     </p>
 </div>
@@ -172,7 +172,7 @@
 
     $('.delete').on('click' , function () {
         var password = $delete.find('input[name="password"]').val();
-        inputs = {password:password};
+        inputs = {password: password};
         url = '/member/delete';
         callAjax(inputs,url, true);
     });
@@ -186,7 +186,7 @@
             success: function (data) {
                 if (data.code == 200) {
                     if (isdelete) {
-                        window.location.replace("http://localhost:8080/");
+                        window.location.replace("http://localhost:8080/member/login");
                     } else {
                         location.reload();
                         if (data.reason) {

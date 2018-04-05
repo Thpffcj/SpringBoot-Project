@@ -24,7 +24,7 @@
     position: relative;
 }
 
-.form-horizontal .form-control.phone {
+.form-horizontal .form-control.email {
     background: #f0f0f0;
     border: none;
     border-radius: 20px;
@@ -52,8 +52,8 @@
     padding: 0 20px 0 45px;
     height: 40px;
     transition: all 0.3s ease 0s;
-    width: 250px;
-    float: left;
+    /*width: 250px;*/
+    /*float: left;*/
 }
 
 .form-horizontal .form-control.code {

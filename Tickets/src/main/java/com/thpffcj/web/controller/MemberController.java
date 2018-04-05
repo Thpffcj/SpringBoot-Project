@@ -1,7 +1,6 @@
 package com.thpffcj.web.controller;
 
 import com.thpffcj.base.ApiResponse;
-import com.thpffcj.entity.Show;
 import com.thpffcj.service.MemberService;
 import com.thpffcj.service.OrderService;
 import com.thpffcj.service.ShowService;
@@ -18,9 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 /**
  * Created by Thpffcj on 2018/1/30.
@@ -46,6 +43,40 @@ public class MemberController {
         return "member/login";
     }
 
+    /**
+     * 邮箱注册
+     * @param email
+     * @param password
+     * @return
+     */
+    @PostMapping("/register")
+    @ResponseBody
+    public ApiResponse register(@RequestParam(value = "email") String email,
+                             @RequestParam(value = "password") String password) {
+        System.out.println("register " + email + " " + password);
+        ServiceResult<MemberDto> result = memberService.register(email, password);
+        return ApiResponse.ofSuccess(result.getResult());
+    }
+
+    /**
+     * 注册验证
+     * @param code
+     * @return
+     */
+    @GetMapping("/verification")
+    public String verification(String code) {
+        System.out.println("verification " + code);
+        memberService.verification(code);
+        return "member/login";
+    }
+
+    /**
+     * 登录
+     * @param mail
+     * @param password
+     * @param session
+     * @return
+     */
     @PostMapping("/do_login")
     @ResponseBody
     public ApiResponse login(@RequestParam(value = "mail") String mail,
@@ -85,8 +116,6 @@ public class MemberController {
                             @RequestParam(value = "name") String name,
                             @RequestParam(value = "password") String password){
         Long id = (Long) session.getAttribute("memberId");
-//        System.out.println("*****************");
-//        System.out.println(id + " " + name + " " + password);
         ServiceResult<MemberDto> result = memberService.edit(id, name, password);
         return ApiResponse.ofSuccess(result.getResult());
     }
@@ -98,12 +127,11 @@ public class MemberController {
      */
     @PostMapping("/delete")
     @ResponseBody
-    public String delete(HttpSession session, @RequestParam(value = "password") String password) {
+    public ApiResponse delete(HttpSession session, @RequestParam(value = "password") String password) {
         Long id = (Long) session.getAttribute("memberId");
         memberService.stopMember(id);
-        return "member/login";
+        return ApiResponse.ofSuccess("");
     }
-
 
     /**
      * 演出列表
@@ -132,6 +160,64 @@ public class MemberController {
         model.addAttribute("show", showDto);
         model.addAttribute("venue", venueDto);
         return "member/show-detail";
+    }
+
+    /**
+     * 预定演出
+     * @param showId
+     * @param type
+     * @param number
+     * @return
+     */
+    @PostMapping("/reserve")
+    @ResponseBody
+    public ApiResponse reserve(HttpSession session,
+                               @RequestParam(value = "showId") Long showId,
+                               @RequestParam(value = "type") String type,
+                               @RequestParam(value = "number") int number) {
+        Long memberId = (Long) session.getAttribute("memberId");
+        // TODO 便于测试
+        if (memberId == null) {
+            memberId = 1L;
+        }
+        if (type.equals("不选座")) {
+            type = "看台";
+        }
+        ServiceResult<OrderDto> result = memberService.seatReservation(memberId, showId, type, number);
+        return ApiResponse.ofSuccess(result.getResult());
+    }
+
+    /**
+     * 支付订单
+     * @param account
+     * @param password
+     * @return
+     */
+    @PostMapping("/pay")
+    @ResponseBody
+    public ApiResponse pay(HttpSession session,
+                           @RequestParam(value = "orderId") Long orderId,
+                           @RequestParam(value = "account") String account,
+                           @RequestParam(value = "password") String password) {
+        Long memberId = (Long) session.getAttribute("memberId");
+        // TODO 便于测试
+        if (memberId == null) {
+            memberId = 1L;
+        }
+        ServiceResult<OrderDto> result = memberService.payMoney(memberId, orderId, account, password);
+        return ApiResponse.ofSuccess(result);
+    }
+
+    /**
+     * 退订
+     * @param orderId
+     * @return
+     */
+    @PostMapping("/cancelReservation")
+    @ResponseBody
+    public ApiResponse cancelReservation(@RequestParam(value = "orderId") Long orderId) {
+        ServiceResult<OrderDto> result = memberService.refund(orderId);
+        return ApiResponse.ofSuccess(result);
     }
 
     /**

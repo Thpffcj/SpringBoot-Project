@@ -1,8 +1,6 @@
 package com.thpffcj.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Thpffcj on 2018/2/9.
@@ -12,7 +10,11 @@ import javax.persistence.Table;
 public class Venue {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    // 管理者id
+    @Column(name = "manager_id")
+    private Long managerId;
     private String password;
     private String name;
     private String address;
@@ -25,6 +27,14 @@ public class Venue {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(Long managerId) {
+        this.managerId = managerId;
     }
 
     public String getPassword() {

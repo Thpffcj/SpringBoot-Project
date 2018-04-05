@@ -26,16 +26,25 @@ public interface AdminService {
 
     /**
      * 审核场馆
+     * @param isApprove
      * @param venueId
      * @return
      */
-    ServiceResult auditingVenue(Long venueId);
+    ServiceResult auditingVenue(boolean isApprove, Long venueId);
 
     /**
-     * 结算
+     * 找到未结算演出
      * @return
      */
     ServiceMultiResult<SettleAccountDto> settleAccounts();
+
+    /**
+     * 对演出进行结算
+     * @param isApprove
+     * @param showName
+     * @return
+     */
+    ServiceResult settlement(boolean isApprove, String showName);
 
     /**
      * 场馆统计信息

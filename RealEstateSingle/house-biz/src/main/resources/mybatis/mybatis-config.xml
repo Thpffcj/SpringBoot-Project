@@ -14,7 +14,7 @@
     </settings>
     
     <typeAliases>
-       <typeAlias type="cn.edu.nju.biz.common.model.User" alias="user" />
+       <typeAlias type="cn.edu.nju.common.model.User" alias="user" />
     </typeAliases>
     
     <mappers>

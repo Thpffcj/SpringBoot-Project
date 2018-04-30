@@ -1,6 +1,6 @@
 package cn.edu.nju.biz.mapper;
 
-import cn.edu.nju.model.User;
+import cn.edu.nju.common.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

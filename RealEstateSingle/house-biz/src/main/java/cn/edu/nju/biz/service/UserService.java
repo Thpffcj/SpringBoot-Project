@@ -1,7 +1,7 @@
 package cn.edu.nju.biz.service;
 
 import cn.edu.nju.biz.mapper.UserMapper;
-import cn.edu.nju.model.User;
+import cn.edu.nju.common.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

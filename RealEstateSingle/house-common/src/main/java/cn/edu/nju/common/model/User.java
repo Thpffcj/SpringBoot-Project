@@ -15,7 +15,7 @@ public class User {
     private String name;
     private String passwd;
     private String confirmPasswd;
-    private Integer type;//普通用户1，经纪人2
+    private Integer type; // 普通用户1，经纪人2
     private Date createTime;
     private Integer enable;
     private String avatar;

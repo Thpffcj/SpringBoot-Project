@@ -4,6 +4,7 @@ import cn.edu.nju.biz.service.UserService;
 import cn.edu.nju.common.model.User;
 import cn.edu.nju.common.result.ResultMsg;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by Thpffcj on 2018/4/9.
  */
-@RestController
+@Controller
 public class UserController {
 
     @Autowired
@@ -39,6 +40,16 @@ public class UserController {
             return "/user/accounts/registerSubmit";
         } else {
             return "redirect:/accounts/register?" + resultMsg.asUrlParams();
+        }
+    }
+
+    @RequestMapping("accounts/verify")
+    public String verify(String key) {
+        boolean result = userService.enable(key);
+        if (result) {
+            return "redirect:/index?" + ResultMsg.successMsg("激活成功").asUrlParams();
+        } else {
+            return "redirect:/accounts/register?" + ResultMsg.errorMsg("激活失败,请确认链接是否过期");
         }
     }
 }

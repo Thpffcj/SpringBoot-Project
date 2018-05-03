@@ -18,8 +18,6 @@
 
     <link rel="stylesheet" href="/static/assets/css/toastr.css" type="text/css">
 
-
-
     <title>好房网</title>
 </head>
 </#macro>
@@ -30,7 +28,6 @@
             <aside id="footer-main">
                 <div class="container">
                     <div class="row">
-                      
                         <div class="col-md-6 col-sm-6">
                             <article>
                                 <h3>关于我们</h3>

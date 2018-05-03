@@ -50,4 +50,8 @@ public class UserService {
         mailService.registerNotify(account.getEmail());
         return true;
     }
+
+    public boolean enable(String key) {
+        return mailService.enable(key);
+    }
 }

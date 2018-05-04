@@ -33,7 +33,11 @@ public class FileService {
             if (!file.isEmpty()) {
                 try {
                     localFile = saveToLocal(file, filePath);
-                    String path = StringUtils.substringAfterLast(localFile.getAbsolutePath(), filePath);
+                    // 解决windows路径问题
+                    String path = StringUtils.substringAfterLast(StringUtils.replace(
+                            localFile.getAbsolutePath(), "\\", "/"), filePath);
+//                    System.out.println("localFile.getAbsolutePath()" + localFile.getAbsolutePath());
+//                    System.out.println("path" + path);
                     paths.add(path);
                 } catch (IOException e) {
                     throw new IllegalArgumentException(e);

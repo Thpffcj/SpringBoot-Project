@@ -117,20 +117,20 @@
                         </aside><!-- /#edit-search -->
                         <aside id="featured-properties">
                             <header><h3>热门房产</h3></header>
-                            <#list recomHouses as house>
-                            <div class="property small">
-                                <a href="/house/detail?id=${house.id}">
-                                    <div class="property-image">
-                                        <img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">
-                                    </div>
-                                </a>
-                                <div class="info">
-                                    <a href="/house/detail?id=${house.id}"><h4>${(house.name)!}</h4></a>
-                                    <figure>${(house.address)!} </figure>
-                                    <div class="tag price">￥${(house.price)!} 万</div>
-                                </div>
-                            </div><!-- /.property -->
-                            </#list>
+                            <#--<#list recomHouses as house>-->
+                            <#--<div class="property small">-->
+                                <#--<a href="/house/detail?id=${house.id}">-->
+                                    <#--<div class="property-image">-->
+                                        <#--<img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">-->
+                                    <#--</div>-->
+                                <#--</a>-->
+                                <#--<div class="info">-->
+                                    <#--<a href="/house/detail?id=${house.id}"><h4>${(house.name)!}</h4></a>-->
+                                    <#--<figure>${(house.address)!} </figure>-->
+                                    <#--<div class="tag price">￥${(house.price)!} 万</div>-->
+                                <#--</div>-->
+                            <#--</div><!-- /.property &ndash;&gt;-->
+                            <#--</#list>-->
                             
                         </aside><!-- /#featured-properties -->
                         
@@ -162,10 +162,7 @@
           if(successMsg) {
               successmsg("success",successMsg);
           }
-        })
-      
-      
-  
+        });
      
       $('#sorting').change(function() {
            var type =  $(this).val();
@@ -175,7 +172,6 @@
            window.location.href=  "/house/list?sort="+type+"&name=" + "${(vo.name)!}" + "&type=" + "${(vo.type)!0}" ;
        });
 
-        
  </script>
 
 </body>

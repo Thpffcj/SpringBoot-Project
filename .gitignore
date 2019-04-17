@@ -38,3 +38,7 @@
 /NettyStudy/.idea
 /NettyStudy/target
 /NettyStudy/NettyStudy.iml
+
+*.iml
+*.idea
+target

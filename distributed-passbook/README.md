@@ -86,7 +86,6 @@
 ### 8. SpringBoot
 
 <br>
-***
 
 ## 2. 需求分析
 
@@ -113,15 +112,14 @@
 - 荣誉勋章
 
 <br>
-***
 
 ## 3. 技术架构
 
-![]()
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/distributed-passbook/pic/%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png?raw=true)
 
 ### 1. 缓存层设计
 
-![]()
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/distributed-passbook/pic/%E7%BC%93%E5%AD%98%E5%B1%82%E8%AE%BE%E8%AE%A1.png?raw=true)
 
 ### 2. 常用工具介绍
 

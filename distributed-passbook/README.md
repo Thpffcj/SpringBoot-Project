@@ -45,6 +45,51 @@
   - 提交读
   - 可重复读
   - 串行读
+  
+**docker安装的MySQL编码有一些问题**
+
+    mysql> SHOW VARIABLES LIKE 'character_set_%';
+    +--------------------------+----------------------------+
+    | Variable_name            | Value                      |
+    +--------------------------+----------------------------+
+    | character_set_client     | latin1                     |
+    | character_set_connection | latin1                     |
+    | character_set_database   | utf8                       |
+    | character_set_filesystem | binary                     |
+    | character_set_results    | latin1                     |
+    | character_set_server     | utf8mb4                    |
+    | character_set_system     | utf8                       |
+    | character_sets_dir       | /usr/share/mysql/charsets/ |
+    +--------------------------+----------------------------+
+    8 rows in set (0.00 sec)
+    
+    mysql> SET NAMES 'utf8';
+    Query OK, 0 rows affected (0.00 sec)
+    
+    mysql> SHOW VARIABLES LIKE 'character_set_%';
+    +--------------------------+----------------------------+
+    | Variable_name            | Value                      |
+    +--------------------------+----------------------------+
+    | character_set_client     | utf8                       |
+    | character_set_connection | utf8                       |
+    | character_set_database   | utf8                       |
+    | character_set_filesystem | binary                     |
+    | character_set_results    | utf8                       |
+    | character_set_server     | utf8mb4                    |
+    | character_set_system     | utf8                       |
+    | character_sets_dir       | /usr/share/mysql/charsets/ |
+    +--------------------------+----------------------------+
+    8 rows in set (0.00 sec)
+    
+    mysql> SHOW VARIABLES LIKE 'collation_%';
+    +----------------------+--------------------+
+    | Variable_name        | Value              |
+    +----------------------+--------------------+
+    | collation_connection | utf8_general_ci    |
+    | collation_database   | utf8_general_ci    |
+    | collation_server     | utf8mb4_unicode_ci |
+    +----------------------+--------------------+
+    3 rows in set (0.00 sec)
 
 ### 5. Redis
 

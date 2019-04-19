@@ -1,31 +1,38 @@
 # SpringBoot-Project
 
-放一些使用Spring技术栈做的一些小项目
-
-### PublicComment
+放一些使用Spring技术栈做的一些实战项目，项目大多来源于慕课网，每个项目中有各自详细的README
 
 ### SearchRoom
 
+- 基于ElasticSearch的搜房网实战
+- 当前互联网行业，数据检索、数据分析等大数据相关的产品异常火爆，而ElasticSearch是当下最火的分布式搜索引擎及大数据分析中间件，了解并掌握ElasticSearch的实用场景及相关技能 ，必将提升你在互联网行业的核心竞争力，让你可以轻松走进BAT !
+
+### distributed-passbook
+
+- Java分布式优惠券系统后台 手把手实战开发
+- 本课程对 Spring Boot、HBase、Kafka、MySQL等重要知识点进行详细的解析，从零开始手把手实战教学搭建一个企业级架构的通用卡包工程，并从产品设计的角度出发，提出可以对该工程做出优化和扩展的方向，课程讲解逻辑清晰，代码规范，让你在学习的过程中更快速的提高项目实战能力。
+
+### distributed-transaction
+
+- 分布式事务实践 解决数据一致性
+- 基于微服务架构的分布式系统应用越来越多，而分布式系统下的事务，一直没有一个简单统一的实现方案。本课程从本地事务出发，介绍了分布式系统和Spring cloud框架及其使用，以及分布式事务的几种实现模式。课程中还提供了大量的实例，让同学们在实战过程中，掌握分布式事务实现方式与思路。
+
 ### Seckill2
+
+- Java秒杀系统方案优化 高性能高并发实战
+- 以“秒杀”这一Java高性能高并发的试金石场景为例，带你通过一系列系统级优化，学会应对高并发。
 
 ### SpringBootBlog
 
 - Spring Boot带前后端 渐进式开发博客系统
 带你围绕Spring Boot技术栈，所涉及的技术不仅限于某个领域，以整合多个技术点，搭建一个能够用于快速开发的框架，一步一步构建博客系统的各个功能，实现一个完整前后端的Java应用。
 
-### SpringBootDemo
-
-- Spring Boot是用来简化Spring应用初始搭建以及开发过程的全新框架，被认为是Spring MVC的“接班人”，和微服务紧密联系在一起。通过本门课程的学习，你将学会如何使用Spring Boot快速构建应用程序，初步领略Spring Boot的魅力！
-
-- 《2小时学习Spring Boot》后续进阶课程，主要讲述了Spring Boot针对Web方面的相关技巧。
-
-### SpringGroupBuy
-
-### SSMCamptusShops
-
-- SSM到Spring Boot 从零开发校园商铺平台
-  - 本项目运用SSM技术快速迭代出版校园商铺1.0
-
 ### Tickets
 
+- 大三课程大作业
+- 售票网站
+
 ### weather-project
+
+- 从天气项目入门Spring Cloud微服务治理
+- 从Spring Boot入手，从0到1快速搭建具备高并发能力、界面友好，业务便于理解的天气预报系统，而后剖析单块架构的利弊，从而引入微服务架构的概念，并从1到0实现微服务的拆分，最后引入Spring Cloud 技术来实现对这些微服务的治理

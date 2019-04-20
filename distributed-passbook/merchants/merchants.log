@@ -2431,3 +2431,130 @@ Caused by: com.mysql.cj.exceptions.CJException: Access denied for user 'root'@'l
 2019-04-19 11:08:16.506  INFO 7306 --- [Thread-3] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
 2019-04-19 11:08:16.507  INFO 7306 --- [Thread-3] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 0
 2019-04-19 11:08:16.508  INFO 7306 --- [Thread-3] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-04-20 10:31:27.982  INFO 10094 --- [main] c.e.n.s.impl.MerchantsServiceImplTest    : Starting MerchantsServiceImplTest on Thpffcj.local with PID 10094 (started by thpffcj in /Users/thpffcj/Public/local repository/SpringBoot-Project/distributed-passbook/merchants)
+2019-04-20 10:31:27.983  INFO 10094 --- [main] c.e.n.s.impl.MerchantsServiceImplTest    : No active profile set, falling back to default profiles: default
+2019-04-20 10:31:28.101  INFO 10094 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@272113c4: startup date [Sat Apr 20 10:31:28 CST 2019]; root of context hierarchy
+2019-04-20 10:31:30.313  INFO 10094 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.kafka.annotation.KafkaBootstrapConfiguration' of type [org.springframework.kafka.annotation.KafkaBootstrapConfiguration$$EnhancerBySpringCGLIB$$9f3225af] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-20 10:31:31.874  INFO 10094 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-04-20 10:31:31.906  INFO 10094 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-04-20 10:31:32.043  INFO 10094 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2019-04-20 10:31:32.046  INFO 10094 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-04-20 10:31:32.048  INFO 10094 --- [main] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2019-04-20 10:31:32.112  INFO 10094 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-04-20 10:31:32.367  INFO 10094 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-04-20 10:31:32.910  INFO 10094 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-04-20 10:31:33.973  INFO 10094 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2019-04-20 10:31:33.988  INFO 10094 --- [main] c.e.n.s.impl.MerchantsServiceImplTest    : Started MerchantsServiceImplTest in 6.887 seconds (JVM running for 8.72)
+2019-04-20 10:31:34.114  INFO 10094 --- [main] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-04-20 10:31:34.582  INFO 10094 --- [main] o.a.k.clients.producer.ProducerConfig    : ProducerConfig values: 
+	metric.reporters = []
+	metadata.max.age.ms = 300000
+	reconnect.backoff.ms = 50
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	bootstrap.servers = [127.0.0.1:9092]
+	ssl.keystore.type = JKS
+	sasl.mechanism = GSSAPI
+	max.block.ms = 60000
+	interceptor.classes = null
+	ssl.truststore.password = null
+	client.id = 
+	ssl.endpoint.identification.algorithm = null
+	request.timeout.ms = 30000
+	acks = 1
+	receive.buffer.bytes = 32768
+	ssl.truststore.type = JKS
+	retries = 0
+	ssl.truststore.location = null
+	ssl.keystore.password = null
+	send.buffer.bytes = 131072
+	compression.type = none
+	metadata.fetch.timeout.ms = 60000
+	retry.backoff.ms = 100
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	buffer.memory = 33554432
+	timeout.ms = 30000
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	ssl.trustmanager.algorithm = PKIX
+	block.on.buffer.full = false
+	ssl.key.password = null
+	sasl.kerberos.min.time.before.relogin = 60000
+	connections.max.idle.ms = 540000
+	max.in.flight.requests.per.connection = 5
+	metrics.num.samples = 2
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	batch.size = 16384
+	ssl.keystore.location = null
+	ssl.cipher.suites = null
+	security.protocol = PLAINTEXT
+	max.request.size = 1048576
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	ssl.keymanager.algorithm = SunX509
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	linger.ms = 0
+
+2019-04-20 10:31:34.703  INFO 10094 --- [main] o.a.k.clients.producer.ProducerConfig    : ProducerConfig values: 
+	metric.reporters = []
+	metadata.max.age.ms = 300000
+	reconnect.backoff.ms = 50
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	bootstrap.servers = [127.0.0.1:9092]
+	ssl.keystore.type = JKS
+	sasl.mechanism = GSSAPI
+	max.block.ms = 60000
+	interceptor.classes = null
+	ssl.truststore.password = null
+	client.id = producer-1
+	ssl.endpoint.identification.algorithm = null
+	request.timeout.ms = 30000
+	acks = 1
+	receive.buffer.bytes = 32768
+	ssl.truststore.type = JKS
+	retries = 0
+	ssl.truststore.location = null
+	ssl.keystore.password = null
+	send.buffer.bytes = 131072
+	compression.type = none
+	metadata.fetch.timeout.ms = 60000
+	retry.backoff.ms = 100
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	buffer.memory = 33554432
+	timeout.ms = 30000
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	ssl.trustmanager.algorithm = PKIX
+	block.on.buffer.full = false
+	ssl.key.password = null
+	sasl.kerberos.min.time.before.relogin = 60000
+	connections.max.idle.ms = 540000
+	max.in.flight.requests.per.connection = 5
+	metrics.num.samples = 2
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	batch.size = 16384
+	ssl.keystore.location = null
+	ssl.cipher.suites = null
+	security.protocol = PLAINTEXT
+	max.request.size = 1048576
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	ssl.keymanager.algorithm = SunX509
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	linger.ms = 0
+
+2019-04-20 10:31:34.709  INFO 10094 --- [main] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 0.10.0.1
+2019-04-20 10:31:34.709  INFO 10094 --- [main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : a7a17cdec9eaa6c5
+2019-04-20 10:31:34.923  INFO 10094 --- [main] c.e.n.service.impl.MerchantsServiceImpl  : DropPassTemplates: {"background":2,"desc":"详情: 慕课","end":1556591494055,"hasToken":false,"id":19,"limit":10000,"start":1554863494053,"summary":"简介: 慕课","title":"慕课-1"}
+2019-04-20 10:31:34.945  INFO 10094 --- [Thread-3] s.c.a.AnnotationConfigApplicationContext : Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@272113c4: startup date [Sat Apr 20 10:31:28 CST 2019]; root of context hierarchy
+2019-04-20 10:31:34.947  INFO 10094 --- [Thread-3] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2019-04-20 10:31:34.947  INFO 10094 --- [Thread-3] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 0
+2019-04-20 10:31:34.949  INFO 10094 --- [Thread-3] o.a.k.clients.producer.KafkaProducer     : Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2019-04-20 10:31:34.998  INFO 10094 --- [Thread-3] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

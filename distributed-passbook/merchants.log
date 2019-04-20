@@ -320,3 +320,208 @@ Caused by: com.mysql.cj.exceptions.CJException: Access denied for user 'root'@'l
 2019-04-19 08:43:30.031  INFO 6603 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
 2019-04-19 08:43:30.032  INFO 6603 --- [main] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
 2019-04-19 08:43:30.054  INFO 6603 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-04-20 10:46:08.334  INFO 10131 --- [main] cn.edu.nju.MerchantsApplication          : Starting MerchantsApplication on Thpffcj.local with PID 10131 (started by thpffcj in /Users/thpffcj/Public/local repository/SpringBoot-Project/distributed-passbook)
+2019-04-20 10:46:08.338  INFO 10131 --- [main] cn.edu.nju.MerchantsApplication          : No active profile set, falling back to default profiles: default
+2019-04-20 10:46:08.405  INFO 10131 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@15eb5ee5: startup date [Sat Apr 20 10:46:08 CST 2019]; root of context hierarchy
+2019-04-20 10:46:09.663  INFO 10131 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.kafka.annotation.KafkaBootstrapConfiguration' of type [org.springframework.kafka.annotation.KafkaBootstrapConfiguration$$EnhancerBySpringCGLIB$$93e74f94] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-04-20 10:46:09.976  INFO 10131 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 9527 (http)
+2019-04-20 10:46:09.988  INFO 10131 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2019-04-20 10:46:09.990  INFO 10131 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.14
+2019-04-20 10:46:10.091  INFO 10131 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-04-20 10:46:10.092  INFO 10131 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1687 ms
+2019-04-20 10:46:10.208  INFO 10131 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2019-04-20 10:46:10.212  INFO 10131 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2019-04-20 10:46:10.213  INFO 10131 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2019-04-20 10:46:10.213  INFO 10131 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2019-04-20 10:46:10.213  INFO 10131 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2019-04-20 10:46:10.959  INFO 10131 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2019-04-20 10:46:10.974  INFO 10131 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-04-20 10:46:11.088  INFO 10131 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2019-04-20 10:46:11.101  INFO 10131 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-04-20 10:46:11.103  INFO 10131 --- [main] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2019-04-20 10:46:11.168  INFO 10131 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019-04-20 10:46:11.401  INFO 10131 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-04-20 10:46:11.960  INFO 10131 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-04-20 10:46:12.532  INFO 10131 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@15eb5ee5: startup date [Sat Apr 20 10:46:08 CST 2019]; root of context hierarchy
+2019-04-20 10:46:12.611  INFO 10131 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/merchants/create],methods=[POST]}" onto public cn.edu.nju.vo.Response cn.edu.nju.controller.MerchantsController.createMerchants(cn.edu.nju.vo.CreateMerchantsRequest)
+2019-04-20 10:46:12.612  INFO 10131 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/merchants/{id}],methods=[GET]}" onto public cn.edu.nju.vo.Response cn.edu.nju.controller.MerchantsController.buildMerchantsInfo(java.lang.Integer)
+2019-04-20 10:46:12.612  INFO 10131 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/merchants/drop],methods=[POST]}" onto public cn.edu.nju.vo.Response cn.edu.nju.controller.MerchantsController.dropPassTemplate(cn.edu.nju.vo.PassTemplate)
+2019-04-20 10:46:12.614  INFO 10131 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019-04-20 10:46:12.615  INFO 10131 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019-04-20 10:46:12.645  INFO 10131 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-20 10:46:12.645  INFO 10131 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-20 10:46:12.685  INFO 10131 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2019-04-20 10:46:12.959  INFO 10131 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2019-04-20 10:46:12.968  INFO 10131 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2019-04-20 10:46:13.018  INFO 10131 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 9527 (http)
+2019-04-20 10:46:13.023  INFO 10131 --- [main] cn.edu.nju.MerchantsApplication          : Started MerchantsApplication in 5.264 seconds (JVM running for 6.138)
+2019-04-20 10:48:26.476  INFO 10131 --- [http-nio-9527-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-04-20 10:48:26.477  INFO 10131 --- [http-nio-9527-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2019-04-20 10:48:26.496  INFO 10131 --- [http-nio-9527-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 19 ms
+2019-04-20 10:48:26.529 ERROR 10131 --- [http-nio-9527-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.Exception: Header 中缺少 token!] with root cause
+
+java.lang.Exception: Header 中缺少 token!
+	at cn.edu.nju.security.AuthCheckInterceptor.preHandle(AuthCheckInterceptor.java:26) ~[classes/:na]
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:134) ~[spring-webmvc-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:958) ~[spring-webmvc-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897) ~[spring-webmvc-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) ~[spring-webmvc-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861) ~[spring-webmvc-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) ~[spring-webmvc-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) ~[tomcat-embed-websocket-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:105) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:81) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) ~[tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:478) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:80) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:799) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:861) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1455) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_191]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_191]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.14.jar:8.5.14]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_191]
+
+2019-04-20 10:49:22.439  INFO 10131 --- [http-nio-9527-exec-2] c.e.nju.controller.MerchantsController   : BuildMerchantsInfo: 19
+2019-04-20 10:49:22.466  INFO 10131 --- [http-nio-9527-exec-2] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-04-20 10:53:34.471  INFO 10131 --- [http-nio-9527-exec-4] c.e.nju.controller.MerchantsController   : CreateMerchants: {"address":"武汉市","phone":"987654321","businessLicenseUrl":"www.thpffcj.com","name":"Thpffcj3","logoUrl":"www.thpffcj.com"}
+2019-04-20 10:58:06.449  INFO 10131 --- [http-nio-9527-exec-6] c.e.nju.controller.MerchantsController   : DropPassTemplate: PassTemplate(id=19, title=慕课-1, summary=简介: 慕课, desc=详情: 慕课 2, limit=1000, hasToken=false, background=2, start=Wed Apr 10 10:31:34 CST 2019, end=Tue Apr 30 10:31:34 CST 2019)
+2019-04-20 10:58:06.475  INFO 10131 --- [http-nio-9527-exec-6] o.a.k.clients.producer.ProducerConfig    : ProducerConfig values: 
+	metric.reporters = []
+	metadata.max.age.ms = 300000
+	reconnect.backoff.ms = 50
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	bootstrap.servers = [127.0.0.1:9092]
+	ssl.keystore.type = JKS
+	sasl.mechanism = GSSAPI
+	max.block.ms = 60000
+	interceptor.classes = null
+	ssl.truststore.password = null
+	client.id = 
+	ssl.endpoint.identification.algorithm = null
+	request.timeout.ms = 30000
+	acks = 1
+	receive.buffer.bytes = 32768
+	ssl.truststore.type = JKS
+	retries = 0
+	ssl.truststore.location = null
+	ssl.keystore.password = null
+	send.buffer.bytes = 131072
+	compression.type = none
+	metadata.fetch.timeout.ms = 60000
+	retry.backoff.ms = 100
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	buffer.memory = 33554432
+	timeout.ms = 30000
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	ssl.trustmanager.algorithm = PKIX
+	block.on.buffer.full = false
+	ssl.key.password = null
+	sasl.kerberos.min.time.before.relogin = 60000
+	connections.max.idle.ms = 540000
+	max.in.flight.requests.per.connection = 5
+	metrics.num.samples = 2
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	batch.size = 16384
+	ssl.keystore.location = null
+	ssl.cipher.suites = null
+	security.protocol = PLAINTEXT
+	max.request.size = 1048576
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	ssl.keymanager.algorithm = SunX509
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	linger.ms = 0
+
+2019-04-20 10:58:06.492  INFO 10131 --- [http-nio-9527-exec-6] o.a.k.clients.producer.ProducerConfig    : ProducerConfig values: 
+	metric.reporters = []
+	metadata.max.age.ms = 300000
+	reconnect.backoff.ms = 50
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	bootstrap.servers = [127.0.0.1:9092]
+	ssl.keystore.type = JKS
+	sasl.mechanism = GSSAPI
+	max.block.ms = 60000
+	interceptor.classes = null
+	ssl.truststore.password = null
+	client.id = producer-1
+	ssl.endpoint.identification.algorithm = null
+	request.timeout.ms = 30000
+	acks = 1
+	receive.buffer.bytes = 32768
+	ssl.truststore.type = JKS
+	retries = 0
+	ssl.truststore.location = null
+	ssl.keystore.password = null
+	send.buffer.bytes = 131072
+	compression.type = none
+	metadata.fetch.timeout.ms = 60000
+	retry.backoff.ms = 100
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	buffer.memory = 33554432
+	timeout.ms = 30000
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	ssl.trustmanager.algorithm = PKIX
+	block.on.buffer.full = false
+	ssl.key.password = null
+	sasl.kerberos.min.time.before.relogin = 60000
+	connections.max.idle.ms = 540000
+	max.in.flight.requests.per.connection = 5
+	metrics.num.samples = 2
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	batch.size = 16384
+	ssl.keystore.location = null
+	ssl.cipher.suites = null
+	security.protocol = PLAINTEXT
+	max.request.size = 1048576
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	ssl.keymanager.algorithm = SunX509
+	metrics.sample.window.ms = 30000
+	partitioner.class = class org.apache.kafka.clients.producer.internals.DefaultPartitioner
+	linger.ms = 0
+
+2019-04-20 10:58:06.493  INFO 10131 --- [http-nio-9527-exec-6] o.a.kafka.common.utils.AppInfoParser     : Kafka version : 0.10.0.1
+2019-04-20 10:58:06.493  INFO 10131 --- [http-nio-9527-exec-6] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId : a7a17cdec9eaa6c5
+2019-04-20 10:58:06.624  INFO 10131 --- [http-nio-9527-exec-6] c.e.n.service.impl.MerchantsServiceImpl  : DropPassTemplates: {"background":2,"desc":"详情: 慕课 2","end":1556591494055,"hasToken":false,"id":19,"limit":1000,"start":1554863494053,"summary":"简介: 慕课","title":"慕课-1"}
+2019-04-20 10:59:21.547  INFO 10131 --- [Thread-14] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@15eb5ee5: startup date [Sat Apr 20 10:46:08 CST 2019]; root of context hierarchy
+2019-04-20 10:59:21.549  INFO 10131 --- [Thread-14] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 2147483647
+2019-04-20 10:59:21.550  INFO 10131 --- [Thread-14] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 0
+2019-04-20 10:59:21.550  INFO 10131 --- [Thread-14] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-04-20 10:59:21.551  INFO 10131 --- [Thread-14] o.a.k.clients.producer.KafkaProducer     : Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2019-04-20 10:59:21.555  INFO 10131 --- [Thread-14] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

@@ -8,7 +8,7 @@
 
 1. 创建商户 -- 商户 id 12
     POST: 127.0.0.1:9527/merchants/create
-    header: token/imooc-passbook-merchants
+    header: token/passbook-merchants
     {
         "name": "慕课网",
         "logoUrl": "www.imooc.com",
@@ -19,11 +19,11 @@
 
 2. 查看商户信息
     GET: 127.0.0.1:9527/merchants/12
-    header: token/imooc-passbook-merchants
+    header: token/passbook-merchants
 
 3. 投放优惠券
     POST: 127.0.0.1:9527/merchants/drop
-    header: token/imooc-passbook-merchants
+    header: token/passbook-merchants
     {
         "background": 1,
         "desc": "慕课网优惠券",

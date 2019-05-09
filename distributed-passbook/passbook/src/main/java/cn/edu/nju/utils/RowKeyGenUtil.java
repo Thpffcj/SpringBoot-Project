@@ -1,6 +1,7 @@
 package cn.edu.nju.utils;
 
 import cn.edu.nju.vo.Feedback;
+import cn.edu.nju.vo.GainPassTemplateRequest;
 import cn.edu.nju.vo.PassTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -27,12 +28,24 @@ public class RowKeyGenUtil {
     }
 
     /**
+     * 根据提供的领取优惠券请求生成 RowKey，只可以在领取优惠券的时候使用
+     * Pass RowKey = reversed(userId) + inverse(timestamp) + PassTemplate RowKey
+     * @param request {@link GainPassTemplateRequest}
+     * @return RowKey
+     */
+    public static String genPassRowKey(GainPassTemplateRequest request) {
+        return new StringBuilder(String.valueOf(request.getUserId())).reverse().toString()
+                + (Long.MAX_VALUE - System.currentTimeMillis())
+                + genPassTemplateRowKey(request.getPassTemplate());
+    }
+
+    /**
      * 根据 Feedback 构造 RowKey
      * @param feedback {@link Feedback}
      * @return String RowKey
      */
     public static String genFeedbackRowKey(Feedback feedback) {
-        return new StringBuilder(String.valueOf(feedback.getUserId())).reverse().toString() +
-                (Long.MAX_VALUE - System.currentTimeMillis());
+        return new StringBuilder(String.valueOf(feedback.getUserId())).reverse().toString()
+                + (Long.MAX_VALUE - System.currentTimeMillis());
     }
 }

@@ -209,6 +209,89 @@
 
 - user表
 
+<br>
+
+## 4. 项目启动
+
+### 1. 创建HBase表
+
+- 启动HDFS
+
+
+    Thpffcj:sbin thpffcj$ ./start-all.sh 
+
+- 启动HBase
+
+
+    Thpffcj:bin thpffcj$ ./start-hbase.sh 
+    localhost: starting zookeeper, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0/bin/../logs/hbase-thpffcj-zookeeper-Thpffcj.local.out
+    starting master, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0//logs/hbase-thpffcj-master-Thpffcj.local.out
+    starting regionserver, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0//logs/hbase-thpffcj-1-regionserver-Thpffcj.local.out
+    
+    Thpffcj:bin thpffcj$ jps
+    12923 HMaster
+
+    Thpffcj:bin thpffcj$ ./hbase shell
+    
+- 在passbook/src/main/resources下有passbook.hsh
+- 创建命名空间
+
+    
+    hbase(main):002:0> create_namespace 'pb'
+    0 row(s) in 0.0960 seconds
+    
+- 依次创建四张表
+
+
+    hbase(main):003:0> create 'pb:user', {NAME => 'b', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}, {NAME => 'o', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+    0 row(s) in 1.3400 seconds
+    
+    => Hbase::Table - pb:user
+    hbase(main):004:0> create 'pb:pass', {NAME => 'i', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+    0 row(s) in 1.2410 seconds
+    
+    => Hbase::Table - pb:pass
+    hbase(main):005:0> create 'pb:passtemplate', {NAME => 'b', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}, {NAME => 'c', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+    0 row(s) in 1.2530 seconds
+    
+    => Hbase::Table - pb:passtemplate
+    hbase(main):006:0> create 'pb:feedback', {NAME => 'i', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+    0 row(s) in 1.2470 seconds
+    
+    => Hbase::Table - pb:feedback
+    
+    hbase(main):007:0> list_namespace_tables 'pb'
+    TABLE                                                                           
+    feedback                                                                        
+    pass                                                                            
+    passtemplate                                                                    
+    user                                                                            
+    4 row(s) in 0.0240 seconds
+    
+### 2. 创建MySQL表
+
+- 执行merchants/src/main/resources下的merchants.sql
+
+### 3. 启动Zookeeper
+
+    Thpffcj:bin thpffcj$ ./zkServer.sh start
+    JMX enabled by default
+    Using config: /Users/thpffcj/Public/software/zookeeper-3.4.5-cdh5.7.0/bin/../conf/zoo.cfg
+    Starting zookeeper ... STARTED
+
+### 3. 启动Kafka
+
+    Thpffcj:bin thpffcj$ kafka-server-start.sh $KAFKA_HOME/config/server.properties
+
+- 启动kafka消费者
+
+
+    Thpffcj:bin thpffcj$ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic merchants-template --from-beginning
+
+### 4. 启动Redis
+
+    Thpffcj:redis-5.0.3 thpffcj$ redis-server
+
 
 
 

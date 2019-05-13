@@ -1,0 +1,54 @@
+{
+  "data": {
+    "passTemplateInfos": [
+      {
+        "merchants": {
+          "address": "南京市",
+          "businessLicenseUrl": "www.thpffcj.com",
+          "id": 9,
+          "isAudit": true,
+          "logoUrl": "www.thpffcj.com",
+          "name": "Thpffcj7",
+          "phone": "1234567890"
+        },
+        "passTemplate": {
+          "background": 2,
+          "desc": "详情: 慕课",
+          "end": 1558540800000,
+          "hasToken": true,
+          "id": 9,
+          "limit": 10000,
+          "start": 1556812800000,
+          "summary": "简介: 慕课",
+          "title": "慕课-2"
+        }
+      },
+      {
+        "merchants": {
+          "address": "南京市",
+          "businessLicenseUrl": "www.thpffcj.com",
+          "id": 9,
+          "isAudit": true,
+          "logoUrl": "www.thpffcj.com",
+          "name": "Thpffcj7",
+          "phone": "1234567890"
+        },
+        "passTemplate": {
+          "background": 2,
+          "desc": "详情: 慕课",
+          "end": 1558540800000,
+          "hasToken": false,
+          "id": 9,
+          "limit": 10000,
+          "start": 1556812800000,
+          "summary": "简介: 慕课",
+          "title": "慕课-1"
+        }
+      }
+    ],
+    "userId": 161657
+  },
+  "errorCode": 0,
+  "errorMsg": ""
+}
+

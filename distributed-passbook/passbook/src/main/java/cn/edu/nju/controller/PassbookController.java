@@ -96,7 +96,7 @@ public class PassbookController {
 
         LogGenerator.genLog(
                 httpServletRequest,
-                pass.getUserId(), LogConstants.ActionName.USER_PASS_INFO,
+                pass.getUserId(), LogConstants.ActionName.USER_USE_PASS,
                 pass
         );
         return userPassService.UserUsePass(pass);

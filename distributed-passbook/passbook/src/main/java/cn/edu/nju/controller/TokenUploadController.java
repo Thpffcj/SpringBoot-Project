@@ -43,6 +43,7 @@ public class TokenUploadController {
         return "upload";
     }
 
+    // 3617cf73e7a1099097242115042cb7b0
     @PostMapping("/token")
     public String tokenFileUpload(@RequestParam("merchantsId") String merchantsId,
                                   @RequestParam("passTemplateId") String passTemplateId,

@@ -128,12 +128,12 @@ public class GainPassTemplateServiceImpl implements IGainPassTemplateService {
             recordTokenToFile(merchantsId, passTemplateId, token);
             put.addColumn(FAMILY_I, TOKEN, Bytes.toBytes(token));
         } else {
-            put.addColumn(FAMILY_I, TOKEN, Bytes.toBytes(-1));
+            put.addColumn(FAMILY_I, TOKEN, Bytes.toBytes("-1"));
         }
 
         put.addColumn(FAMILY_I, ASSIGNED_DATE,
                 Bytes.toBytes(DateFormatUtils.ISO_DATE_FORMAT.format(new Date())));
-        put.addColumn(FAMILY_I, CON_DATE, Bytes.toBytes(-1));
+        put.addColumn(FAMILY_I, CON_DATE, Bytes.toBytes("-1"));
 
         datas.add(put);
 
@@ -154,7 +154,7 @@ public class GainPassTemplateServiceImpl implements IGainPassTemplateService {
                 Paths.get(Constants.TOKEN_DIR, String.valueOf(merchantsId),
                         passTemplateId + Constants.USED_TOKEN_SUFFIX),
                 (token + "\n").getBytes(),
-                StandardOpenOption.APPEND
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND
         );
     }
 

@@ -48,12 +48,12 @@ public class MerchantsServiceImplTest {
     public void dropPassTemplate() {
 
         PassTemplate passTemplate = new PassTemplate();
-        passTemplate.setId(19);
-        passTemplate.setTitle("慕课-1");
+        passTemplate.setId(9);
+        passTemplate.setTitle("慕课-2");
         passTemplate.setSummary("简介: 慕课");
         passTemplate.setDesc("详情: 慕课");
         passTemplate.setLimit(10000L);
-        passTemplate.setHasToken(false);
+        passTemplate.setHasToken(true);
         passTemplate.setBackground(2);
         passTemplate.setStart(DateUtils.addDays(new Date(), -10));
         passTemplate.setEnd(DateUtils.addDays(new Date(), 10));

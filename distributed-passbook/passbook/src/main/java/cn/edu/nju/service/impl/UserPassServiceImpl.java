@@ -119,6 +119,7 @@ public class UserPassServiceImpl implements IUserPassService {
 
         // 根据 userId 构造行键前缀
         byte[] rowPrefix = Bytes.toBytes(new StringBuilder(String.valueOf(userId)).reverse().toString());
+        log.info("rowPrefix is: {}", rowPrefix);
 
         CompareFilter.CompareOp compareOp =
                 status == PassStatus.UNUSED ?
@@ -135,12 +136,15 @@ public class UserPassServiceImpl implements IUserPassService {
             filters.add(new SingleColumnValueFilter(
                     Constants.PassTable.FAMILY_I.getBytes(),
                     Constants.PassTable.CON_DATE.getBytes(), compareOp,
-                    Bytes.toBytes(-1)));
+                    Bytes.toBytes("-1")));
         }
 
         scan.setFilter(new FilterList(filters));
 
         List<Pass> passes = hbaseTemplate.find(Constants.PassTable.TABLE_NAME, scan, new PassRowMapper());
+
+        log.info("passs size: {}", passes.size());
+
         Map<String, PassTemplate> passTemplateMap = buildPassTemplateMap(passes);
         Map<Integer, Merchants> merchantsMap = buildMerchantsMap(
                 new ArrayList<>(passTemplateMap.values()));

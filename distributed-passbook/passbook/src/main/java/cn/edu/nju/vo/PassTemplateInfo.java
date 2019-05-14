@@ -10,11 +10,10 @@ import lombok.NoArgsConstructor;
  * 优惠券模板信息
  * Created by thpffcj on 2019-05-08.
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PassTemplateInfo extends PassTemplate {
+public class PassTemplateInfo {
 
     // 优惠券模板
     private PassTemplate passTemplate;

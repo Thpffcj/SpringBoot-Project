@@ -61,7 +61,7 @@ public class UserPassServiceImpl implements IUserPassService {
     }
 
     @Override
-    public Response UserUsePass(Pass pass) {
+    public Response userUsePass(Pass pass) {
 
         // 根据 userId 构造行键前缀
         byte[] rowPrefix = Bytes.toBytes(new StringBuilder(
@@ -79,9 +79,9 @@ public class UserPassServiceImpl implements IUserPassService {
         );
         filters.add(new SingleColumnValueFilter(
                 Constants.PassTable.FAMILY_I.getBytes(),
-                Constants.PassTable.TEMPLATE_ID.getBytes(),
+                Constants.PassTable.CON_DATE.getBytes(),
                 CompareFilter.CompareOp.EQUAL,
-                Bytes.toBytes(-1)
+                Bytes.toBytes("-1")
         ));
 
         scan.setFilter(new FilterList(filters));

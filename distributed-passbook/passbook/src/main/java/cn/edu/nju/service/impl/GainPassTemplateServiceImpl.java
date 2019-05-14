@@ -17,6 +17,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,6 +48,7 @@ public class GainPassTemplateServiceImpl implements IGainPassTemplateService {
     }
 
     @Override
+    @Transactional
     public Response gainPassTemplate(GainPassTemplateRequest request) throws Exception {
 
         PassTemplate passTemplate;

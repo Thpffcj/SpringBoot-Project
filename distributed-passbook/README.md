@@ -48,6 +48,10 @@
   
 **docker安装的MySQL编码有一些问题**
 
+    Thpffcj:~ thpffcj$ docker exec -it mysql1 /bin/bash
+    
+    bash-4.2# mysql -uroot -p000000
+
     mysql> SHOW VARIABLES LIKE 'character_set_%';
     +--------------------------+----------------------------+
     | Variable_name            | Value                      |
@@ -291,50 +295,160 @@
 ### 4. 启动Redis
 
     Thpffcj:redis-5.0.3 thpffcj$ redis-server
+    
+## 5. 测试
+
+**需要启动的服务**
+
+- hbase
+- mysql
+- kafka
+- redis
+
+**需要清空的数据**
+
+- hbase 的四张表
+    
+    
+    hbase(main):007:0> truncate 'pb:user'
+    Truncating 'pb:user' table (it may take a while):
+     - Disabling table...
+     - Truncating table...
+    0 row(s) in 3.3910 seconds
+
+- mysql 商户数据
+- /tmp/token/ 下面的优惠券 token 数据
+- redis 中的数据
+
+**使用Postman发送数据**
+
+- 创建商户 - 商户 id 10
 
 
+    POST: 127.0.0.1:9527/merchants/create
+    header: token/passbook-merchants
+    {
+        "name": "我的博客",
+        "logoUrl": "www.thpffcj.com",
+        "businessLicenseUrl": "www.thpffcj.com",
+        "phone": "1234567890",
+        "address": "南京市鼓楼区"
+    }
+    
+- 查看商户信息
 
 
+    GET: 127.0.0.1:9527/merchants/10
+    header: token/passbook-merchants
+
+- 投放优惠券
 
 
+    POST: 127.0.0.1:9527/merchants/drop
+    header: token/passbook-merchants
+    {
+        "background": 1,
+        "desc": "淘宝优惠券",
+        "end": "2019-06-30",
+        "hasToken": false,
+        "id": 10,
+        "limit": 1000,
+        "start": "2018-05-01",
+        "summary": "优惠券简介",
+        "title": "淘宝优惠券-1"
+    }
+    {
+        "background": 1,
+        "desc": "淘宝优惠券",
+        "end": "2019-06-30",
+        "hasToken": true,
+        "id": 10,
+        "limit": 1000,
+        "start": "2019-05-01",
+        "summary": "优惠券简介",
+        "title": "淘宝优惠券-2"
+    }
 
+- 上传优惠券 token
+    
+    
+    GET: 127.0.0.1:9528/upload
+    merchantsId - 10
+    PassTemplateId: 0b2d034848f1525132154ddabf9a1a6b
 
+- 创建用户 -- 用户 181794
+    
+    
+    POST: 127.0.0.1:9528/passbook/createuser
+    {
+        "baseInfo": {
+            "name": "thpffcj",
+            "age": 22,
+            "sex": "m"
+        },
+        "otherInfo": {
+            "phone": "1234567890",
+            "address": "南京市鼓楼区"
+        }
+    }
 
+- 库存信息
+    
+    
+    GET: 127.0.0.1:9528/passbook/inventoryinfo?userId=181794
 
+- 获取优惠券 -- 获取的是带有 token 的优惠券
+    
+    
+    POST: 127.0.0.1:9528/passbook/gainpasstemplate
+    {
+        "userId": 181794,
+        "passTemplate": {
+            "id": 10,
+            "title": "淘宝优惠券-2",
+            "hasToken": true
+        }
+    }
 
+- userpassinfo
+    
+    
+    GET: 127.0.0.1:9528/passbook/userpassinfo?userId=181794
 
+- userusedpassinfo
+    
+    
+    GET: 127.0.0.1:9528/passbook/userusedpassinfo?userId=181794
 
+- userusepass
+    
+    
+    POST: 127.0.0.1:9528/passbook/userusepass
+    {
+        "userId": 181794,
+        "templateId": "0b2d034848f1525132154ddabf9a1a6b"
+    }
 
+- 创建评论信息
+    
+    
+    POST: 127.0.0.1:9528/passbook/createfeedback
+    {
+        "userId": 181794,
+        "type": "app",
+        "templateId": -1,
+        "comment": "学习分布式卡包应用"
+    }
+    {
+        "userId": 181794,
+        "type": "pass",
+        "templateId": "0b2d034848f1525132154ddabf9a1a6b",
+        "comment": "学习分布式卡包应用"
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- 查看评论信息
+    
+    
+    GET: 127.0.0.1:9528/passbook/getfeedback?userId=181794
 
 

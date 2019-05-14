@@ -92,14 +92,14 @@ public class PassbookController {
      */
     @ResponseBody
     @PostMapping("/userusepass")
-    Response userUsePass(Pass pass) {
+    Response userUsePass(@RequestBody Pass pass) {
 
         LogGenerator.genLog(
                 httpServletRequest,
                 pass.getUserId(), LogConstants.ActionName.USER_USE_PASS,
                 pass
         );
-        return userPassService.UserUsePass(pass);
+        return userPassService.userUsePass(pass);
     }
 
     /**

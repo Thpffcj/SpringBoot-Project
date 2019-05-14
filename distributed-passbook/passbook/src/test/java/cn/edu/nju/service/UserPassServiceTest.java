@@ -1,5 +1,6 @@
 package cn.edu.nju.service;
 
+import cn.edu.nju.vo.Pass;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,5 +35,17 @@ public class UserPassServiceTest extends AbstractServiceTest {
     public void testGetUserAllPassInfo() throws Exception {
 
         System.out.println(JSON.toJSONString(userPassService.getUserAllPassInfo(userId)));
+    }
+
+    @Test
+    public void testUserUsePass() {
+
+        Pass pass = new Pass();
+        pass.setUserId(userId);
+        pass.setTemplateId("3617cf73e7a1099097242115042cb7b0");
+
+        System.out.println(JSON.toJSONString(
+                userPassService.userUsePass(pass)
+        ));
     }
 }

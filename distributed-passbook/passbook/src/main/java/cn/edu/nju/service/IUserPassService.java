@@ -38,5 +38,5 @@ public interface IUserPassService {
      * @param pass {@link Pass}
      * @return {@link Response}
      */
-    Response UserUsePass(Pass pass);
+    Response userUsePass(Pass pass);
 }

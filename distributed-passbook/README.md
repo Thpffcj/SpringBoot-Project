@@ -222,58 +222,58 @@
 - 启动HDFS
 
 ```
-    Thpffcj:sbin thpffcj$ ./start-all.sh 
+Thpffcj:sbin thpffcj$ ./start-all.sh 
 ```
 
 - 启动HBase
 
 ```
-    Thpffcj:bin thpffcj$ ./start-hbase.sh 
-    localhost: starting zookeeper, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0/bin/../logs/hbase-thpffcj-zookeeper-Thpffcj.local.out
-    starting master, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0//logs/hbase-thpffcj-master-Thpffcj.local.out
-    starting regionserver, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0//logs/hbase-thpffcj-1-regionserver-Thpffcj.local.out
-    
-    Thpffcj:bin thpffcj$ jps
-    12923 HMaster
+Thpffcj:bin thpffcj$ ./start-hbase.sh 
+localhost: starting zookeeper, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0/bin/../logs/hbase-thpffcj-zookeeper-Thpffcj.local.out
+starting master, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0//logs/hbase-thpffcj-master-Thpffcj.local.out
+starting regionserver, logging to /Users/thpffcj/Public/software/hbase-1.2.0-cdh5.7.0//logs/hbase-thpffcj-1-regionserver-Thpffcj.local.out
 
-    Thpffcj:bin thpffcj$ ./hbase shell
+Thpffcj:bin thpffcj$ jps
+12923 HMaster
+
+Thpffcj:bin thpffcj$ ./hbase shell
 ```
 
 - 在passbook/src/main/resources下有passbook.hsh
 - 创建命名空间
 
 ```   
-    hbase(main):002:0> create_namespace 'pb'
-    0 row(s) in 0.0960 seconds
+hbase(main):002:0> create_namespace 'pb'
+0 row(s) in 0.0960 seconds
 ```
 
 - 依次创建四张表
 
 ```
-    hbase(main):003:0> create 'pb:user', {NAME => 'b', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}, {NAME => 'o', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
-    0 row(s) in 1.3400 seconds
-    
-    => Hbase::Table - pb:user
-    hbase(main):004:0> create 'pb:pass', {NAME => 'i', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
-    0 row(s) in 1.2410 seconds
-    
-    => Hbase::Table - pb:pass
-    hbase(main):005:0> create 'pb:passtemplate', {NAME => 'b', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}, {NAME => 'c', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
-    0 row(s) in 1.2530 seconds
-    
-    => Hbase::Table - pb:passtemplate
-    hbase(main):006:0> create 'pb:feedback', {NAME => 'i', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
-    0 row(s) in 1.2470 seconds
-    
-    => Hbase::Table - pb:feedback
-    
-    hbase(main):007:0> list_namespace_tables 'pb'
-    TABLE                                                                           
-    feedback                                                                        
-    pass                                                                            
-    passtemplate                                                                    
-    user                                                                            
-    4 row(s) in 0.0240 seconds
+hbase(main):003:0> create 'pb:user', {NAME => 'b', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}, {NAME => 'o', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+0 row(s) in 1.3400 seconds
+
+=> Hbase::Table - pb:user
+hbase(main):004:0> create 'pb:pass', {NAME => 'i', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+0 row(s) in 1.2410 seconds
+
+=> Hbase::Table - pb:pass
+hbase(main):005:0> create 'pb:passtemplate', {NAME => 'b', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}, {NAME => 'c', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+0 row(s) in 1.2530 seconds
+
+=> Hbase::Table - pb:passtemplate
+hbase(main):006:0> create 'pb:feedback', {NAME => 'i', VERSIONS => '3', TTL => '2147483647', 'BLOOMFILTER' => 'ROW'}
+0 row(s) in 1.2470 seconds
+
+=> Hbase::Table - pb:feedback
+
+hbase(main):007:0> list_namespace_tables 'pb'
+TABLE                                                                           
+feedback                                                                        
+pass                                                                            
+passtemplate                                                                    
+user                                                                            
+4 row(s) in 0.0240 seconds
 ```
 
 ### 2. 创建MySQL表
@@ -294,7 +294,7 @@
 - 启动kafka消费者
 
 ```
-    Thpffcj:bin thpffcj$ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic merchants-template --from-beginning
+Thpffcj:bin thpffcj$ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic merchants-template --from-beginning
 ```
 
 ### 4. 启动Redis
@@ -315,11 +315,11 @@
 - hbase 的四张表
     
 ```  
-    hbase(main):007:0> truncate 'pb:user'
-    Truncating 'pb:user' table (it may take a while):
-     - Disabling table...
-     - Truncating table...
-    0 row(s) in 3.3910 seconds
+hbase(main):007:0> truncate 'pb:user'
+Truncating 'pb:user' table (it may take a while):
+ - Disabling table...
+ - Truncating table...
+0 row(s) in 3.3910 seconds
 ```
 
 - mysql 商户数据
@@ -332,141 +332,141 @@
 
 
 ```
-    POST: 127.0.0.1:9527/merchants/create
-    header: token/passbook-merchants
-    {
-        "name": "我的博客",
-        "logoUrl": "www.thpffcj.com",
-        "businessLicenseUrl": "www.thpffcj.com",
-        "phone": "1234567890",
-        "address": "南京市鼓楼区"
-    }
+POST: 127.0.0.1:9527/merchants/create
+header: token/passbook-merchants
+{
+    "name": "我的博客",
+    "logoUrl": "www.thpffcj.com",
+    "businessLicenseUrl": "www.thpffcj.com",
+    "phone": "1234567890",
+    "address": "南京市鼓楼区"
+}
 ```
 
 - 查看商户信息
 
 ```
-    GET: 127.0.0.1:9527/merchants/10
-    header: token/passbook-merchants
+GET: 127.0.0.1:9527/merchants/10
+header: token/passbook-merchants
 ```
 
 - 投放优惠券
 
 ```
-    POST: 127.0.0.1:9527/merchants/drop
-    header: token/passbook-merchants
-    {
-        "background": 1,
-        "desc": "淘宝优惠券",
-        "end": "2019-06-30",
-        "hasToken": false,
-        "id": 10,
-        "limit": 1000,
-        "start": "2018-05-01",
-        "summary": "优惠券简介",
-        "title": "淘宝优惠券-1"
-    }
-    {
-        "background": 1,
-        "desc": "淘宝优惠券",
-        "end": "2019-06-30",
-        "hasToken": true,
-        "id": 10,
-        "limit": 1000,
-        "start": "2019-05-01",
-        "summary": "优惠券简介",
-        "title": "淘宝优惠券-2"
-    }
+POST: 127.0.0.1:9527/merchants/drop
+header: token/passbook-merchants
+{
+    "background": 1,
+    "desc": "淘宝优惠券",
+    "end": "2019-06-30",
+    "hasToken": false,
+    "id": 10,
+    "limit": 1000,
+    "start": "2018-05-01",
+    "summary": "优惠券简介",
+    "title": "淘宝优惠券-1"
+}
+{
+    "background": 1,
+    "desc": "淘宝优惠券",
+    "end": "2019-06-30",
+    "hasToken": true,
+    "id": 10,
+    "limit": 1000,
+    "start": "2019-05-01",
+    "summary": "优惠券简介",
+    "title": "淘宝优惠券-2"
+}
 ```
 
 - 上传优惠券 token
     
 ```    
-    GET: 127.0.0.1:9528/upload
-    merchantsId - 10
-    PassTemplateId: 0b2d034848f1525132154ddabf9a1a6b
+GET: 127.0.0.1:9528/upload
+merchantsId - 10
+PassTemplateId: 0b2d034848f1525132154ddabf9a1a6b
 ```
 
 - 创建用户 -- 用户 181794
     
 ```    
-    POST: 127.0.0.1:9528/passbook/createuser
-    {
-        "baseInfo": {
-            "name": "thpffcj",
-            "age": 22,
-            "sex": "m"
-        },
-        "otherInfo": {
-            "phone": "1234567890",
-            "address": "南京市鼓楼区"
-        }
+POST: 127.0.0.1:9528/passbook/createuser
+{
+    "baseInfo": {
+        "name": "thpffcj",
+        "age": 22,
+        "sex": "m"
+    },
+    "otherInfo": {
+        "phone": "1234567890",
+        "address": "南京市鼓楼区"
     }
+}
 ```
 
 - 库存信息
     
 ```    
-    GET: 127.0.0.1:9528/passbook/inventoryinfo?userId=181794
+GET: 127.0.0.1:9528/passbook/inventoryinfo?userId=181794
 ```
 
 - 获取优惠券 -- 获取的是带有 token 的优惠券
     
 ```    
-    POST: 127.0.0.1:9528/passbook/gainpasstemplate
-    {
-        "userId": 181794,
-        "passTemplate": {
-            "id": 10,
-            "title": "淘宝优惠券-2",
-            "hasToken": true
-        }
+POST: 127.0.0.1:9528/passbook/gainpasstemplate
+{
+    "userId": 181794,
+    "passTemplate": {
+        "id": 10,
+        "title": "淘宝优惠券-2",
+        "hasToken": true
     }
+}
 ```
 
 - userpassinfo
     
 ```    
-    GET: 127.0.0.1:9528/passbook/userpassinfo?userId=181794
+GET: 127.0.0.1:9528/passbook/userpassinfo?userId=181794
 ```
 
 - userusedpassinfo
     
 ```    
-    GET: 127.0.0.1:9528/passbook/userusedpassinfo?userId=181794
+GET: 127.0.0.1:9528/passbook/userusedpassinfo?userId=181794
 ```
 
 - userusepass
     
 ```    
-    POST: 127.0.0.1:9528/passbook/userusepass
-    {
-        "userId": 181794,
-        "templateId": "0b2d034848f1525132154ddabf9a1a6b"
-    }
+POST: 127.0.0.1:9528/passbook/userusepass
+{
+    "userId": 181794,
+    "templateId": "0b2d034848f1525132154ddabf9a1a6b"
+}
 ```
 
 - 创建评论信息
     
 ```    
-    POST: 127.0.0.1:9528/passbook/createfeedback
-    {
-        "userId": 181794,
-        "type": "app",
-        "templateId": -1,
-        "comment": "学习分布式卡包应用"
-    }
-    {
-        "userId": 181794,
-        "type": "pass",
-        "templateId": "0b2d034848f1525132154ddabf9a1a6b",
-        "comment": "学习分布式卡包应用"
-    }
+POST: 127.0.0.1:9528/passbook/createfeedback
+{
+    "userId": 181794,
+    "type": "app",
+    "templateId": -1,
+    "comment": "学习分布式卡包应用"
+}
+{
+    "userId": 181794,
+    "type": "pass",
+    "templateId": "0b2d034848f1525132154ddabf9a1a6b",
+    "comment": "学习分布式卡包应用"
+}
 ```
 
 - 查看评论信息
     
 ```    
-    GET: 127.0.0.1:9528/passbook/getfeedback?userId=181794
+GET: 127.0.0.1:9528/passbook/getfeedback?userId=181794
 ```
 

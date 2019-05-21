@@ -33,12 +33,13 @@ public class WeatherDataCollectionServiceImpl implements WeatherDataCollectionSe
 
     /**
      * 把天气数据放在缓存
+     *
      * @param uri
      */
     private void saveWeatherData(String uri) {
         String key = uri;
         String strBody = null;
-        ValueOperations<String, String>  ops = stringRedisTemplate.opsForValue();
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
 
         // 调用服务接口来获取
         ResponseEntity<String> respString = restTemplate.getForEntity(uri, String.class);

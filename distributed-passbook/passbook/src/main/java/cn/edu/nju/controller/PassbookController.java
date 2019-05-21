@@ -51,6 +51,7 @@ public class PassbookController {
 
     /**
      * 获取用户个人的优惠券信息
+     *
      * @param userId 用户 id
      * @return {@link Response}
      * @throws Exception
@@ -69,6 +70,7 @@ public class PassbookController {
 
     /**
      * 获取用户使用了的优惠券信息
+     *
      * @param userId 用户id
      * @return {@link Response}
      * @throws Exception
@@ -87,6 +89,7 @@ public class PassbookController {
 
     /**
      * 用户使用优惠券
+     *
      * @param pass {@link Pass}
      * @return {@link Response}
      */
@@ -104,6 +107,7 @@ public class PassbookController {
 
     /**
      * 获取库存信息
+     *
      * @param userId 用户 id
      * @return {@link Response}
      * @throws Exception
@@ -122,6 +126,7 @@ public class PassbookController {
 
     /**
      * 用户领取优惠券
+     *
      * @param request {@link GainPassTemplateRequest}
      * @return {@link Response}
      * @throws Exception
@@ -140,6 +145,7 @@ public class PassbookController {
 
     /**
      * 用户创建评论
+     *
      * @param feedback {@link Feedback}
      * @return {@link Response}
      */
@@ -156,6 +162,7 @@ public class PassbookController {
 
     /**
      * 用户获取评论信息
+     *
      * @param userId 用户 id
      * @return {@link Response}
      */
@@ -173,6 +180,7 @@ public class PassbookController {
 
     /**
      * 异常演示接口
+     *
      * @return {@link Response}
      * @throws Exception
      */

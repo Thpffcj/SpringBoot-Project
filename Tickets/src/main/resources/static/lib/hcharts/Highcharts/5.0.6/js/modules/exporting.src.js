@@ -6,14 +6,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * Exporting module
          *
@@ -73,8 +73,6 @@
         };
 
 
-
-
         // Add the export related options
         defaultOptions.exporting = {
             //enabled: true,
@@ -92,39 +90,39 @@
                     symbol: 'menu',
                     _titleKey: 'contextButtonTitle',
                     menuItems: [{
-                            textKey: 'printChart',
-                            onclick: function() {
-                                this.print();
-                            }
-                        }, {
-                            separator: true
-                        }, {
-                            textKey: 'downloadPNG',
-                            onclick: function() {
-                                this.exportChart();
-                            }
-                        }, {
-                            textKey: 'downloadJPEG',
-                            onclick: function() {
-                                this.exportChart({
-                                    type: 'image/jpeg'
-                                });
-                            }
-                        }, {
-                            textKey: 'downloadPDF',
-                            onclick: function() {
-                                this.exportChart({
-                                    type: 'application/pdf'
-                                });
-                            }
-                        }, {
-                            textKey: 'downloadSVG',
-                            onclick: function() {
-                                this.exportChart({
-                                    type: 'image/svg+xml'
-                                });
-                            }
+                        textKey: 'printChart',
+                        onclick: function () {
+                            this.print();
                         }
+                    }, {
+                        separator: true
+                    }, {
+                        textKey: 'downloadPNG',
+                        onclick: function () {
+                            this.exportChart();
+                        }
+                    }, {
+                        textKey: 'downloadJPEG',
+                        onclick: function () {
+                            this.exportChart({
+                                type: 'image/jpeg'
+                            });
+                        }
+                    }, {
+                        textKey: 'downloadPDF',
+                        onclick: function () {
+                            this.exportChart({
+                                type: 'application/pdf'
+                            });
+                        }
+                    }, {
+                        textKey: 'downloadSVG',
+                        onclick: function () {
+                            this.exportChart({
+                                type: 'image/svg+xml'
+                            });
+                        }
+                    }
                         // Enable this block to add "View SVG" to the dropdown menu
                         /*
                         ,{
@@ -144,7 +142,7 @@
         };
 
         // Add the H.post utility
-        H.post = function(url, data, formAttributes) {
+        H.post = function (url, data, formAttributes) {
             var name,
                 form;
 
@@ -179,7 +177,7 @@
              * A collection of fixes on the produced SVG to account for expando properties,
              * browser bugs, VML problems and other. Returns a cleaned SVG.
              */
-            sanitizeSVG: function(svg, options) {
+            sanitizeSVG: function (svg, options) {
                 // Move HTML into a foreignObject
                 if (options && options.exporting && options.exporting.allowHTML) {
                     var html = svg.match(/<\/svg>(.*?$)/);
@@ -214,10 +212,9 @@
                     	return s2 +'.'+ s3[0];
                     })*/
 
-                // Replace HTML entities, issue #347
-                .replace(/&nbsp;/g, '\u00A0') // no-break space
+                    // Replace HTML entities, issue #347
+                    .replace(/&nbsp;/g, '\u00A0') // no-break space
                     .replace(/&shy;/g, '\u00AD'); // soft hyphen
-
 
 
                 return svg;
@@ -226,7 +223,7 @@
             /**
              * Return innerHTML of chart. Used as hook for plugins.
              */
-            getChartHTML: function() {
+            getChartHTML: function () {
 
                 this.inlineStyles();
 
@@ -242,7 +239,7 @@
              *    item of the same `id`, or to the first item if a commin id is not
              *    found.
              */
-            getSVG: function(additionalOptions) {
+            getSVG: function (additionalOptions) {
                 var chart = this,
                     chartCopy,
                     sandbox,
@@ -257,7 +254,7 @@
 
                 // IE compatibility hack for generating SVG content that it doesn't really understand
                 if (!doc.createElementNS) {
-                    doc.createElementNS = function(ns, tagName) {
+                    doc.createElementNS = function (ns, tagName) {
                         return doc.createElement(tagName);
                     };
                 }
@@ -296,7 +293,7 @@
 
                 // prepare for replicating the chart
                 options.series = [];
-                each(chart.series, function(serie) {
+                each(chart.series, function (serie) {
                     seriesOptions = merge(serie.userOptions, { // #4912
                         animation: false, // turn off animation
                         enableMouseTracking: false,
@@ -310,7 +307,7 @@
                 });
 
                 // Assign an internal key to ensure a one-to-one mapping (#5924)
-                each(chart.axes, function(axis) {
+                each(chart.axes, function (axis) {
                     axis.userOptions.internalKey = H.uniqueKey();
                 });
 
@@ -319,7 +316,7 @@
 
                 // Axis options and series options  (#2022, #3900, #5982)
                 if (additionalOptions) {
-                    each(['xAxis', 'yAxis', 'series'], function(coll) {
+                    each(['xAxis', 'yAxis', 'series'], function (coll) {
                         var collOptions = {};
                         if (additionalOptions[coll]) {
                             collOptions[coll] = additionalOptions[coll];
@@ -329,8 +326,8 @@
                 }
 
                 // Reflect axis extremes in the export (#5924)
-                each(chart.axes, function(axis) {
-                    var axisCopy = H.find(chartCopy.axes, function(copy) {
+                each(chart.axes, function (axis) {
+                    var axisCopy = H.find(chartCopy.axes, function (copy) {
                             return copy.options.internalKey ===
                                 axis.userOptions.internalKey;
                         }),
@@ -356,7 +353,7 @@
                 return svg;
             },
 
-            getSVGForExport: function(options, chartOptions) {
+            getSVGForExport: function (options, chartOptions) {
                 var chartExportingOptions = this.options.exporting;
 
                 return this.getSVG(merge({
@@ -379,7 +376,7 @@
              * @param {Object} options Exporting options. Possible members are url, type, width and formAttributes.
              * @param {Object} chartOptions Additional chart options for the SVG representation of the chart
              */
-            exportChart: function(options, chartOptions) {
+            exportChart: function (options, chartOptions) {
 
                 var svg = this.getSVGForExport(options, chartOptions);
 
@@ -400,7 +397,7 @@
             /**
              * Print the chart
              */
-            print: function() {
+            print: function () {
 
                 var chart = this,
                     container = chart.container,
@@ -429,7 +426,7 @@
                 }
 
                 // hide all body content
-                each(childNodes, function(node, i) {
+                each(childNodes, function (node, i) {
                     if (node.nodeType === 1) {
                         origDisplay[i] = node.style.display;
                         node.style.display = 'none';
@@ -444,13 +441,13 @@
                 win.print();
 
                 // allow the browser to prepare before reverting
-                setTimeout(function() {
+                setTimeout(function () {
 
                     // put the chart back in
                     origParent.appendChild(container);
 
                     // restore all body content
-                    each(childNodes, function(node, i) {
+                    each(childNodes, function (node, i) {
                         if (node.nodeType === 1) {
                             node.style.display = origDisplay[i];
                         }
@@ -479,7 +476,7 @@
              * @param {Number} width The width of the opener button
              * @param {Number} height The height of the opener button
              */
-            contextMenu: function(className, items, x, y, width, height, button) {
+            contextMenu: function (className, items, x, y, width, height, button) {
                 var chart = this,
                     navOptions = chart.options.navigation,
                     chartWidth = chart.chartWidth,
@@ -509,9 +506,8 @@
                     }, null, menu);
 
 
-
                     // hide on mouse out
-                    hide = function() {
+                    hide = function () {
                         css(menu, {
                             display: 'none'
                         });
@@ -522,17 +518,17 @@
                     };
 
                     // Hide the menu some time after mouse leave (#1357)
-                    addEvent(menu, 'mouseleave', function() {
+                    addEvent(menu, 'mouseleave', function () {
                         menu.hideTimer = setTimeout(hide, 500);
                     });
-                    addEvent(menu, 'mouseenter', function() {
+                    addEvent(menu, 'mouseenter', function () {
                         clearTimeout(menu.hideTimer);
                     });
 
 
                     // Hide it on clicking or touching outside the menu (#2258, #2335,
                     // #2407)
-                    removeMouseUp = addEvent(doc, 'mouseup', function(e) {
+                    removeMouseUp = addEvent(doc, 'mouseup', function (e) {
                         if (!chart.pointer.inClass(e.target, className)) {
                             hide();
                         }
@@ -541,7 +537,7 @@
 
 
                     // create the items
-                    each(items, function(item) {
+                    each(items, function (item) {
                         if (item) {
                             var element;
 
@@ -551,7 +547,7 @@
                             } else {
                                 element = createElement('div', {
                                     className: 'highcharts-menu-item',
-                                    onclick: function(e) {
+                                    onclick: function (e) {
                                         if (e) { // IE7
                                             e.stopPropagation();
                                         }
@@ -602,7 +598,7 @@
             /**
              * Add the export button to the chart
              */
-            addButton: function(options) {
+            addButton: function (options) {
                 var chart = this,
                     renderer = chart.renderer,
                     btnOptions = merge(chart.options.navigation.buttonOptions, options),
@@ -635,13 +631,13 @@
                 delete attr.states;
 
                 if (onclick) {
-                    callback = function(e) {
+                    callback = function (e) {
                         e.stopPropagation();
                         onclick.call(chart, e);
                     };
 
                 } else if (menuItems) {
-                    callback = function() {
+                    callback = function () {
                         chart.contextMenu(
                             button.menuClassName,
                             menuItems,
@@ -678,12 +674,12 @@
 
                 if (btnOptions.symbol) {
                     symbol = renderer.symbol(
-                            btnOptions.symbol,
-                            btnOptions.symbolX - (symbolSize / 2),
-                            btnOptions.symbolY - (symbolSize / 2),
-                            symbolSize,
-                            symbolSize
-                        )
+                        btnOptions.symbol,
+                        btnOptions.symbolX - (symbolSize / 2),
+                        btnOptions.symbolY - (symbolSize / 2),
+                        symbolSize,
+                        symbolSize
+                    )
                         .addClass('highcharts-button-symbol')
                         .attr({
                             zIndex: 1
@@ -707,14 +703,14 @@
             /**
              * Destroy the buttons.
              */
-            destroyExport: function(e) {
+            destroyExport: function (e) {
                 var chart = e ? e.target : this,
                     exportSVGElements = chart.exportSVGElements,
                     exportDivElements = chart.exportDivElements;
 
                 // Destroy the extra buttons added
                 if (exportSVGElements) {
-                    each(exportSVGElements, function(elem, i) {
+                    each(exportSVGElements, function (elem, i) {
 
                         // Destroy and null the svg/vml elements
                         if (elem) { // #1822
@@ -727,7 +723,7 @@
 
                 // Destroy the divs for the menu
                 if (exportDivElements) {
-                    each(exportDivElements, function(elem, i) {
+                    each(exportDivElements, function (elem, i) {
 
                         // Remove the event handler
                         clearTimeout(elem.hideTimer); // #5427
@@ -779,7 +775,7 @@
          * @todo: What are the border styles for text about? In general, text has a lot of properties.
          * @todo: Make it work with IE9 and IE10.
          */
-        Chart.prototype.inlineStyles = function() {
+        Chart.prototype.inlineStyles = function () {
             var renderer = this.renderer,
                 inlineToAttributes = renderer.inlineToAttributes,
                 blacklist = renderer.inlineBlacklist,
@@ -793,7 +789,7 @@
             function hyphenate(prop) {
                 return prop.replace(
                     /([A-Z])/g,
-                    function(a, b) {
+                    function (a, b) {
                         return '-' + b.toLowerCase();
                     }
                 );
@@ -885,8 +881,7 @@
         };
 
 
-
-        symbols.menu = function(x, y, width, height) {
+        symbols.menu = function (x, y, width, height) {
             var arr = [
                 'M', x, y + 2.5,
                 'L', x + width, y + 2.5,
@@ -899,7 +894,7 @@
         };
 
         // Add the buttons on chart load
-        Chart.prototype.renderExporting = function() {
+        Chart.prototype.renderExporting = function () {
             var n,
                 exportingOptions = this.options.exporting,
                 buttons = exportingOptions.buttons,
@@ -923,7 +918,7 @@
             addEvent(this, 'destroy', this.destroyExport);
         };
 
-        Chart.prototype.callbacks.push(function(chart) {
+        Chart.prototype.callbacks.push(function (chart) {
 
             function update(prop, options, redraw) {
                 chart.isDirtyExporting = true;
@@ -940,9 +935,9 @@
 
             // Add update methods to handle chart.update and chart.exporting.update
             // and chart.navigation.update.
-            each(['exporting', 'navigation'], function(prop) {
+            each(['exporting', 'navigation'], function (prop) {
                 chart[prop] = {
-                    update: function(options, redraw) {
+                    update: function (options, redraw) {
                         update(prop, options, redraw);
                     }
                 };

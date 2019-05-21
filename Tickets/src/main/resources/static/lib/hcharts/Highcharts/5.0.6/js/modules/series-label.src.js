@@ -5,14 +5,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * (c) 2009-2016 Torstein Honsi
          *
@@ -26,7 +26,7 @@
          * - other series types, area etc.
          * - avoid data labels, when data labels above, show series label below.
          * - add more options (connector, format, formatter)
-         * 
+         *
          * http://jsfiddle.net/highcharts/L2u9rpwr/
          * http://jsfiddle.net/highcharts/y5A37/
          * http://jsfiddle.net/highcharts/264Nm/
@@ -93,7 +93,7 @@
         /**
          * General symbol definition for labels with connector
          */
-        SVGRenderer.prototype.symbols.connector = function(x, y, w, h, options) {
+        SVGRenderer.prototype.symbols.connector = function (x, y, w, h, options) {
             var anchorX = options && options.anchorX,
                 anchorY = options && options.anchorY,
                 path,
@@ -137,7 +137,7 @@
          * Points to avoid. In addition to actual data points, the label should avoid
          * interpolated positions.
          */
-        Series.prototype.getPointsOnGraph = function() {
+        Series.prototype.getPointsOnGraph = function () {
             var distance = 16,
                 points = this.points,
                 point,
@@ -231,7 +231,7 @@
         /**
          * Check whether a proposed label position is clear of other elements
          */
-        Series.prototype.checkClearPoint = function(x, y, bBox, checkDistance) {
+        Series.prototype.checkClearPoint = function (x, y, bBox, checkDistance) {
             var distToOthersSquared = Number.MAX_VALUE, // distance to other graphs
                 distToPointSquared = Number.MAX_VALUE,
                 dist,
@@ -265,11 +265,11 @@
             // First check for collision with existing labels
             for (i = 0; i < chart.boxesToAvoid.length; i += 1) {
                 if (intersectRect(chart.boxesToAvoid[i], {
-                        left: x,
-                        right: x + bBox.width,
-                        top: y,
-                        bottom: y + bBox.height
-                    })) {
+                    left: x,
+                    right: x + bBox.width,
+                    top: y,
+                    bottom: y + bBox.height
+                })) {
                     return false;
                 }
             }
@@ -283,15 +283,15 @@
                     for (j = 1; j < points.length; j += 1) {
                         // If any of the box sides intersect with the line, return
                         if (boxIntersectLine(
-                                x,
-                                y,
-                                bBox.width,
-                                bBox.height,
-                                points[j - 1].chartX,
-                                points[j - 1].chartY,
-                                points[j].chartX,
-                                points[j].chartY
-                            )) {
+                            x,
+                            y,
+                            bBox.width,
+                            bBox.height,
+                            points[j - 1].chartX,
+                            points[j - 1].chartY,
+                            points[j].chartX,
+                            points[j].chartY
+                        )) {
                             return false;
                         }
 
@@ -324,7 +324,7 @@
 
                     // Do we need a connector? 
                     if (connectorEnabled && this === series && ((checkDistance && !withinRange) ||
-                            distToOthersSquared < Math.pow(this.options.label.connectorNeighbourDistance, 2))) {
+                        distToOthersSquared < Math.pow(this.options.label.connectorNeighbourDistance, 2))) {
                         for (j = 1; j < points.length; j += 1) {
                             dist = Math.min(
                                 Math.pow(x + bBox.width / 2 - points[j].chartX, 2) + Math.pow(y + bBox.height / 2 - points[j].chartY, 2),
@@ -353,26 +353,26 @@
         };
 
         /**
-         * The main initiator method that runs on chart level after initiation and redraw. It runs in 
+         * The main initiator method that runs on chart level after initiation and redraw. It runs in
          * a timeout to prevent locking, and loops over all series, taking all series and labels into
          * account when placing the labels.
          */
-        Chart.prototype.drawSeriesLabels = function() {
+        Chart.prototype.drawSeriesLabels = function () {
             var chart = this,
                 labelSeries = this.labelSeries;
 
             chart.boxesToAvoid = [];
 
             // Build the interpolated points
-            each(labelSeries, function(series) {
+            each(labelSeries, function (series) {
                 series.interpolatedPoints = series.getPointsOnGraph();
 
-                each(series.options.label.boxesToAvoid || [], function(box) {
+                each(series.options.label.boxesToAvoid || [], function (box) {
                     chart.boxesToAvoid.push(box);
                 });
             });
 
-            each(chart.series, function(series) {
+            each(chart.series, function (series) {
                 var bBox,
                     x,
                     y,
@@ -493,7 +493,7 @@
 
                     if (results.length) {
 
-                        results.sort(function(a, b) {
+                        results.sort(function (a, b) {
                             return b.weight - a.weight;
                         });
 
@@ -562,7 +562,7 @@
             clearTimeout(chart.seriesLabelTimer);
 
             // Which series should have labels
-            each(chart.series, function(series) {
+            each(chart.series, function (series) {
                 var options = series.options.label,
                     label = series.labelBySeries,
                     closest = label && label.closest;
@@ -594,11 +594,12 @@
                 }
             });
 
-            chart.seriesLabelTimer = setTimeout(function() {
+            chart.seriesLabelTimer = setTimeout(function () {
                 chart.drawSeriesLabels();
             }, delay);
 
         }
+
         wrap(Chart.prototype, 'render', drawLabels);
         wrap(Chart.prototype, 'redraw', drawLabels);
 

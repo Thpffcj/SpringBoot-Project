@@ -14,5 +14,5 @@ import java.util.List;
 @Component
 public interface CommentMapper {
 
-    List<Comment> selectComments(@Param("houseId")long houseId, @Param("size")int size);
+    List<Comment> selectComments(@Param("houseId") long houseId, @Param("size") int size);
 }

@@ -2,7 +2,7 @@
  * Created by 瓦力.
  */
 
-Date.prototype.Format = function(fmt) {
+Date.prototype.Format = function (fmt) {
 
     var o = {
         "M+": this.getMonth() + 1,
@@ -53,7 +53,7 @@ function mySelfInfo(userId) {
             btn: ['Close'],
             moveType: 1, //拖拽模式，0或者1
             content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff;' +
-            ' font-weight: 300;">用户名：' + res.data.name + '<br>联系电话：' + res.data.phoneNumber + '</div>'
+                ' font-weight: 300;">用户名：' + res.data.name + '<br>联系电话：' + res.data.phoneNumber + '</div>'
         });
     });
 }

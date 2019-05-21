@@ -33,6 +33,7 @@ public class MainController {
 
     /**
      * 获取登录界面
+     *
      * @return
      */
     @GetMapping("/login")
@@ -55,6 +56,7 @@ public class MainController {
 
     /**
      * 注册用户
+     *
      * @param user
      * @return
      */

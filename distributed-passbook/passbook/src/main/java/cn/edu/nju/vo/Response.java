@@ -24,6 +24,7 @@ public class Response {
 
     /**
      * 正确的响应构造函数
+     *
      * @param data
      */
     public Response(Object data) {
@@ -32,6 +33,7 @@ public class Response {
 
     /**
      * 空响应
+     *
      * @return
      */
     public static Response success() {
@@ -40,6 +42,7 @@ public class Response {
 
     /**
      * 错误响应
+     *
      * @param errorMsg
      * @return
      */

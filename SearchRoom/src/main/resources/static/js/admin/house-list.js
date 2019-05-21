@@ -130,7 +130,7 @@ var table = $('#data-table').DataTable({
         cache: false,
         data: function (data) {
             var postData = {},
-             houseStatus = $('#houseStatus').val(),
+                houseStatus = $('#houseStatus').val(),
                 createTimeMin = $('#createTimeMin').val(),
                 createTimeMax = $('#createTimeMax').val(),
                 city = $('#city').val(),

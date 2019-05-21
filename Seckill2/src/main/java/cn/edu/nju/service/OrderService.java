@@ -27,7 +27,7 @@ public class OrderService {
 
     public SeckillOrder getSeckillOrderByUserIdGoodsId(long userId, long goodsId) {
 //        return orderDao.getSeckillOrderByUserIdGoodsId(userId, goodsId);
-        return redisService.get(OrderKey.getSeckillOrderByUidGid, ""+userId+"_"+goodsId, SeckillOrder.class);
+        return redisService.get(OrderKey.getSeckillOrderByUidGid, "" + userId + "_" + goodsId, SeckillOrder.class);
     }
 
     public OrderInfo getOrderById(long orderId) {
@@ -55,7 +55,7 @@ public class OrderService {
         seckillOrder.setUserId(user.getId());
         orderDao.insertSeckillOrder(seckillOrder);
 
-        redisService.set(OrderKey.getSeckillOrderByUidGid, ""+user.getId()+"_"+goods.getId(), seckillOrder);
+        redisService.set(OrderKey.getSeckillOrderByUidGid, "" + user.getId() + "_" + goods.getId(), seckillOrder);
 
         return orderInfo;
     }

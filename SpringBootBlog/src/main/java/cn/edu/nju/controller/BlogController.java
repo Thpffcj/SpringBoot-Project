@@ -24,9 +24,9 @@ public class BlogController {
     private BlogRepository blogRepository;
 
     @GetMapping
-    public String listBlogs(@RequestParam(value="order",required=false,defaultValue="new") String order,
-                            @RequestParam(value="keyword",required=false,defaultValue="" ) String keyword) {
-        System.out.println("order:" +order + ";keyword:" +keyword );
-        return "redirect:/index?order="+order+"&keyword="+keyword;
+    public String listBlogs(@RequestParam(value = "order", required = false, defaultValue = "new") String order,
+                            @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+        System.out.println("order:" + order + ";keyword:" + keyword);
+        return "redirect:/index?order=" + order + "&keyword=" + keyword;
     }
 }

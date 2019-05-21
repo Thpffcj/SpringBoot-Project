@@ -13,7 +13,7 @@ public abstract class BasePrefix implements KeyPrefix {
         this(0, prefix);
     }
 
-    public BasePrefix( int expireSeconds, String prefix) {
+    public BasePrefix(int expireSeconds, String prefix) {
         this.expireSeconds = expireSeconds;
         this.prefix = prefix;
     }

@@ -80,6 +80,7 @@ public class WebFileUploadConfig {
 
     /**
      * 认证信息实例
+     *
      * @return
      */
     @Bean

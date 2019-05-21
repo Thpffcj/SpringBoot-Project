@@ -100,8 +100,9 @@ public class GainPassTemplateServiceImpl implements IGainPassTemplateService {
 
     /**
      * 给用户添加优惠券
-     * @param request {@link GainPassTemplateRequest}
-     * @param merchantsId 商户 id
+     *
+     * @param request        {@link GainPassTemplateRequest}
+     * @param merchantsId    商户 id
      * @param passTemplateId 优惠券 id
      * @return true/false
      * @throws Exception
@@ -146,9 +147,10 @@ public class GainPassTemplateServiceImpl implements IGainPassTemplateService {
 
     /**
      * 将已使用的 token 记录到文件中
-     * @param merchantsId 商户 id
+     *
+     * @param merchantsId    商户 id
      * @param passTemplateId 优惠券 id
-     * @param token 分配的优惠券 token
+     * @param token          分配的优惠券 token
      */
     private void recordTokenToFile(Integer merchantsId, String passTemplateId, String token) throws IOException {
 

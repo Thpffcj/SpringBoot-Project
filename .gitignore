@@ -1,45 +1,29 @@
-/SSMCampusShops/.idea
-/SSMCampusShops/target
-/SSMCampusShops/SSMCampusShops.iml
+HELP.md
+/target/
+!.mvn/wrapper/maven-wrapper.jar
 
-/SpringBootDemo/.idea
-/SpringBootDemo/target
-/SpringBootDemo/SpringBootDemo.iml
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-/SpringBootBlog/.idea
-/SpringBootBlog/out
-/SpringBootBlog/SpringBootBlog.iml
-
-/PublicComment/react-dianping-new
-/PublicComment/Comment/.idea
-/PublicComment/Comment/target
-/PublicComment/Comment/Comment.iml
-
-/SpringGroupBuy/.idea
-/SpringGroupBuy/target
-/SpringGroupBuy/SpringGroupBuy.iml
-
-/Seckill2/.idea
-/Seckill2/target
-/Seckill2/Seckill2.iml
-
-/Tickets/.idea
-/Tickets/target
-/Tickets/Tickets.iml
-
-/SearchRoom/.idea
-/SearchRoom/target
-/SearchRoom/SearchRoom.iml
-
-/weather-project/.idea
-/weather-project/.gradle
-/weather-project/out
-
-/NettyStudy/.idea
-/NettyStudy/target
-/NettyStudy/NettyStudy.iml
-
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
-*.idea
-target
-*.log
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
+
+### VS Code ###
+.vscode/

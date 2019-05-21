@@ -44,6 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 创建订单
+     *
      * @param memberId
      * @param showId
      * @param seatName
@@ -80,6 +81,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 改变订单状态
+     *
      * @param orderId
      * @param status
      * @return
@@ -139,6 +141,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * Order转OrderDto
+     *
      * @param orders
      * @return
      */

@@ -47,6 +47,7 @@ public class PassTemplate {
 
     /**
      * 校验优惠券对象的有效性
+     *
      * @param merchantsDao {@link MerchantsDao}
      * @return {@link ErrorCode}
      */

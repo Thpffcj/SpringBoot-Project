@@ -5,14 +5,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * (c) 2009-2016 Torstein Honsi
          *
@@ -100,14 +100,14 @@
 
 
         // Define annotation prototype
-        var Annotation = function() {
+        var Annotation = function () {
             this.init.apply(this, arguments);
         };
         Annotation.prototype = {
             /* 
              * Initialize the annotation
              */
-            init: function(chart, options) {
+            init: function (chart, options) {
                 var shapeType = options.shape && options.shape.type;
 
                 this.chart = chart;
@@ -117,7 +117,7 @@
             /*
              * Render the annotation
              */
-            render: function(redraw) {
+            render: function (redraw) {
                 var annotation = this,
                     chart = this.chart,
                     renderer = annotation.chart.renderer,
@@ -156,7 +156,7 @@
             /*
              * Redraw the annotation title or shape after options update
              */
-            redraw: function() {
+            redraw: function () {
                 var options = this.options,
                     chart = this.chart,
                     group = this.group,
@@ -288,7 +288,7 @@
             /*
              * Destroy the annotation
              */
-            destroy: function() {
+            destroy: function () {
                 var annotation = this,
                     chart = this.chart,
                     allItems = chart.annotations.allItems,
@@ -298,7 +298,7 @@
                     allItems.splice(index, 1);
                 }
 
-                each(['title', 'shape', 'group'], function(element) {
+                each(['title', 'shape', 'group'], function (element) {
                     if (annotation[element]) {
                         annotation[element].destroy();
                         annotation[element] = null;
@@ -311,7 +311,7 @@
             /*
              * Update the annotation with a given options
              */
-            update: function(options, redraw) {
+            update: function (options, redraw) {
                 extend(this.options, options);
 
                 // update link to point or series
@@ -320,7 +320,7 @@
                 this.render(redraw);
             },
 
-            linkObjects: function() {
+            linkObjects: function () {
                 var annotation = this,
                     chart = annotation.chart,
                     linkedTo = annotation.linkedObject,
@@ -343,7 +343,7 @@
                 /*
                  * Unified method for adding annotations to the chart
                  */
-                add: function(options, redraw) {
+                add: function (options, redraw) {
                     var annotations = this.allItems,
                         chart = this.chart,
                         item,
@@ -365,8 +365,8 @@
                 /**
                  * Redraw all annotations, method used in chart events
                  */
-                redraw: function() {
-                    each(this.allItems, function(annotation) {
+                redraw: function () {
+                    each(this.allItems, function (annotation) {
                         annotation.redraw();
                     });
                 }
@@ -375,7 +375,7 @@
 
 
         // Initialize on chart load
-        Chart.prototype.callbacks.push(function(chart) {
+        Chart.prototype.callbacks.push(function (chart) {
             var options = chart.options.annotations,
                 group;
 
@@ -399,7 +399,7 @@
             }
 
             // update annotations after chart redraw
-            H.addEvent(chart, 'redraw', function() {
+            H.addEvent(chart, 'redraw', function () {
                 chart.annotations.redraw();
             });
         });

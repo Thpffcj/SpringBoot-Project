@@ -14,6 +14,7 @@ public interface IUserService {
 
     /**
      * 根据电话号码寻找用户
+     *
      * @param telephone
      * @return
      */
@@ -21,6 +22,7 @@ public interface IUserService {
 
     /**
      * 通过手机号注册用户
+     *
      * @param telehone
      * @return
      */
@@ -28,6 +30,7 @@ public interface IUserService {
 
     /**
      * 修改指定属性值
+     *
      * @param profile
      * @param value
      * @return

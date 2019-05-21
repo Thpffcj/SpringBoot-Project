@@ -33,12 +33,13 @@ public class CreateMerchantsRequest {
 
     /**
      * 验证请求的有效性
+     *
      * @param merchantsDao {@link MerchantsDao}
      * @return {@link ErrorCode}
      */
     public ErrorCode validate(MerchantsDao merchantsDao) {
         if (merchantsDao.findByName(this.name) != null) {
-            return  ErrorCode.DUPLICATE_NAME;
+            return ErrorCode.DUPLICATE_NAME;
         }
 
         if (null == this.logoUrl) {
@@ -62,6 +63,7 @@ public class CreateMerchantsRequest {
 
     /**
      * 将请求对象转换为商户对象
+     *
      * @return {@link Merchants}
      */
     public Merchants toMerchants() {

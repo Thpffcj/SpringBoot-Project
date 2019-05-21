@@ -17,7 +17,7 @@ public class GoodsService {
     @Autowired
     GoodsDao goodsDao;
 
-    public List<GoodsVo> listGoodsVo(){
+    public List<GoodsVo> listGoodsVo() {
         return goodsDao.listGoodsVo();
     }
 
@@ -33,7 +33,7 @@ public class GoodsService {
     }
 
     public void resetStock(List<GoodsVo> goodsList) {
-        for(GoodsVo goods : goodsList ) {
+        for (GoodsVo goods : goodsList) {
             SeckillGoods g = new SeckillGoods();
             g.setGoodsId(goods.getId());
             g.setStockCount(goods.getStockCount());

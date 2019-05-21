@@ -18,8 +18,8 @@ import java.sql.SQLException;
 @Configuration
 public class DruidConfig {
 
-    @ConfigurationProperties(prefix="spring.druid")
-    @Bean(initMethod="init", destroyMethod="close")
+    @ConfigurationProperties(prefix = "spring.druid")
+    @Bean(initMethod = "init", destroyMethod = "close")
     public DruidDataSource dataSource(Filter statFilter) throws SQLException {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setProxyFilters(Lists.newArrayList(statFilter()));

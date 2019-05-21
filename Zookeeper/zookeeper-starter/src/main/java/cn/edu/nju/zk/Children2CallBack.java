@@ -16,7 +16,7 @@ public class Children2CallBack implements AsyncCallback.Children2Callback {
             System.out.println(s);
         }
         System.out.println("ChildrenCallback:" + path);
-        System.out.println((String)ctx);
+        System.out.println((String) ctx);
         System.out.println(stat.toString());
     }
 }

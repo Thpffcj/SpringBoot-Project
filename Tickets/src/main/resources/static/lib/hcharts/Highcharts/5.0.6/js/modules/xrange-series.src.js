@@ -8,14 +8,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * (c) 2014-2016 Highsoft AS
          * Authors: Torstein Honsi, Lars A. V. Cabrera
@@ -39,8 +39,8 @@
             Point = H.Point,
             Series = H.Series,
             pointFormat = '<span style="color:{point.color}">' +
-            '\u25CF' +
-            '</span> {series.name}: <b>{point.yCategory}</b><br/>',
+                '\u25CF' +
+                '</span> {series.name}: <b>{point.yCategory}</b><br/>',
             xrange = 'xrange';
 
         defaultPlotOptions.xrange = merge(defaultPlotOptions.column, {
@@ -51,7 +51,7 @@
         seriesTypes.xrange = extendClass(columnType, {
             pointClass: extendClass(Point, {
                 // Add x2 and yCategory to the available properties for tooltip formats
-                getLabelConfig: function() {
+                getLabelConfig: function () {
                     var cfg = Point.prototype.getLabelConfig.call(this);
 
                     cfg.x2 = this.x2;
@@ -69,12 +69,12 @@
              * Borrow the column series metrics, but with swapped axes. This gives free access
              * to features like groupPadding, grouping, pointWidth etc.
              */
-            getColumnMetrics: function() {
+            getColumnMetrics: function () {
                 var metrics,
                     chart = this.chart;
 
                 function swapAxes() {
-                    each(chart.series, function(s) {
+                    each(chart.series, function (s) {
                         var xAxis = s.xAxis;
                         s.xAxis = s.yAxis;
                         s.yAxis = xAxis;
@@ -95,7 +95,7 @@
              * Override cropData to show a point where x is outside visible range
              * but x2 is outside.
              */
-            cropData: function(xData, yData, min, max) {
+            cropData: function (xData, yData, min, max) {
 
                 // Replace xData with x2Data to find the appropriate cropStart
                 var cropData = Series.prototype.cropData,
@@ -107,14 +107,14 @@
                 return crop;
             },
 
-            translate: function() {
+            translate: function () {
                 columnType.prototype.translate.apply(this, arguments);
                 var series = this,
                     xAxis = series.xAxis,
                     metrics = series.columnMetrics,
                     minPointLength = series.options.minPointLength || 0;
 
-                each(series.points, function(point) {
+                each(series.points, function (point) {
                     var plotX = point.plotX,
                         posX = pick(point.x2, point.x + (point.len || 0)),
                         plotX2 = xAxis.toPixels(posX, true),
@@ -166,7 +166,7 @@
                 });
             },
 
-            drawPoints: function() {
+            drawPoints: function () {
                 var series = this,
                     chart = this.chart,
                     options = series.options,
@@ -175,7 +175,7 @@
                     verb = chart.pointCount < animationLimit ? 'animate' : 'attr';
 
                 // draw the columns
-                each(series.points, function(point) {
+                each(series.points, function (point) {
                     var plotY = point.plotY,
                         graphic = point.graphic,
                         type = point.shapeType,
@@ -216,7 +216,6 @@
                         }
 
 
-
                     } else if (graphic) {
                         point.graphic = graphic.destroy(); // #1269
                     }
@@ -227,7 +226,7 @@
         /**
          * Max x2 should be considered in xAxis extremes
          */
-        wrap(Axis.prototype, 'getSeriesExtremes', function(proceed) {
+        wrap(Axis.prototype, 'getSeriesExtremes', function (proceed) {
             var axis = this,
                 series = axis.series,
                 dataMax,
@@ -236,8 +235,8 @@
             proceed.call(this);
             if (axis.isXAxis && series.type === xrange) {
                 dataMax = pick(axis.dataMax, Number.MIN_VALUE);
-                each(this.series, function(series) {
-                    each(series.x2Data || [], function(val) {
+                each(this.series, function (series) {
+                    each(series.x2Data || [], function (val) {
                         if (val > dataMax) {
                             dataMax = val;
                             modMax = true;

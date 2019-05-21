@@ -6,14 +6,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(Highcharts) {
+}(function (Highcharts) {
+    (function (Highcharts) {
         /**
          * Highcharts funnel module
          *
@@ -51,11 +51,11 @@
                 /**
                  * Overrides the pie translate method
                  */
-                translate: function() {
+                translate: function () {
 
                     var
-                    // Get positions - either an integer or a percentage string must be given
-                        getLength = function(length, relativeTo) {
+                        // Get positions - either an integer or a percentage string must be given
+                        getLength = function (length, relativeTo) {
                             return (/%$/).test(length) ?
                                 relativeTo * parseInt(length, 10) / 100 :
                                 parseInt(length, 10);
@@ -94,14 +94,14 @@
                         y5;
 
                     // Return the width at a specific y coordinate
-                    series.getWidthAt = getWidthAt = function(y) {
+                    series.getWidthAt = getWidthAt = function (y) {
                         var top = (centerY - height / 2);
 
                         return y > neckY || height === neckHeight ?
                             neckWidth :
                             neckWidth + (width - neckWidth) * (1 - (y - top) / (height - neckHeight));
                     };
-                    series.getX = function(y, half) {
+                    series.getX = function (y, half) {
                         return centerX + (half ? -1 : 1) * ((getWidthAt(reversed ? 2 * centerY - y : y) / 2) + options.dataLabels.distance);
                     };
 
@@ -129,16 +129,14 @@
                      */
 
 
-
-
                     // get the total sum
-                    each(data, function(point) {
+                    each(data, function (point) {
                         if (!ignoreHiddenPoint || point.visible !== false) {
                             sum += point.y;
                         }
                     });
 
-                    each(data, function(point) {
+                    each(data, function (point) {
                         // set start and end positions
                         y5 = null;
                         fraction = sum ? point.y / sum : 0;
@@ -226,8 +224,8 @@
                 /**
                  * Funnel items don't have angles (#2289)
                  */
-                sortByAngle: function(points) {
-                    points.sort(function(a, b) {
+                sortByAngle: function (points) {
+                    points.sort(function (a, b) {
                         return a.plotY - b.plotY;
                     });
                 },
@@ -235,7 +233,7 @@
                 /**
                  * Extend the pie data label method
                  */
-                drawDataLabels: function() {
+                drawDataLabels: function () {
                     var data = this.data,
                         labelDistance = this.options.dataLabels.distance,
                         leftSide,
@@ -276,7 +274,7 @@
 
             });
 
-        /** 
+        /**
          * Pyramid series type.
          * A pyramid series is a special type of funnel, without neck and reversed by default.
          */

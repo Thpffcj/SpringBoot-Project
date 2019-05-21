@@ -21,7 +21,8 @@ public class ZKGetChildrenList implements Watcher {
     public static final String zkServerPath = "192.168.92.130:2181";
     public static final Integer timeout = 5000;
 
-    public ZKGetChildrenList() {}
+    public ZKGetChildrenList() {
+    }
 
     public ZKGetChildrenList(String connectString) {
         try {
@@ -65,7 +66,7 @@ public class ZKGetChildrenList implements Watcher {
     @Override
     public void process(WatchedEvent event) {
         try {
-            if(event.getType()==EventType.NodeChildrenChanged){
+            if (event.getType() == EventType.NodeChildrenChanged) {
                 System.out.println("NodeChildrenChanged");
                 ZKGetChildrenList zkServer = new ZKGetChildrenList(zkServerPath);
                 List<String> strChildList = zkServer.getZookeeper().getChildren(event.getPath(), false);
@@ -73,11 +74,11 @@ public class ZKGetChildrenList implements Watcher {
                     System.out.println(s);
                 }
                 countDown.countDown();
-            } else if(event.getType() == EventType.NodeCreated) {
+            } else if (event.getType() == EventType.NodeCreated) {
                 System.out.println("NodeCreated");
-            } else if(event.getType() == EventType.NodeDataChanged) {
+            } else if (event.getType() == EventType.NodeDataChanged) {
                 System.out.println("NodeDataChanged");
-            } else if(event.getType() == EventType.NodeDeleted) {
+            } else if (event.getType() == EventType.NodeDeleted) {
                 System.out.println("NodeDeleted");
             }
         } catch (KeeperException e) {
@@ -90,6 +91,7 @@ public class ZKGetChildrenList implements Watcher {
     public ZooKeeper getZookeeper() {
         return zookeeper;
     }
+
     public void setZookeeper(ZooKeeper zookeeper) {
         this.zookeeper = zookeeper;
     }

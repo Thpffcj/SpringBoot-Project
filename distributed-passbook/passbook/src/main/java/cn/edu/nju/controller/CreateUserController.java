@@ -31,9 +31,10 @@ public class CreateUserController {
         this.userService = userService;
         this.httpServletRequest = httpServletRequest;
     }
-    
+
     /**
      * 创建用户
+     *
      * @param user {@link User}
      * @return {@link Response}
      * @throws Exception

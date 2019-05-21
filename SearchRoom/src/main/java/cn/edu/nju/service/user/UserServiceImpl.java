@@ -69,6 +69,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 根据电话号码寻找用户
+     *
      * @param telephone
      * @return
      */
@@ -91,6 +92,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 通过手机号注册用户
+     *
      * @param telephone
      * @return
      */
@@ -116,6 +118,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 修改指定属性值
+     *
      * @param profile
      * @param value
      * @return

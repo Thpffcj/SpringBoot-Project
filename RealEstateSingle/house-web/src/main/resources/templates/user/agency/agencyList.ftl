@@ -7,7 +7,7 @@
 <!-- Wrapper -->
 <div class="wrapper">
     <!-- Navigation -->
-     <@common.nav/>
+    <@common.nav/>
     <!-- end Navigation -->
     <!-- Page Content -->
     <div id="page-content">
@@ -27,26 +27,28 @@
                     <section id="agencies-listing">
                         <header><h1>Agencies Listing</h1></header>
                         <#list agencyList as agency>
-                           <div class="agency">
-                            <a href="/agency/agencyDetail?id=${agency.id}" class="agency-image"><img alt="" src="/static/assets/img/agency-logo-02.png"></a>
-                            <div class="wrapper">
-                                <header><a href="/agency/agencyDetail?id=${agency.id}"><h2>${agency.name}</h2></a></header>
-                                <dl>
-                                    <dt>手机:</dt>
-                                    <dd>${agency.phone}</dd>
-                                    <dt>Mobile:</dt>
-                                    <dd>${agency.mobile}</dd>
-                                    <dt>Email:</dt>
-                                    <dd><a href="mailto:#">${agency.email}</a></dd>
-                                </dl>
-                                <address>
-                                    <strong>地址</strong>
-                                    <br>
-                                    <strong>${agency.name}</strong><br>
-                                    ${agency.address}
-                                </address>
+                            <div class="agency">
+                                <a href="/agency/agencyDetail?id=${agency.id}" class="agency-image"><img alt=""
+                                                                                                         src="/static/assets/img/agency-logo-02.png"></a>
+                                <div class="wrapper">
+                                    <header><a href="/agency/agencyDetail?id=${agency.id}"><h2>${agency.name}</h2></a>
+                                    </header>
+                                    <dl>
+                                        <dt>手机:</dt>
+                                        <dd>${agency.phone}</dd>
+                                        <dt>Mobile:</dt>
+                                        <dd>${agency.mobile}</dd>
+                                        <dt>Email:</dt>
+                                        <dd><a href="mailto:#">${agency.email}</a></dd>
+                                    </dl>
+                                    <address>
+                                        <strong>地址</strong>
+                                        <br>
+                                        <strong>${agency.name}</strong><br>
+                                        ${agency.address}
+                                    </address>
+                                </div>
                             </div>
-                          </div>
                         </#list>
                     </section>
                 </div>
@@ -65,7 +67,7 @@
     </div>
     <!-- end Page Content -->
     <!-- Page Footer -->
-     <@common.footer/>
+    <@common.footer/>
     <!-- end Page Footer -->
 </div>
 
@@ -74,21 +76,21 @@
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
 <@common.js/>
- <script  type="text/javascript" >
-     
+<script type="text/javascript">
 
-     $(document).ready(function() {
-          var errorMsg   = "${errorMsg!""}";
-          var successMsg = "${successMsg!""}";
-          if(errorMsg){ 
-              errormsg("error",errorMsg);
-          }
-          if(successMsg) {
-              successmsg("success",successMsg);
-          }
-        })
-        
- </script>
+
+    $(document).ready(function () {
+        var errorMsg = "${errorMsg!""}";
+        var successMsg = "${successMsg!""}";
+        if (errorMsg) {
+            errormsg("error", errorMsg);
+        }
+        if (successMsg) {
+            successmsg("success", successMsg);
+        }
+    })
+
+</script>
 
 </body>
 </html>

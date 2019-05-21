@@ -56,7 +56,7 @@ public class Client1 {
         childrenCache.getListenable().addListener(new PathChildrenCacheListener() {
             public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
                 // 监听节点变化
-                if(event.getType().equals(PathChildrenCacheEvent.Type.CHILD_UPDATED)){
+                if (event.getType().equals(PathChildrenCacheEvent.Type.CHILD_UPDATED)) {
                     String configNodePath = event.getData().getPath();
                     if (configNodePath.equals(CONFIG_NODE_PATH + SUB_PATH)) {
                         System.out.println("监听到配置发生变化，节点路径为:" + configNodePath);

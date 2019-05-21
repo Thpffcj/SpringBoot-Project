@@ -21,7 +21,7 @@ public class WeatherReportServiceImpl implements WeatherReportService {
         // 由天气数据API微服务来提供
         WeatherResponse resp = dataClient.getDataByCityId(cityId);
         Weather data = null;
-        if (resp != null ) {
+        if (resp != null) {
             resp.getData();
         }
         return data;

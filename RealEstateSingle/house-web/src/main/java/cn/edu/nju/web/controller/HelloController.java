@@ -20,7 +20,7 @@ public class HelloController {
     private UserService userService;
 
     @RequestMapping("hello")
-    public String  hello(ModelMap modelMap){
+    public String hello(ModelMap modelMap) {
         List<User> users = userService.getUsers();
         User one = users.get(0);
         modelMap.put("user", one);
@@ -28,7 +28,7 @@ public class HelloController {
     }
 
     @RequestMapping("index")
-    public String index(){
+    public String index() {
         return "homepage/index";
     }
 }

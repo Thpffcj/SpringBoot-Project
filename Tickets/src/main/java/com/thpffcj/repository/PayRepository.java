@@ -15,6 +15,7 @@ public interface PayRepository extends CrudRepository<Pay, Integer> {
 
     /**
      * 查询账户
+     *
      * @param phone
      * @param password
      * @return
@@ -23,6 +24,7 @@ public interface PayRepository extends CrudRepository<Pay, Integer> {
 
     /**
      * 支付账单
+     *
      * @param id
      * @param money
      */

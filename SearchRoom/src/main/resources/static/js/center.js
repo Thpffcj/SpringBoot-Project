@@ -170,7 +170,7 @@ $(function () {
             layer.msg(data.message, {icon: 5, time: 2000});
         }
     }
-    
+
     function submitError(xhr, response, e) {
         if (xhr.status === 403) {
             layer.msg('登录失效!', {icon: 5, time: 2000});

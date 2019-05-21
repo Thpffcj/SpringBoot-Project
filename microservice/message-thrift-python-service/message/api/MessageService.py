@@ -15,6 +15,7 @@ import logging
 from .ttypes import *
 from thrift.Thrift import TProcessor
 from thrift.transport import TTransport
+
 all_structs = []
 
 
@@ -178,6 +179,7 @@ class Processor(Iface, TProcessor):
         oprot.writeMessageEnd()
         oprot.trans.flush()
 
+
 # HELPER FUNCTIONS AND STRUCTURES
 
 
@@ -188,13 +190,13 @@ class sendMobileMessage_args(object):
      - message
     """
 
-
-    def __init__(self, mobile=None, message=None,):
+    def __init__(self, mobile=None, message=None, ):
         self.mobile = mobile
         self.message = message
 
     def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+        if iprot._fast_decode is not None and isinstance(iprot.trans,
+                                                         TTransport.CReadableTransport) and self.thrift_spec is not None:
             iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
             return
         iprot.readStructBegin()
@@ -209,7 +211,8 @@ class sendMobileMessage_args(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRING:
-                    self.message = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.message = iprot.readString().decode('utf-8') if sys.version_info[
+                                                                             0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -246,11 +249,13 @@ class sendMobileMessage_args(object):
 
     def __ne__(self, other):
         return not (self == other)
+
+
 all_structs.append(sendMobileMessage_args)
 sendMobileMessage_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRING, 'mobile', 'UTF8', None, ),  # 1
-    (2, TType.STRING, 'message', 'UTF8', None, ),  # 2
+    (1, TType.STRING, 'mobile', 'UTF8', None,),  # 1
+    (2, TType.STRING, 'message', 'UTF8', None,),  # 2
 )
 
 
@@ -260,12 +265,12 @@ class sendMobileMessage_result(object):
      - success
     """
 
-
-    def __init__(self, success=None,):
+    def __init__(self, success=None, ):
         self.success = success
 
     def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+        if iprot._fast_decode is not None and isinstance(iprot.trans,
+                                                         TTransport.CReadableTransport) and self.thrift_spec is not None:
             iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
             return
         iprot.readStructBegin()
@@ -308,9 +313,11 @@ class sendMobileMessage_result(object):
 
     def __ne__(self, other):
         return not (self == other)
+
+
 all_structs.append(sendMobileMessage_result)
 sendMobileMessage_result.thrift_spec = (
-    (0, TType.BOOL, 'success', None, None, ),  # 0
+    (0, TType.BOOL, 'success', None, None,),  # 0
 )
 
 
@@ -321,13 +328,13 @@ class sendEmailMessage_args(object):
      - message
     """
 
-
-    def __init__(self, email=None, message=None,):
+    def __init__(self, email=None, message=None, ):
         self.email = email
         self.message = message
 
     def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+        if iprot._fast_decode is not None and isinstance(iprot.trans,
+                                                         TTransport.CReadableTransport) and self.thrift_spec is not None:
             iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
             return
         iprot.readStructBegin()
@@ -342,7 +349,8 @@ class sendEmailMessage_args(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRING:
-                    self.message = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.message = iprot.readString().decode('utf-8') if sys.version_info[
+                                                                             0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -379,11 +387,13 @@ class sendEmailMessage_args(object):
 
     def __ne__(self, other):
         return not (self == other)
+
+
 all_structs.append(sendEmailMessage_args)
 sendEmailMessage_args.thrift_spec = (
     None,  # 0
-    (1, TType.STRING, 'email', 'UTF8', None, ),  # 1
-    (2, TType.STRING, 'message', 'UTF8', None, ),  # 2
+    (1, TType.STRING, 'email', 'UTF8', None,),  # 1
+    (2, TType.STRING, 'message', 'UTF8', None,),  # 2
 )
 
 
@@ -393,12 +403,12 @@ class sendEmailMessage_result(object):
      - success
     """
 
-
-    def __init__(self, success=None,):
+    def __init__(self, success=None, ):
         self.success = success
 
     def read(self, iprot):
-        if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
+        if iprot._fast_decode is not None and isinstance(iprot.trans,
+                                                         TTransport.CReadableTransport) and self.thrift_spec is not None:
             iprot._fast_decode(self, iprot, [self.__class__, self.thrift_spec])
             return
         iprot.readStructBegin()
@@ -441,10 +451,11 @@ class sendEmailMessage_result(object):
 
     def __ne__(self, other):
         return not (self == other)
+
+
 all_structs.append(sendEmailMessage_result)
 sendEmailMessage_result.thrift_spec = (
-    (0, TType.BOOL, 'success', None, None, ),  # 0
+    (0, TType.BOOL, 'success', None, None,),  # 0
 )
 fix_spec(all_structs)
 del all_structs
-

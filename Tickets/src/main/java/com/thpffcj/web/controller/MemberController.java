@@ -45,6 +45,7 @@ public class MemberController {
 
     /**
      * 邮箱注册
+     *
      * @param email
      * @param password
      * @return
@@ -52,7 +53,7 @@ public class MemberController {
     @PostMapping("/register")
     @ResponseBody
     public ApiResponse register(@RequestParam(value = "email") String email,
-                             @RequestParam(value = "password") String password) {
+                                @RequestParam(value = "password") String password) {
         System.out.println("register " + email + " " + password);
         ServiceResult<MemberDto> result = memberService.register(email, password);
         return ApiResponse.ofSuccess(result.getResult());
@@ -60,6 +61,7 @@ public class MemberController {
 
     /**
      * 注册验证
+     *
      * @param code
      * @return
      */
@@ -72,6 +74,7 @@ public class MemberController {
 
     /**
      * 登录
+     *
      * @param mail
      * @param password
      * @param session
@@ -93,6 +96,7 @@ public class MemberController {
 
     /**
      * 查看个人信息
+     *
      * @param session
      * @param model
      * @return
@@ -106,6 +110,7 @@ public class MemberController {
 
     /**
      * 修改个人信息
+     *
      * @param name
      * @param password
      * @return
@@ -114,7 +119,7 @@ public class MemberController {
     @ResponseBody
     public ApiResponse edit(HttpSession session,
                             @RequestParam(value = "name") String name,
-                            @RequestParam(value = "password") String password){
+                            @RequestParam(value = "password") String password) {
         Long id = (Long) session.getAttribute("memberId");
         ServiceResult<MemberDto> result = memberService.edit(id, name, password);
         return ApiResponse.ofSuccess(result.getResult());
@@ -122,6 +127,7 @@ public class MemberController {
 
     /**
      * 会员资格取消
+     *
      * @param session
      * @return
      */
@@ -135,6 +141,7 @@ public class MemberController {
 
     /**
      * 演出列表
+     *
      * @param model
      * @param page
      * @return
@@ -148,6 +155,7 @@ public class MemberController {
 
     /**
      * 演出详情
+     *
      * @param model
      * @param showId
      * @return
@@ -164,6 +172,7 @@ public class MemberController {
 
     /**
      * 预定演出
+     *
      * @param showId
      * @param type
      * @param number
@@ -189,6 +198,7 @@ public class MemberController {
 
     /**
      * 支付订单
+     *
      * @param account
      * @param password
      * @return
@@ -210,6 +220,7 @@ public class MemberController {
 
     /**
      * 退订
+     *
      * @param orderId
      * @return
      */
@@ -222,6 +233,7 @@ public class MemberController {
 
     /**
      * 查看本人统计信息
+     *
      * @param session
      * @param model
      * @return
@@ -232,9 +244,9 @@ public class MemberController {
         ServiceMultiResult<OrderDto> bookOrderDto = orderService.getAllBookOrder(id);
         ServiceMultiResult<OrderDto> checkOrderDto = orderService.getAllCheckOrder(id);
         ServiceMultiResult<OrderDto> refundOrderDto = orderService.getAllRefundOrder(id);
-        model.addAttribute("bookOrders" , bookOrderDto.getResult());
-        model.addAttribute("checkOrders" , checkOrderDto.getResult());
-        model.addAttribute("refundOrders" , refundOrderDto.getResult());
+        model.addAttribute("bookOrders", bookOrderDto.getResult());
+        model.addAttribute("checkOrders", checkOrderDto.getResult());
+        model.addAttribute("refundOrders", refundOrderDto.getResult());
         return "member/statistics";
     }
 }

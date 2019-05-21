@@ -15,6 +15,7 @@ public class RowKeyGenUtil {
 
     /**
      * 根据提供的 PassTemplate 对象生成 RowKey
+     *
      * @param passTemplate {@link PassTemplate}
      * @return String RowKey
      */
@@ -30,6 +31,7 @@ public class RowKeyGenUtil {
     /**
      * 根据提供的领取优惠券请求生成 RowKey，只可以在领取优惠券的时候使用
      * Pass RowKey = reversed(userId) + inverse(timestamp) + PassTemplate RowKey
+     *
      * @param request {@link GainPassTemplateRequest}
      * @return RowKey
      */
@@ -41,6 +43,7 @@ public class RowKeyGenUtil {
 
     /**
      * 根据 Feedback 构造 RowKey
+     *
      * @param feedback {@link Feedback}
      * @return String RowKey
      */

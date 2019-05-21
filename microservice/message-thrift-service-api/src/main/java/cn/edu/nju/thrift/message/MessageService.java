@@ -412,7 +412,9 @@ public class MessageService {
         public java.lang.String mobile; // required
         public java.lang.String message; // required
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             MOBILE((short) 1, "mobile"),
             MESSAGE((short) 2, "message");
@@ -533,7 +535,9 @@ public class MessageService {
             this.mobile = null;
         }
 
-        /** Returns true if field mobile is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field mobile is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetMobile() {
             return this.mobile != null;
         }
@@ -557,7 +561,9 @@ public class MessageService {
             this.message = null;
         }
 
-        /** Returns true if field message is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field message is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetMessage() {
             return this.message != null;
         }
@@ -601,7 +607,9 @@ public class MessageService {
             throw new java.lang.IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new java.lang.IllegalArgumentException();
@@ -876,7 +884,9 @@ public class MessageService {
 
         public boolean success; // required
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             SUCCESS((short) 0, "success");
 
@@ -990,7 +1000,9 @@ public class MessageService {
             __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
         }
 
-        /** Returns true if field success is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field success is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetSuccess() {
             return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
         }
@@ -1021,7 +1033,9 @@ public class MessageService {
             throw new java.lang.IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new java.lang.IllegalArgumentException();
@@ -1238,7 +1252,9 @@ public class MessageService {
         public java.lang.String email; // required
         public java.lang.String message; // required
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             EMAIL((short) 1, "email"),
             MESSAGE((short) 2, "message");
@@ -1359,7 +1375,9 @@ public class MessageService {
             this.email = null;
         }
 
-        /** Returns true if field email is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field email is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetEmail() {
             return this.email != null;
         }
@@ -1383,7 +1401,9 @@ public class MessageService {
             this.message = null;
         }
 
-        /** Returns true if field message is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field message is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetMessage() {
             return this.message != null;
         }
@@ -1427,7 +1447,9 @@ public class MessageService {
             throw new java.lang.IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new java.lang.IllegalArgumentException();
@@ -1702,7 +1724,9 @@ public class MessageService {
 
         public boolean success; // required
 
-        /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+        /**
+         * The set of fields this struct contains, along with convenience methods for finding and manipulating them.
+         */
         public enum _Fields implements org.apache.thrift.TFieldIdEnum {
             SUCCESS((short) 0, "success");
 
@@ -1816,7 +1840,9 @@ public class MessageService {
             __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
         }
 
-        /** Returns true if field success is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field success is set (has been assigned a value) and false otherwise
+         */
         public boolean isSetSuccess() {
             return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
         }
@@ -1847,7 +1873,9 @@ public class MessageService {
             throw new java.lang.IllegalStateException();
         }
 
-        /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+        /**
+         * Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise
+         */
         public boolean isSet(_Fields field) {
             if (field == null) {
                 throw new java.lang.IllegalArgumentException();

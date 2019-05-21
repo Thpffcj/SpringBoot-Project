@@ -7,7 +7,7 @@ public enum OrderStatus {
 
     BOOK(0), // 已预定
     PAY(1), // 已付款
-    CHECK (2), // 已检票
+    CHECK(2), // 已检票
     REFUND(3); // 已退票
 
     private int value;

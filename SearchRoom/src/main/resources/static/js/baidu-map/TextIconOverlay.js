@@ -21,7 +21,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
     var T,
         baidu = T = baidu || {version: "1.3.8"};
 
-    (function (){
+    (function () {
         //提出guid，防止在与老版本Tangram混用时
         //在下一行错误的修改window[undefined]
         baidu.guid = "$BAIDU$";
@@ -137,7 +137,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
              * @shortcut ie
              * @see baidu.browser.firefox,baidu.browser.safari,baidu.browser.opera,baidu.browser.chrome,baidu.browser.maxthon
              */
-            baidu.browser.ie = baidu.ie = document.documentMode || + RegExp['\x241'];
+            baidu.browser.ie = baidu.ie = document.documentMode || +RegExp['\x241'];
         }
 
         /**
@@ -155,7 +155,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
          * @returns {string} 目标元素的computed style值
          */
 
-        baidu.dom.getComputedStyle = function(element, key){
+        baidu.dom.getComputedStyle = function (element, key) {
             element = baidu.dom._g(element);
             var doc = baidu.dom.getDocument(element),
                 styles;
@@ -251,7 +251,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
             // 在取不到值的时候，用fixer进行修正
             if (!value) {
                 var fixer = dom._styleFixer[key];
-                if(fixer){
+                if (fixer) {
                     value = fixer.get ? fixer.get(element) : baidu.dom.getStyle(element, fixer);
                 }
             }
@@ -276,7 +276,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
              * @meta standard
              * @see baidu.browser.ie,baidu.browser.firefox,baidu.browser.safari,baidu.browser.chrome
              */
-            baidu.browser.opera = + RegExp['\x241'];
+            baidu.browser.opera = +RegExp['\x241'];
         }
 
         /**
@@ -328,23 +328,23 @@ var BMapLib = window.BMapLib = BMapLib || {};
                     doc.getBoxObjectFor &&
                     getStyle(element, 'position') == 'absolute' &&
                     (element.style.top === '' || element.style.left === ''),
-                pos = {"left":0,"top":0},
+                pos = {"left": 0, "top": 0},
                 viewport = (browser.ie && !browser.isStrict) ? doc.body : doc.documentElement,
                 parent,
                 box;
 
-            if(element == viewport){
+            if (element == viewport) {
                 return pos;
             }
 
-            if(element.getBoundingClientRect){ // IE and Gecko 1.9+
+            if (element.getBoundingClientRect) { // IE and Gecko 1.9+
 
                 //当HTML或者BODY有border width时, 原生的getBoundingClientRect返回值是不符合预期的
                 //考虑到通常情况下 HTML和BODY的border只会设成0px,所以忽略该问题.
                 box = element.getBoundingClientRect();
 
                 pos.left = Math.floor(box.left) + Math.max(doc.documentElement.scrollLeft, doc.body.scrollLeft);
-                pos.top  = Math.floor(box.top)  + Math.max(doc.documentElement.scrollTop,  doc.body.scrollTop);
+                pos.top = Math.floor(box.top) + Math.max(doc.documentElement.scrollTop, doc.body.scrollTop);
 
                 // IE会给HTML元素添加一个border，默认是medium（2px）
                 // 但是在IE 6 7 的怪异模式下，可以被html { border: 0; } 这条css规则覆盖
@@ -352,15 +352,15 @@ var BMapLib = window.BMapLib = BMapLib || {};
                 // 但是。。。在IE 6 7的怪异模式，如果用户使用css覆盖了默认的medium
                 // clientTop和clientLeft不会更新
                 pos.left -= doc.documentElement.clientLeft;
-                pos.top  -= doc.documentElement.clientTop;
+                pos.top -= doc.documentElement.clientTop;
 
                 var htmlDom = doc.body,
                     // 在这里，不使用element.style.borderLeftWidth，只有computedStyle是可信的
                     htmlBorderLeftWidth = parseInt(getStyle(htmlDom, 'borderLeftWidth')),
                     htmlBorderTopWidth = parseInt(getStyle(htmlDom, 'borderTopWidth'));
-                if(browser.ie && !browser.isStrict){
+                if (browser.ie && !browser.isStrict) {
                     pos.left -= isNaN(htmlBorderLeftWidth) ? 2 : htmlBorderLeftWidth;
-                    pos.top  -= isNaN(htmlBorderTopWidth) ? 2 : htmlBorderTopWidth;
+                    pos.top -= isNaN(htmlBorderTopWidth) ? 2 : htmlBorderTopWidth;
                 }
             } else {
                 // safari/opera/firefox
@@ -368,12 +368,12 @@ var BMapLib = window.BMapLib = BMapLib || {};
 
                 do {
                     pos.left += parent.offsetLeft;
-                    pos.top  += parent.offsetTop;
+                    pos.top += parent.offsetTop;
 
                     // safari里面，如果遍历到了一个fixed的元素，后面的offset都不准了
                     if (browser.isWebkit > 0 && getStyle(parent, 'position') == 'fixed') {
                         pos.left += doc.body.scrollLeft;
-                        pos.top  += doc.body.scrollTop;
+                        pos.top += doc.body.scrollTop;
                         break;
                     }
 
@@ -381,8 +381,8 @@ var BMapLib = window.BMapLib = BMapLib || {};
                 } while (parent && parent != element);
 
                 // 对body offsetTop的修正
-                if(browser.opera > 0 || (browser.isWebkit > 0 && getStyle(element, 'position') == 'absolute')){
-                    pos.top  -= doc.body.offsetTop;
+                if (browser.opera > 0 || (browser.isWebkit > 0 && getStyle(element, 'position') == 'absolute')) {
+                    pos.top -= doc.body.offsetTop;
                 }
 
                 // 计算除了body的scroll
@@ -403,10 +403,10 @@ var BMapLib = window.BMapLib = BMapLib || {};
         /**
          * @ignore
          * @namespace baidu.event 屏蔽浏览器差异性的事件封装。
-         * @property target 	事件的触发元素
-         * @property pageX 		鼠标事件的鼠标x坐标
-         * @property pageY 		鼠标事件的鼠标y坐标
-         * @property keyCode 	键盘事件的键值
+         * @property target    事件的触发元素
+         * @property pageX        鼠标事件的鼠标x坐标
+         * @property pageY        鼠标事件的鼠标y坐标
+         * @property keyCode    键盘事件的键值
          */
         baidu.event = baidu.event || {};
 
@@ -451,7 +451,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
                 realType = type;
             type = type.toLowerCase();
             // filter过滤
-            if(filter && filter[type]){
+            if (filter && filter[type]) {
                 afterFilter = filter[type](element, type, realListener);
                 realType = afterFilter.type;
                 realListener = afterFilter.listener;
@@ -483,12 +483,12 @@ var BMapLib = window.BMapLib = BMapLib || {};
          * @returns {String} 当前页面的唯一标识字符串
          */
 
-        (function(){
+        (function () {
             //不直接使用window，可以提高3倍左右性能
             var guid = window[baidu.guid];
 
-            baidu.lang.guid = function() {
-                return "TANGRAM__" + (guid._counter ++).toString(36);
+            baidu.lang.guid = function () {
+                return "TANGRAM__" + (guid._counter++).toString(36);
             };
 
             guid._counter = guid._counter || 1;
@@ -522,15 +522,15 @@ var BMapLib = window.BMapLib = BMapLib || {};
          *
          * @ignore
          * @class  Tangram继承机制提供的一个基类，用户可以通过继承baidu.lang.Class来获取它的属性及方法。
-         * @name 	baidu.lang.Class
+         * @name    baidu.lang.Class
          * @grammar baidu.lang.Class(guid)
-         * @param 	{string}	guid	对象的唯一标识
+         * @param    {string}    guid    对象的唯一标识
          * @meta standard
          * @remark baidu.lang.Class和它的子类的实例均包含一个全局唯一的标识guid。guid是在构造函数中生成的，因此，继承自baidu.lang.Class的类应该直接或者间接调用它的构造函数。<br>baidu.lang.Class的构造函数中产生guid的方式可以保证guid的唯一性，及每个实例都有一个全局唯一的guid。
          * @meta standard
          * @see baidu.lang.inherits,baidu.lang.Event
          */
-        baidu.lang.Class = function(guid) {
+        baidu.lang.Class = function (guid) {
             this.guid = guid || baidu.lang.guid();
             window[baidu.guid]._instances[this.guid] = this;
         };
@@ -541,10 +541,10 @@ var BMapLib = window.BMapLib = BMapLib || {};
          * @name dispose
          * @grammar obj.dispose()
          */
-        baidu.lang.Class.prototype.dispose = function(){
+        baidu.lang.Class.prototype.dispose = function () {
             delete window[baidu.guid]._instances[this.guid];
 
-            for(var property in this){
+            for (var property in this) {
                 if (!baidu.lang.isFunction(this[property])) {
                     delete this[property];
                 }
@@ -556,17 +556,17 @@ var BMapLib = window.BMapLib = BMapLib || {};
          * 重载了默认的toString方法，使得返回信息更加准确一些。
          * @return {string} 对象的String表示形式
          */
-        baidu.lang.Class.prototype.toString = function(){
-            return "[object " + (this._className || "Object" ) + "]";
+        baidu.lang.Class.prototype.toString = function () {
+            return "[object " + (this._className || "Object") + "]";
         };
 
         /**
          * @ignore
          * @class   自定义的事件对象。
-         * @name 	baidu.lang.Event
+         * @name    baidu.lang.Event
          * @grammar baidu.lang.Event(type[, target])
-         * @param 	{string} type	 事件类型名称。为了方便区分事件和一个普通的方法，事件类型名称必须以"on"(小写)开头。
-         * @param 	{Object} [target]触发事件的对象
+         * @param    {string} type     事件类型名称。为了方便区分事件和一个普通的方法，事件类型名称必须以"on"(小写)开头。
+         * @param    {Object} [target]触发事件的对象
          * @meta standard
          * @remark 引入该模块，会自动为Class引入3个事件扩展方法：addEventListener、removeEventListener和dispatchEvent。
          * @meta standard
@@ -582,10 +582,10 @@ var BMapLib = window.BMapLib = BMapLib || {};
         /**
          * 注册对象的事件监听器。引入baidu.lang.Event后，Class的子类实例才会获得该方法。
          * @grammar obj.addEventListener(type, handler[, key])
-         * @param 	{string}   type         自定义事件的名称
-         * @param 	{Function} handler      自定义事件被触发时应该调用的回调函数
-         * @param 	{string}   [key]		为事件监听函数指定的名称，可在移除时使用。如果不提供，方法会默认为它生成一个全局唯一的key。
-         * @remark 	事件类型区分大小写。如果自定义事件名称不是以小写"on"开头，该方法会给它加上"on"再进行判断，即"click"和"onclick"会被认为是同一种事件。
+         * @param    {string}   type         自定义事件的名称
+         * @param    {Function} handler      自定义事件被触发时应该调用的回调函数
+         * @param    {string}   [key]        为事件监听函数指定的名称，可在移除时使用。如果不提供，方法会默认为它生成一个全局唯一的key。
+         * @remark    事件类型区分大小写。如果自定义事件名称不是以小写"on"开头，该方法会给它加上"on"再进行判断，即"click"和"onclick"会被认为是同一种事件。
          */
         baidu.lang.Class.prototype.addEventListener = function (type, handler, key) {
             if (!baidu.lang.isFunction(handler)) {
@@ -616,13 +616,13 @@ var BMapLib = window.BMapLib = BMapLib || {};
          * @grammar obj.removeEventListener(type, handler)
          * @param {string}   type     事件类型
          * @param {Function|string} handler  要移除的事件监听函数或者监听函数的key
-         * @remark 	如果第二个参数handler没有被绑定到对应的自定义事件中，什么也不做。
+         * @remark    如果第二个参数handler没有被绑定到对应的自定义事件中，什么也不做。
          */
         baidu.lang.Class.prototype.removeEventListener = function (type, handler) {
             if (typeof handler != "undefined") {
-                if ( (baidu.lang.isFunction(handler) && ! (handler = handler.hashCode))
-                    || (! baidu.lang.isString(handler))
-                ){
+                if ((baidu.lang.isFunction(handler) && !(handler = handler.hashCode))
+                    || (!baidu.lang.isString(handler))
+                ) {
                     return;
                 }
             }
@@ -638,7 +638,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
             if (typeof handler != "undefined") {
                 t[type][handler] && delete t[type][handler];
             } else {
-                for(var guid in t[type]){
+                for (var guid in t[type]) {
                     delete t[type][guid];
                 }
             }
@@ -647,8 +647,8 @@ var BMapLib = window.BMapLib = BMapLib || {};
         /**
          * 派发自定义事件，使得绑定到自定义事件上面的函数都会被执行。引入baidu.lang.Event后，Class的子类实例才会获得该方法。
          * @grammar obj.dispatchEvent(event, options)
-         * @param {baidu.lang.Event|String} event 	Event对象，或事件名称(1.1.1起支持)
-         * @param {Object} 					options 扩展参数,所含属性键值会扩展到Event对象上(1.2起支持)
+         * @param {baidu.lang.Event|String} event    Event对象，或事件名称(1.1.1起支持)
+         * @param {Object}                    options 扩展参数,所含属性键值会扩展到Event对象上(1.2起支持)
          * @remark 处理会调用通过addEventListenr绑定的自定义事件回调函数之外，还会调用直接绑定到对象上面的自定义事件。例如：<br>
          myobj.onMyEvent = function(){}<br>
          myobj.addEventListener("onMyEvent", function(){});
@@ -723,7 +723,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      * @type {String}
 
      */
-    var _IMAGE_EXTENSION  = 'png';
+    var _IMAGE_EXTENSION = 'png';
 
     /**
      *@exports TextIconOverlay as BMapLib.TextIconOverlay
@@ -739,14 +739,14 @@ var BMapLib = window.BMapLib = BMapLib || {};
          *@param {String} text 表示该覆盖物显示的文字信息。
          *@param {Json Object} options 可选参数，可选项包括：<br />
          *"<b>styles</b>":{Array<IconStyle>} 一组图标风格。单个图表风格包括以下几个属性：<br />
-         *   url	{String}	 图片的url地址。(必选)<br />
-         *   size {Size}	图片的大小。（必选）<br />
+         *   url    {String}     图片的url地址。(必选)<br />
+         *   size {Size}    图片的大小。（必选）<br />
          *   anchor {Size} 图标定位在地图上的位置相对于图标左上角的偏移值，默认偏移值为图标的中心位置。（可选）<br />
          *   offset {Size} 图片相对于可视区域的偏移值，此功能的作用等同于CSS中的background-position属性。（可选）<br />
          *   textSize {Number} 文字的大小。（可选，默认10）<br />
          *   textColor {String} 文字的颜色。（可选，默认black）<br />
          */
-        BMapLib.TextIconOverlay = function(position, text, options){
+        BMapLib.TextIconOverlay = function (position, text, options) {
             this._position = position;
             this._text = text;
             this._options = options || {};
@@ -756,11 +756,11 @@ var BMapLib = window.BMapLib = BMapLib || {};
 
     T.lang.inherits(TextIconOverlay, BMap.Overlay, "TextIconOverlay");
 
-    TextIconOverlay.prototype._setupDefaultStyles = function(){
+    TextIconOverlay.prototype._setupDefaultStyles = function () {
         var sizes = [53, 56, 66, 78, 90];
-        for(var i = 0, size; size = sizes[i]; i++){
+        for (var i = 0, size; size = sizes[i]; i++) {
             this._styles.push({
-                url:_IMAGE_PATH + i + '.' + _IMAGE_EXTENSION,
+                url: _IMAGE_PATH + i + '.' + _IMAGE_EXTENSION,
                 size: new BMap.Size(size, size)
             });
         }//for循环的简洁写法
@@ -771,7 +771,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *@param {Map} map BMap.Map的实例化对象。
      *@return {HTMLElement} 返回覆盖物对应的HTML元素。
      */
-    TextIconOverlay.prototype.initialize = function(map){
+    TextIconOverlay.prototype.initialize = function (map) {
         this._map = map;
 
         this._domElement = document.createElement('div');
@@ -789,7 +789,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *继承Overlay的draw方法，自定义覆盖物时必须。
      *@return 无返回值。
      */
-    TextIconOverlay.prototype.draw = function(){
+    TextIconOverlay.prototype.draw = function () {
         this._map && this._updatePosition();
     };
 
@@ -797,7 +797,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *获取该覆盖物上的文字。
      *@return {String} 该覆盖物上的文字。
      */
-    TextIconOverlay.prototype.getText = function(){
+    TextIconOverlay.prototype.getText = function () {
         return this._text;
     };
 
@@ -806,8 +806,8 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *@param {String} text 要设置的文字，通常是字母A-Z或数字0-9。
      *@return 无返回值。
      */
-    TextIconOverlay.prototype.setText = function(text){
-        if(text && (!this._text || (this._text.toString() != text.toString()))){
+    TextIconOverlay.prototype.setText = function (text) {
+        if (text && (!this._text || (this._text.toString() != text.toString()))) {
             this._text = text;
             this._updateText();
             this._updateCss();
@@ -829,7 +829,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *@return 无返回值。
      */
     TextIconOverlay.prototype.setPosition = function (position) {
-        if(position && (!this._position || !this._position.equals(position))){
+        if (position && (!this._position || !this._position.equals(position))) {
             this._position = position;
             this._updatePosition();
         }
@@ -843,7 +843,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *@param {Array<IconStyle>}  styles 一组图标风格。
      *@return {Number} 对应的索引值。
      */
-    TextIconOverlay.prototype.getStyleByText = function(text, styles){
+    TextIconOverlay.prototype.getStyleByText = function (text, styles) {
         var count = parseInt(text);
         var index = parseInt(count / 10);
         index = Math.max(0, index);
@@ -855,7 +855,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *更新相应的CSS。
      *@return 无返回值。
      */
-    TextIconOverlay.prototype._updateCss = function(){
+    TextIconOverlay.prototype._updateCss = function () {
         var style = this.getStyleByText(this._text, this._styles);
         this._domElement.style.cssText = this._buildCssText(style);
     };
@@ -864,7 +864,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *更新覆盖物的显示文字。
      *@return 无返回值。
      */
-    TextIconOverlay.prototype._updateText = function(){
+    TextIconOverlay.prototype._updateText = function () {
         if (this._domElement) {
             this._domElement.innerHTML = this._text;
         }
@@ -874,10 +874,10 @@ var BMapLib = window.BMapLib = BMapLib || {};
      *调整覆盖物在地图上的位置更新覆盖物的显示文字。
      *@return 无返回值。
      */
-    TextIconOverlay.prototype._updatePosition = function(){
+    TextIconOverlay.prototype._updatePosition = function () {
         if (this._domElement && this._position) {
             var style = this._domElement.style;
-            var pixelPosition= this._map.pointToOverlayPixel(this._position);
+            var pixelPosition = this._map.pointToOverlayPixel(this._position);
             pixelPosition.x -= Math.ceil(parseInt(style.width) / 2);
             pixelPosition.y -= Math.ceil(parseInt(style.height) / 2);
             style.left = pixelPosition.x + "px";
@@ -890,7 +890,7 @@ var BMapLib = window.BMapLib = BMapLib || {};
      * @param {IconStyle}  一个图标的风格。
      * @return {String} 构建完成的CSSTEXT。
      */
-    TextIconOverlay.prototype._buildCssText = function(style) {
+    TextIconOverlay.prototype._buildCssText = function (style) {
         //根据style来确定一些默认值
         var url = style['url'];
         var size = style['size'];
@@ -910,12 +910,12 @@ var BMapLib = window.BMapLib = BMapLib || {};
             csstext.push('background-position:' + backgroundPosition + ';');
         }
 
-        if (size instanceof BMap.Size){
+        if (size instanceof BMap.Size) {
             if (anchor instanceof BMap.Size) {
                 if (anchor.height > 0 && anchor.height < size.height) {
                     csstext.push('height:' + (size.height - anchor.height) + 'px; padding-top:' + anchor.height + 'px;');
                 }
-                if(anchor.width > 0 && anchor.width < size.width){
+                if (anchor.width > 0 && anchor.width < size.width) {
                     csstext.push('width:' + (size.width - anchor.width) + 'px; padding-left:' + anchor.width + 'px;');
                 }
             } else {
@@ -1005,8 +1005,8 @@ var BMapLib = window.BMapLib = BMapLib || {};
      * 当前支持click mouseover mouseout
      * @return 无返回值。
      */
-    TextIconOverlay.prototype._bind = function(){
-        if (!this._domElement){
+    TextIconOverlay.prototype._bind = function () {
+        if (!this._domElement) {
             return;
         }
 
@@ -1014,11 +1014,12 @@ var BMapLib = window.BMapLib = BMapLib || {};
         var map = this._map;
 
         var BaseEvent = T.lang.Event;
-        function eventExtend(e, be){
+
+        function eventExtend(e, be) {
             var elem = e.srcElement || e.target;
             var x = e.clientX || e.pageX;
             var y = e.clientY || e.pageY;
-            if (e && be && x && y && elem){
+            if (e && be && x && y && elem) {
                 var offset = T.dom.getPosition(map.getContainer());
                 be.pixel = new BMap.Pixel(x - offset.left, y - offset.top);
                 be.point = map.pixelToPoint(be.pixel);
@@ -1026,13 +1027,13 @@ var BMapLib = window.BMapLib = BMapLib || {};
             return be;
         }//给事件参数增加pixel和point两个值
 
-        T.event.on(this._domElement,"mouseover", function(e){
+        T.event.on(this._domElement, "mouseover", function (e) {
             me.dispatchEvent(eventExtend(e, new BaseEvent("onmouseover")));
         });
-        T.event.on(this._domElement,"mouseout", function(e){
+        T.event.on(this._domElement, "mouseout", function (e) {
             me.dispatchEvent(eventExtend(e, new BaseEvent("onmouseout")));
         });
-        T.event.on(this._domElement,"click", function(e){
+        T.event.on(this._domElement, "click", function (e) {
             me.dispatchEvent(eventExtend(e, new BaseEvent("onclick")));
         });
     };

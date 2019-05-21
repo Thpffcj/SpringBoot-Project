@@ -114,20 +114,20 @@ public class GoodsController {
     @RequestMapping(value = "/detail/{goodsId}")
     @ResponseBody
     public Result<GoodsDetailVo> detail(HttpServletRequest request, HttpServletResponse response, Model model, User user,
-                         @PathVariable("goodsId") long goodsId) {
+                                        @PathVariable("goodsId") long goodsId) {
         GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
         long startAt = goods.getStartDate().getTime();
         long endAt = goods.getEndDate().getTime();
         long now = System.currentTimeMillis();
         int seckillStatus = 0;
         int remainSeconds = 0;
-        if(now < startAt ) {//秒杀还没开始，倒计时
+        if (now < startAt) {//秒杀还没开始，倒计时
             seckillStatus = 0;
-            remainSeconds = (int)((startAt - now )/1000);
-        }else  if(now > endAt){//秒杀已经结束
+            remainSeconds = (int) ((startAt - now) / 1000);
+        } else if (now > endAt) {//秒杀已经结束
             seckillStatus = 2;
             remainSeconds = -1;
-        }else {//秒杀进行中
+        } else {//秒杀进行中
             seckillStatus = 1;
             remainSeconds = 0;
         }

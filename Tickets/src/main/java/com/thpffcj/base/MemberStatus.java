@@ -3,7 +3,7 @@ package com.thpffcj.base;
 /**
  * Created by Thpffcj on 2018/3/6.
  */
-public enum  MemberStatus {
+public enum MemberStatus {
 
     NORMAL(0), // 正常状态
     TO_BE_VERIFIED(1), // 正常状态

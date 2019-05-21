@@ -84,15 +84,16 @@ public class TokenUploadController {
 
     /**
      * 将 token 写入 Redis
+     *
      * @param path {@link Path}
-     * @param key redis key
+     * @param key  redis key
      * @return true/false
      */
     private boolean writeTokenToRedis(Path path, String key) {
 
         Set<String> tokens;
 
-        try(Stream<String> stream = Files.lines(path)) {
+        try (Stream<String> stream = Files.lines(path)) {
             tokens = stream.collect(Collectors.toSet());
         } catch (IOException ex) {
             ex.printStackTrace();

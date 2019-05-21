@@ -6,14 +6,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * Solid angular gauge module
          *
@@ -35,7 +35,7 @@
         colorAxisMethods = {
 
 
-            initDataClasses: function(userOptions) {
+            initDataClasses: function (userOptions) {
                 var axis = this,
                     chart = this.chart,
                     dataClasses,
@@ -43,7 +43,7 @@
                     options = this.options;
                 this.dataClasses = dataClasses = [];
 
-                each(userOptions.dataClasses, function(dataClass, i) {
+                each(userOptions.dataClasses, function (dataClass, i) {
                     var colors;
 
                     dataClass = H.merge(dataClass);
@@ -63,19 +63,19 @@
                 });
             },
 
-            initStops: function(userOptions) {
+            initStops: function (userOptions) {
                 this.stops = userOptions.stops || [
                     [0, this.options.minColor],
                     [1, this.options.maxColor]
                 ];
-                each(this.stops, function(stop) {
+                each(this.stops, function (stop) {
                     stop.color = H.color(stop[1]);
                 });
             },
-            /** 
+            /**
              * Translate from a value to a color
              */
-            toColor: function(value, point) {
+            toColor: function (value, point) {
                 var pos,
                     stops = this.stops,
                     from,
@@ -130,7 +130,7 @@
              * Return an intermediate color between two colors, according to pos where 0
              * is the from color and 1 is the to color.
              */
-            tweenColors: function(from, to, pos) {
+            tweenColors: function (from, to, pos) {
                 // Check for has alpha, because rgba colors perform worse due to lack of
                 // support in WebKit.
                 var hasAlpha,
@@ -158,8 +158,8 @@
         /**
          * Handle animation of the color attributes directly
          */
-        each(['fill', 'stroke'], function(prop) {
-            H.Fx.prototype[prop + 'Setter'] = function() {
+        each(['fill', 'stroke'], function (prop) {
+            H.Fx.prototype[prop + 'Setter'] = function () {
                 this.elem.attr(
                     prop,
                     colorAxisMethods.tweenColors(
@@ -183,7 +183,7 @@
              * Extend the translate function to extend the Y axis with the necessary
              * decoration (#5895).
              */
-            translate: function() {
+            translate: function () {
                 var axis = this.yAxis;
                 H.extend(axis, colorAxisMethods);
 
@@ -200,7 +200,7 @@
             /**
              * Draw the points where each point is one needle
              */
-            drawPoints: function() {
+            drawPoints: function () {
                 var series = this,
                     yAxis = series.yAxis,
                     center = yAxis.center,
@@ -223,7 +223,7 @@
                 this.thresholdAngleRad = pick(thresholdAngleRad, yAxis.startAngleRad);
 
 
-                each(series.points, function(point) {
+                each(series.points, function (point) {
                     var graphic = point.graphic,
                         rotation = yAxis.startAngleRad + yAxis.translate(point.y, null, null, null, true),
                         radius = (pInt(pick(point.options.radius, options.radius, 100)) * center[2]) / 200,
@@ -292,7 +292,7 @@
             /**
              * Extend the pie slice animation by animating from start angle and up
              */
-            animate: function(init) {
+            animate: function (init) {
 
                 if (!init) {
                     this.startAngleRad = this.thresholdAngleRad;

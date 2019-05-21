@@ -35,6 +35,7 @@ public enum LevelRules {
 
     /**
      * 根据等级寻找升级所需金额
+     *
      * @param level
      * @return
      */
@@ -49,6 +50,7 @@ public enum LevelRules {
 
     /**
      * 根据等级确定折扣
+     *
      * @param level
      * @return
      */

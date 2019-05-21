@@ -23,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * HTTP权限控制
+     *
      * @param http
      * @throws Exception
      */
@@ -59,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 自定义认证策略
+     *
      * @param auth
      * @throws Exception
      */
@@ -86,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManager() {
         AuthenticationManager authenticationManager = null;
         try {
-            authenticationManager =  super.authenticationManager();
+            authenticationManager = super.authenticationManager();
         } catch (Exception e) {
             e.printStackTrace();
         }

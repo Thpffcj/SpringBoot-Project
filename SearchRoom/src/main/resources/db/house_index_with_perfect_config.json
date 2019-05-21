@@ -6,8 +6,6 @@
     "index.query.default_field": "title",
     "index.unassigned.node_left.delayed_timeout": "5m"
   },
-
-
   "mappings": {
     "house": {
       "dynamic": "strict",
@@ -71,7 +69,7 @@
           "analyzer": "ik_smart",
           "search_analyzer": "ik_smart"
         },
-        "layoutDesc" : {
+        "layoutDesc": {
           "type": "text",
           "index": "analyzed",
           "analyzer": "ik_smart",

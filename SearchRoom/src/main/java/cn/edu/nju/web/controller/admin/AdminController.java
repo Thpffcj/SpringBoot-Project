@@ -57,6 +57,7 @@ public class AdminController {
 
     /**
      * 后台管理中心
+     *
      * @return
      */
     @GetMapping("/admin/center")
@@ -66,6 +67,7 @@ public class AdminController {
 
     /**
      * 欢迎页
+     *
      * @return
      */
     @GetMapping("/admin/welcome")
@@ -75,6 +77,7 @@ public class AdminController {
 
     /**
      * 管理员登录页
+     *
      * @return
      */
     @GetMapping("/admin/login")
@@ -84,6 +87,7 @@ public class AdminController {
 
     /**
      * 房源列表页
+     *
      * @return
      */
     @GetMapping("admin/house/list")
@@ -107,6 +111,7 @@ public class AdminController {
 
     /**
      * 新增房源功能页
+     *
      * @return
      */
     @GetMapping("admin/add/house")
@@ -116,6 +121,7 @@ public class AdminController {
 
     /**
      * 上传图片接口
+     *
      * @param file
      * @return
      */
@@ -152,6 +158,7 @@ public class AdminController {
 
     /**
      * 新增房源接口
+     *
      * @param houseForm
      * @param bindingResult
      * @return
@@ -183,6 +190,7 @@ public class AdminController {
 
     /**
      * 房源信息编辑页
+     *
      * @return
      */
     @GetMapping("admin/house/edit")
@@ -246,6 +254,7 @@ public class AdminController {
 
     /**
      * 移除图片接口
+     *
      * @param id
      * @return
      */
@@ -263,6 +272,7 @@ public class AdminController {
 
     /**
      * 修改封面接口
+     *
      * @param coverId
      * @param targetId
      * @return
@@ -282,6 +292,7 @@ public class AdminController {
 
     /**
      * 增加标签接口
+     *
      * @param houseId
      * @param tag
      * @return
@@ -304,6 +315,7 @@ public class AdminController {
 
     /**
      * 移除标签接口
+     *
      * @param houseId
      * @param tag
      * @return
@@ -326,6 +338,7 @@ public class AdminController {
 
     /**
      * 审核接口
+     *
      * @param id
      * @param operation
      * @return
@@ -365,6 +378,7 @@ public class AdminController {
 
     /**
      * 预约管理
+     *
      * @return
      */
     @GetMapping("admin/house/subscribe")
@@ -374,6 +388,7 @@ public class AdminController {
 
     /**
      * 展示所有预约
+     *
      * @param draw
      * @param start
      * @param size
@@ -396,6 +411,7 @@ public class AdminController {
 
     /**
      * 查看预约用户信息
+     *
      * @param userId
      * @return
      */
@@ -416,6 +432,7 @@ public class AdminController {
 
     /**
      * 经纪人完成预约
+     *
      * @param houseId
      * @return
      */

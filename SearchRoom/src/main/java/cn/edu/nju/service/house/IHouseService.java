@@ -20,6 +20,7 @@ public interface IHouseService {
 
     /**
      * 新增
+     *
      * @param houseForm
      * @return
      */
@@ -31,6 +32,7 @@ public interface IHouseService {
 
     /**
      * 查询完整房源信息
+     *
      * @param id
      * @return
      */
@@ -38,6 +40,7 @@ public interface IHouseService {
 
     /**
      * 移除图片
+     *
      * @param id
      * @return
      */
@@ -45,6 +48,7 @@ public interface IHouseService {
 
     /**
      * 更新封面
+     *
      * @param coverId
      * @param targetId
      * @return
@@ -53,6 +57,7 @@ public interface IHouseService {
 
     /**
      * 新增标签
+     *
      * @param houseId
      * @param tag
      * @return
@@ -61,6 +66,7 @@ public interface IHouseService {
 
     /**
      * 移除标签
+     *
      * @param houseId
      * @param tag
      * @return
@@ -69,6 +75,7 @@ public interface IHouseService {
 
     /**
      * 更新房源状态
+     *
      * @param id
      * @param status
      * @return
@@ -77,6 +84,7 @@ public interface IHouseService {
 
     /**
      * 查询房源信息集
+     *
      * @param rentSearch
      * @return
      */
@@ -84,6 +92,7 @@ public interface IHouseService {
 
     /**
      * 全地图查询
+     *
      * @param mapSearch
      * @return
      */
@@ -91,6 +100,7 @@ public interface IHouseService {
 
     /**
      * 精确范围数据查询
+     *
      * @param mapSearch
      * @return
      */
@@ -98,6 +108,7 @@ public interface IHouseService {
 
     /**
      * 加入预约清单
+     *
      * @param houseId
      * @return
      */
@@ -105,6 +116,7 @@ public interface IHouseService {
 
     /**
      * 获取对应状态的预约列表
+     *
      * @param status
      * @param start
      * @param size
@@ -114,6 +126,7 @@ public interface IHouseService {
 
     /**
      * 预约看房时间
+     *
      * @param houseId
      * @param orderTime
      * @param telephone
@@ -124,6 +137,7 @@ public interface IHouseService {
 
     /**
      * 取消预约
+     *
      * @param houseId
      * @return
      */
@@ -131,6 +145,7 @@ public interface IHouseService {
 
     /**
      * 管理员查询预约信息接口
+     *
      * @param start
      * @param size
      */
@@ -138,6 +153,7 @@ public interface IHouseService {
 
     /**
      * 完成预约
+     *
      * @param houseId
      * @return
      */

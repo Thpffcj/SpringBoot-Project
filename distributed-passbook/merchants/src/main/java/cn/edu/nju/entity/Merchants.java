@@ -51,5 +51,5 @@ public class Merchants {
     // 商户是否通过审核
     @Basic
     @Column(name = "is_audit", nullable = false)
-    private Boolean isAudit= false;
+    private Boolean isAudit = false;
 }

@@ -51,27 +51,26 @@
 }
 
 
-  
 /* go to top */
-#goToTop{
-  display:block;
-  width:40px;
-  height:40px;
-  position:fixed;
-  bottom:60px;
-  right:10px;
-  text-decoration:none;
+#goToTop {
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    text-decoration: none;
 }
 
-#goToTop span{
-  display:block;
-  color:#dddddd;
+#goToTop span {
+    display: block;
+    color: #dddddd;
 }
 
-#goToTop span:hover{
-  color:#cccccc;
+#goToTop span:hover {
+    color: #cccccc;
 }
 
 #md {
-	height:400px;	
+    height: 400px;
 }

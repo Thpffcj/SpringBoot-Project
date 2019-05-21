@@ -125,6 +125,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 房源详细信息对象填充
+     *
      * @param houseDetail
      * @param houseForm
      * @return
@@ -157,6 +158,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 图片对象列表信息填充
+     *
      * @param form
      * @param houseId
      * @return
@@ -471,6 +473,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 渲染详细信息及标签
+     *
      * @param houseIds
      * @param idToHouseMap
      */
@@ -491,6 +494,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 全地图查询
+     *
      * @param mapSearch
      * @return
      */
@@ -507,6 +511,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 精确范围数据查询
+     *
      * @param mapSearch
      * @return
      */
@@ -524,6 +529,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 加入预约清单
+     *
      * @param houseId
      * @return
      */
@@ -555,6 +561,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 获取对应状态的预约列表
+     *
      * @param status
      * @param start
      * @param size
@@ -603,6 +610,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 预约看房时间
+     *
      * @param houseId
      * @param orderTime
      * @param telephone
@@ -633,6 +641,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 取消预约
+     *
      * @param houseId
      * @return
      */
@@ -651,6 +660,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 管理员查询预约信息接口
+     *
      * @param start
      * @param size
      * @return
@@ -667,6 +677,7 @@ public class HouseServiceImpl implements IHouseService {
 
     /**
      * 完成预约
+     *
      * @param houseId
      * @return
      */

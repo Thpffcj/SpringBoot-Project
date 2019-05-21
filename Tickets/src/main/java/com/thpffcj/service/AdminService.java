@@ -14,18 +14,21 @@ public interface AdminService {
 
     /**
      * 列出待审核场馆
+     *
      * @return
      */
     ServiceMultiResult<VenueDto> getAllOpenApplication();
 
     /**
      * 列出修改场馆信息的申请
+     *
      * @return
      */
     ServiceMultiResult<VenueDto> getAllModifyApplication();
 
     /**
      * 审核场馆
+     *
      * @param isApprove
      * @param venueId
      * @return
@@ -34,12 +37,14 @@ public interface AdminService {
 
     /**
      * 找到未结算演出
+     *
      * @return
      */
     ServiceMultiResult<SettleAccountDto> settleAccounts();
 
     /**
      * 对演出进行结算
+     *
      * @param isApprove
      * @param showName
      * @return
@@ -48,6 +53,7 @@ public interface AdminService {
 
     /**
      * 场馆统计信息
+     *
      * @return
      */
     ServiceMultiResult<VenueFinanceDto> venueStatistics();

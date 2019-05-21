@@ -15,8 +15,8 @@ public class HashUtils {
 
     private static final String SALT = "thpffcj.com";
 
-    public static String encryPassword(String password){
-        HashCode hashCode =	FUNCTION.hashString(password+SALT, Charset.forName("UTF-8"));
+    public static String encryPassword(String password) {
+        HashCode hashCode = FUNCTION.hashString(password + SALT, Charset.forName("UTF-8"));
         return hashCode.toString();
     }
 }

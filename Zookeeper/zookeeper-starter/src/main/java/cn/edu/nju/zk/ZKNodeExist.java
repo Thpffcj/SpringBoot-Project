@@ -20,7 +20,8 @@ public class ZKNodeExist implements Watcher {
     public static final String zkServerPath = "192.168.92.130:2181";
     public static final Integer timeout = 5000;
 
-    public ZKNodeExist() {}
+    public ZKNodeExist() {
+    }
 
     public ZKNodeExist(String connectString) {
         try {
@@ -75,6 +76,7 @@ public class ZKNodeExist implements Watcher {
     public ZooKeeper getZookeeper() {
         return zookeeper;
     }
+
     public void setZookeeper(ZooKeeper zookeeper) {
         this.zookeeper = zookeeper;
     }

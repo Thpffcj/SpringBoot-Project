@@ -33,6 +33,7 @@ public class UserController {
 
     /**
      * 查询所用用户
+     *
      * @return
      */
     @GetMapping
@@ -44,6 +45,7 @@ public class UserController {
 
     /**
      * 根据id查询用户
+     *
      * @return
      */
     @GetMapping("{id}")
@@ -57,6 +59,7 @@ public class UserController {
 
     /**
      * 获取 form 表单页面
+     *
      * @param model
      * @return
      */
@@ -69,6 +72,7 @@ public class UserController {
 
     /**
      * 新建用户
+     *
      * @return
      */
     @PostMapping
@@ -79,6 +83,7 @@ public class UserController {
 
     /**
      * 删除用户
+     *
      * @return
      */
     @GetMapping(value = "delete/{id}")
@@ -92,6 +97,7 @@ public class UserController {
 
     /**
      * 获取修改用户的界面，及数据
+     *
      * @param id
      * @param model
      * @return

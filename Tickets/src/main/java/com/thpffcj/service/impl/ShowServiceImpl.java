@@ -37,6 +37,7 @@ public class ShowServiceImpl implements ShowService {
 
     /**
      * 发布演出计划
+     *
      * @param venueId
      * @param showForm
      * @return
@@ -61,6 +62,7 @@ public class ShowServiceImpl implements ShowService {
 
     /**
      * 通过showId查找演出
+     *
      * @param showId
      * @return
      */
@@ -76,6 +78,7 @@ public class ShowServiceImpl implements ShowService {
 
     /**
      * 找到所有未结算的演出
+     *
      * @return
      */
     @Override
@@ -91,6 +94,7 @@ public class ShowServiceImpl implements ShowService {
 
     /**
      * 分页查询所有演出
+     *
      * @param page
      * @return
      */
@@ -115,6 +119,7 @@ public class ShowServiceImpl implements ShowService {
 
     /**
      * 修改演出状态
+     *
      * @param showId
      * @param status
      */

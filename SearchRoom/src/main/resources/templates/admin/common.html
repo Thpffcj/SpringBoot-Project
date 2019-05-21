@@ -138,6 +138,7 @@
             });
             layer.full(index);
         }
+
         /*资讯-编辑*/
         function article_edit(title, url, id, w, h) {
             var index = layer.open({
@@ -147,6 +148,7 @@
             });
             layer.full(index);
         }
+
         /*资讯-删除*/
         function article_del(obj, id) {
             layer.confirm('确认要删除吗？', function (index) {
@@ -185,6 +187,7 @@
                     layer.msg('未通过', {icon: 5, time: 1000});
                 });
         }
+
         /*资讯-下架*/
         function article_stop(obj, id) {
             layer.confirm('确认要下架吗？', function (index) {
@@ -204,6 +207,7 @@
                 layer.msg('已发布!', {icon: 6, time: 1000});
             });
         }
+
         /*资讯-申请上线*/
         function article_shenqing(obj, id) {
             $(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');

@@ -34,8 +34,7 @@ $browsers-supporting-svg-but-not-gradients: (ie: "9", opera: "9.5-9.6");
 @mixin each-gradient-prefix($values) {
   @if prefixed(-svg, $values) {
     @include for-legacy-browsers($browsers-supporting-svg-but-not-gradients,
-                                 $svg-gradient-shim-threshold)
-    {
+            $svg-gradient-shim-threshold) {
       @include with-prefix(-svg) {
         @content;
       }

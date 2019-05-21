@@ -12,6 +12,7 @@ public class XmlBuilder {
 
     /**
      * 将XML转为指定的POJO
+     *
      * @param clazz
      * @param xmlStr
      * @return

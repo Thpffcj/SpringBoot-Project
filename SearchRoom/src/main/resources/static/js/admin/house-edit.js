@@ -37,13 +37,13 @@ $(function () {
 
     $subwayLine.change(function () {
         var selectedVal = $(this).val();
-        if (typeof(selectedVal) === 'undefined' || selectedVal === "") {
+        if (typeof (selectedVal) === 'undefined' || selectedVal === "") {
             layer.msg('没选择地铁线路！', {icon: 5, time: 2000});
 
             return;
         }
 
-       changeSubwayStation($subwayStation, selectedVal);
+        changeSubwayStation($subwayStation, selectedVal);
     });
 
     $(".uploaded-list-container a").hover(function () {

@@ -35,7 +35,7 @@ public class CustomerServiceTxInCode {
             return customer;
         } catch (Exception e) {
             transactionManager.rollback(status);
-            throw  e;
+            throw e;
         }
     }
 }

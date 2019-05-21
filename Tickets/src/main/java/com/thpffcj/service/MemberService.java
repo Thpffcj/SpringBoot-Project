@@ -23,6 +23,7 @@ public interface MemberService {
 
     /**
      * 会员选座购买
+     *
      * @param memberId
      * @param showId
      * @param seatName
@@ -33,6 +34,7 @@ public interface MemberService {
 
     /**
      * 付款
+     *
      * @param orderId
      * @param account
      * @param password
@@ -42,6 +44,7 @@ public interface MemberService {
 
     /**
      * 退票
+     *
      * @param orderId
      * @return
      */

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Created by Thpffcj on 2018/5/4.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class AuthTests {
 
     @Autowired
@@ -20,7 +20,7 @@ public class AuthTests {
 
     @Test
     public void testAuth() {
-        User user =	userService.auth("1441732331@qq.com", "000000");
+        User user = userService.auth("1441732331@qq.com", "000000");
         assert user != null;
         System.out.println(user.getAboutme());
     }

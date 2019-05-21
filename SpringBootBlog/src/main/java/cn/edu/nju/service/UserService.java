@@ -14,6 +14,7 @@ public interface UserService {
 
     /**
      * 保存用户
+     *
      * @param user
      * @return
      */
@@ -21,18 +22,21 @@ public interface UserService {
 
     /**
      * 删除用户
+     *
      * @param id
      */
     void removeUser(Long id);
 
     /**
      * 删除列表里面的用户
+     *
      * @param users
      */
     void removeUsersInBatch(List<User> users);
 
     /**
      * 更新用户
+     *
      * @param user
      * @return
      */
@@ -40,6 +44,7 @@ public interface UserService {
 
     /**
      * 根据id获取用户
+     *
      * @param id
      * @return
      */
@@ -47,12 +52,14 @@ public interface UserService {
 
     /**
      * 获取用户列表
+     *
      * @return
      */
     List<User> listUsers();
 
     /**
      * 根据用户名进行分页模糊查询
+     *
      * @param name
      * @param pageable
      * @return

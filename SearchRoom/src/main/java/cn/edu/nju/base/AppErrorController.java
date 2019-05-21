@@ -36,6 +36,7 @@ public class AppErrorController implements ErrorController {
 
     /**
      * Web页面错误处理
+     *
      * @param request
      * @param response
      * @return
@@ -56,6 +57,7 @@ public class AppErrorController implements ErrorController {
 
     /**
      * 除Web页面外的错误处理，比如Json/XML等
+     *
      * @param request
      * @return
      */

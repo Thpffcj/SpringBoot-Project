@@ -71,7 +71,8 @@
             </div>
             <div class="btnContainer ">
                 <button id="subscribe" th:switch="${house.subscribeStatus}"
-                        th:attr="data-bind=${house.subscribeStatus}" th:style="${house.subscribeStatus != 0} ? 'background-color: #6a7b8c; color: black;'">
+                        th:attr="data-bind=${house.subscribeStatus}"
+                        th:style="${house.subscribeStatus != 0} ? 'background-color: #6a7b8c; color: black;'">
                     <span th:case="1">已加入待看</span>
                     <span th:case="2">已预约时间</span>
                     <span th:case="3">已看过此房</span>
@@ -325,10 +326,10 @@
 <div id="only" data-city="bj" data-page="zufang_view"></div>
 <div th:include="common :: footer"></div>
 <script type='text/javascript'>
-    (function(m, ei, q, i, a, j, s) {
-        m[i] = m[i] || function() {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
+    (function (m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
         j = ei.createElement(q),
             s = ei.getElementsByTagName(q)[0];
         j.async = true;

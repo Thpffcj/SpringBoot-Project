@@ -185,6 +185,7 @@ public class AddressServiceImpl implements IAddressService {
 
     /**
      * 根据城市以及具体地位获取百度地图的经纬度
+     *
      * @param city
      * @param address
      * @return
@@ -221,7 +222,8 @@ public class AddressServiceImpl implements IAddressService {
             int status = jsonNode.get("status").asInt();
             if (status != 0) {
                 return new ServiceResult<BaiduMapLocation>(false, "Error to get map location for status: " + status);
-            } {
+            }
+            {
                 BaiduMapLocation location = new BaiduMapLocation();
                 JsonNode jsonLocation = jsonNode.get("result").get("location");
                 location.setLongitude(jsonLocation.get("lng").asDouble());
@@ -237,6 +239,7 @@ public class AddressServiceImpl implements IAddressService {
 
     /**
      * 上传百度LBS数据
+     *
      * @param location
      * @param title
      * @param address
@@ -280,7 +283,7 @@ public class AddressServiceImpl implements IAddressService {
                 return new ServiceResult(false, "Can not upload baidu lbs data");
             } else {
                 JsonNode jsonNode = objectMapper.readTree(result);
-                int  status = jsonNode.get("status").asInt();
+                int status = jsonNode.get("status").asInt();
                 if (status != 0) {
                     String message = jsonNode.get("message").asText();
                     logger.error("Error to upload lbs data for status: {}, and message: {}", status, message);
@@ -333,6 +336,7 @@ public class AddressServiceImpl implements IAddressService {
 
     /**
      * 移除百度LBS数据
+     *
      * @param houseId
      * @return
      */

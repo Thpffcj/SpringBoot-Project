@@ -41,6 +41,7 @@ public class VenueController {
 
     /**
      * 欢迎页
+     *
      * @return
      */
     @GetMapping("/welcome")
@@ -50,6 +51,7 @@ public class VenueController {
 
     /**
      * 后台管理中心
+     *
      * @return
      */
     @GetMapping("/center")
@@ -62,6 +64,7 @@ public class VenueController {
 
     /**
      * 场馆主界面
+     *
      * @param model
      * @param httpSession
      * @return
@@ -79,6 +82,7 @@ public class VenueController {
 
     /**
      * 新增演出功能页
+     *
      * @return
      */
     @GetMapping("/add/show")
@@ -88,6 +92,7 @@ public class VenueController {
 
     /**
      * 添加演出
+     *
      * @param showForm
      * @return
      */
@@ -102,6 +107,7 @@ public class VenueController {
 
     /**
      * 新增场馆
+     *
      * @return
      */
     @GetMapping("/add/venue")
@@ -111,6 +117,7 @@ public class VenueController {
 
     /**
      * 添加场馆
+     *
      * @return
      */
     @PostMapping("/add/venue")
@@ -122,13 +129,14 @@ public class VenueController {
 
     /**
      * 修改场馆信息
+     *
      * @return
      */
     @PostMapping("/edit")
     public String editVenue(HttpSession session, Model model,
-                                 @RequestParam(value = "name") String name,
-                                 @RequestParam(value = "address") String address,
-                                 @RequestParam(value = "description") String description) {
+                            @RequestParam(value = "name") String name,
+                            @RequestParam(value = "address") String address,
+                            @RequestParam(value = "description") String description) {
         Long venueId = (Long) session.getAttribute("venueId");
         ServiceResult<VenueDto> result = venueService.edit(venueId, name, address, description);
         VenueDto venueDto = venueService.getVenueDtoByVenueId(venueId).getResult();
@@ -138,6 +146,7 @@ public class VenueController {
 
     /**
      * 检票页面
+     *
      * @return
      */
     @GetMapping("/check")
@@ -147,18 +156,20 @@ public class VenueController {
 
     /**
      * 检票
+     *
      * @param orderId
      * @return
      */
     @PostMapping("/check")
     @ResponseBody
     public ApiResponse checkTicket(@RequestParam(value = "orderId") Long orderId) {
-        ServiceResult<OrderDto> result =  venueService.checkOrder(orderId);
+        ServiceResult<OrderDto> result = venueService.checkOrder(orderId);
         return ApiResponse.ofSuccess(result);
     }
 
     /**
      * 现场购票
+     *
      * @return
      */
     @GetMapping("/buy")
@@ -181,6 +192,7 @@ public class VenueController {
 
     /**
      * 查看场馆订票退票情况
+     *
      * @param session
      * @param model
      * @return
@@ -193,8 +205,8 @@ public class VenueController {
         }
         ServiceMultiResult<OrderDto> bookOrderDto = orderService.getAllVenueBookOrder(venueId);
         ServiceMultiResult<OrderDto> refundOrderDto = orderService.getAllVenueRefundOrder(venueId);
-        model.addAttribute("bookOrders" , bookOrderDto.getResult());
-        model.addAttribute("refundOrders" , refundOrderDto.getResult());
+        model.addAttribute("bookOrders", bookOrderDto.getResult());
+        model.addAttribute("refundOrders", refundOrderDto.getResult());
         return "venue/statistics";
     }
 }

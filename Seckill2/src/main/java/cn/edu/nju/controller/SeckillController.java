@@ -99,7 +99,7 @@ public class SeckillController implements InitializingBean {
     @RequestMapping(value = "/verifyCode", method = RequestMethod.GET)
     @ResponseBody
     public Result<String> getSeckillVerifyCode(HttpServletResponse response, User user,
-                                              @RequestParam("goodsId") long goodsId) {
+                                               @RequestParam("goodsId") long goodsId) {
         if (user == null) {
             return Result.error(CodeMsg.SESSION_ERROR);
         }

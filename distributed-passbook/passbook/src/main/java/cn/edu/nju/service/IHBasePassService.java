@@ -10,6 +10,7 @@ public interface IHBasePassService {
 
     /**
      * 将 PassTemplate 写入 HBase
+     *
      * @param passTemplate {@link PassTemplate}
      * @return true/false
      */

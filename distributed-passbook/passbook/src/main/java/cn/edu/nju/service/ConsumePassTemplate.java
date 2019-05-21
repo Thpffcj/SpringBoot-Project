@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ConsumePassTemplate {
-    
+
     // pass 相关的 HBase 服务
     private final IHBasePassService passService;
 
@@ -26,23 +26,23 @@ public class ConsumePassTemplate {
     public ConsumePassTemplate(IHBasePassService passService) {
         this.passService = passService;
     }
-    
+
     @KafkaListener(topics = {Constants.TEMPLATE_TOPIC})
     public void receive(@Payload String passTemplate,
-                        @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key, 
-                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition, 
+                        @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
+                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
                         @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
-        
+
         log.info("Consumer Receive PassTemplate: {}", passTemplate);
 
         PassTemplate pt = null;
-        
+
         try {
             pt = JSON.parseObject(passTemplate, PassTemplate.class);
         } catch (Exception ex) {
             log.error("Parse PassTemplate Error: {}", ex.getMessage());
         }
-        
+
         log.info("DropPassTemplateToHBase: {}", passService.dropPassTemplateToHBase(pt));
     }
 }

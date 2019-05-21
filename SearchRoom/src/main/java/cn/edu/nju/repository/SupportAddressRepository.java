@@ -12,6 +12,7 @@ public interface SupportAddressRepository extends CrudRepository<SupportAddress,
 
     /**
      * 获取所有对应行政级别的信息
+     *
      * @return
      */
     List<SupportAddress> findAllByLevel(String level);

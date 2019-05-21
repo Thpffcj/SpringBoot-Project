@@ -15,6 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 自定义配置
+     *
      * @param http
      * @throws Exception
      */
@@ -30,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 认证信息管理
+     *
      * @param auth
      * @throws Exception
      */

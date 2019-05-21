@@ -11,6 +11,7 @@ public interface IGainPassTemplateService {
 
     /**
      * 用户领取优惠券
+     *
      * @param request {@link GainPassTemplateRequest}
      * @return {@link Response}
      * @throws Exception

@@ -47,6 +47,7 @@ public class LoginController {
 
     /**
      * 为了压测的一个方法，无实际作用
+     *
      * @param model
      * @param user
      * @return

@@ -5,14 +5,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * (c) 2009-2016 Torstein Honsi
          *
@@ -33,7 +33,7 @@
         }
 
         extend(Axis.prototype, {
-            isInBreak: function(brk, val) {
+            isInBreak: function (brk, val) {
                 var ret,
                     repeat = brk.repeat || Infinity,
                     from = brk.from,
@@ -48,7 +48,7 @@
                 return ret;
             },
 
-            isInAnyBreak: function(val, testKeep) {
+            isInAnyBreak: function (val, testKeep) {
 
                 var breaks = this.options.breaks,
                     i = breaks && breaks.length,
@@ -78,7 +78,7 @@
             }
         });
 
-        wrap(Axis.prototype, 'setTickPositions', function(proceed) {
+        wrap(Axis.prototype, 'setTickPositions', function (proceed) {
             proceed.apply(this, Array.prototype.slice.call(arguments, 1));
 
             if (this.options.breaks) {
@@ -99,7 +99,7 @@
             }
         });
 
-        wrap(Axis.prototype, 'init', function(proceed, chart, userOptions) {
+        wrap(Axis.prototype, 'init', function (proceed, chart, userOptions) {
             // Force Axis to be not-ordinal when breaks are defined
             if (userOptions.breaks && userOptions.breaks.length) {
                 userOptions.ordinal = false;
@@ -113,7 +113,7 @@
 
                 axis.isBroken = true;
 
-                this.val2lin = function(val) {
+                this.val2lin = function (val) {
                     var nval = val,
                         brk,
                         i;
@@ -133,7 +133,7 @@
                     return nval;
                 };
 
-                this.lin2val = function(val) {
+                this.lin2val = function (val) {
                     var nval = val,
                         brk,
                         i;
@@ -151,7 +151,7 @@
                     return nval;
                 };
 
-                this.setExtremes = function(newMin, newMax, redraw, animation, eventArguments) {
+                this.setExtremes = function (newMin, newMax, redraw, animation, eventArguments) {
                     // If trying to set extremes inside a break, extend it to before and after the break ( #3857 )
                     while (this.isInAnyBreak(newMin)) {
                         newMin -= this.closestPointRange;
@@ -162,7 +162,7 @@
                     Axis.prototype.setExtremes.call(this, newMin, newMax, redraw, animation, eventArguments);
                 };
 
-                this.setAxisTranslation = function(saveOld) {
+                this.setAxisTranslation = function (saveOld) {
                     Axis.prototype.setAxisTranslation.call(this, saveOld);
 
                     var breaks = axis.options.breaks,
@@ -216,7 +216,7 @@
                         }
                     }
 
-                    breakArrayT.sort(function(a, b) {
+                    breakArrayT.sort(function (a, b) {
                         var ret;
                         if (a.value === b.value) {
                             ret = (a.move === 'in' ? 0 : 1) - (b.move === 'in' ? 0 : 1);
@@ -259,7 +259,7 @@
             }
         });
 
-        wrap(Series.prototype, 'generatePoints', function(proceed) {
+        wrap(Series.prototype, 'generatePoints', function (proceed) {
 
             proceed.apply(this, stripArguments(arguments));
 
@@ -295,7 +295,7 @@
             this.drawBreaks(this.yAxis, pick(this.pointArrayMap, ['y']));
         }
 
-        H.Series.prototype.drawBreaks = function(axis, keys) {
+        H.Series.prototype.drawBreaks = function (axis, keys) {
             var series = this,
                 points = series.points,
                 breaks,
@@ -307,12 +307,12 @@
                 return; // #5950
             }
 
-            each(keys, function(key) {
+            each(keys, function (key) {
                 breaks = axis.breakArray || [];
                 threshold = axis.isXAxis ? axis.min : pick(series.options.threshold, axis.min);
-                each(points, function(point) {
+                each(points, function (point) {
                     y = pick(point['stack' + key.toUpperCase()], point[key]);
-                    each(breaks, function(brk) {
+                    each(breaks, function (brk) {
                         eventName = false;
 
                         if ((threshold < brk.from && y > brk.to) || (threshold > brk.from && y < brk.from)) {

@@ -62,6 +62,7 @@ public class UserController {
 
     /**
      * 加入预约看房
+     *
      * @param houseId
      * @return
      */
@@ -78,6 +79,7 @@ public class UserController {
 
     /**
      * 预约待看清单
+     *
      * @param start
      * @param size
      * @param status
@@ -103,6 +105,7 @@ public class UserController {
 
     /**
      * 预约看房
+     *
      * @param houseId
      * @param orderTime
      * @param desc
@@ -135,6 +138,7 @@ public class UserController {
 
     /**
      * 取消预约
+     *
      * @param houseId
      * @return
      */

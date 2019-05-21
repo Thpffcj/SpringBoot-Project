@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: cn.edu.nju.service.RedisTemplateTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.517 sec - in cn.edu.nju.service.RedisTemplateTest

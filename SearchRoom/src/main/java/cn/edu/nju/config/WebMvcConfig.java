@@ -33,6 +33,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
 
     /**
      * 静态资源加载配置
+     *
      * @param registry
      */
     @Override
@@ -42,6 +43,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
 
     /**
      * 模板资源解析器
+     *
      * @return
      */
     @Bean
@@ -56,6 +58,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
 
     /**
      * Thymeleaf标准方言解释器
+     *
      * @return
      */
     @Bean
@@ -73,6 +76,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
 
     /**
      * 视图解析器
+     *
      * @return
      */
     @Bean
@@ -84,6 +88,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements Application
 
     /**
      * Bean Util
+     *
      * @return
      */
     @Bean

@@ -28,17 +28,19 @@ public class AdminController {
 
     /**
      * 审核页面
+     *
      * @return
      */
     @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("opens", adminService.getAllOpenApplication().getResult());
-        model.addAttribute("edits" , adminService.getAllModifyApplication().getResult());
+        model.addAttribute("edits", adminService.getAllModifyApplication().getResult());
         return "admin/index";
     }
 
     /**
      * 通过或拒绝场馆申请
+     *
      * @param isApprove
      * @param venueId
      * @return
@@ -52,6 +54,7 @@ public class AdminController {
 
     /**
      * 结算页面
+     *
      * @param model
      * @return
      */
@@ -63,6 +66,7 @@ public class AdminController {
 
     /**
      * 对演出进行结算
+     *
      * @param isApprove
      * @param showName
      * @return
@@ -76,6 +80,7 @@ public class AdminController {
 
     /**
      * 查看Tickets统计信息
+     *
      * @return
      */
     @GetMapping("/statistics")
@@ -85,13 +90,14 @@ public class AdminController {
 
     /**
      * 场馆演出次数统计
+     *
      * @return
      */
     @GetMapping("/venueShowTimes")
     @ResponseBody
     public ApiResponse getVenueShowTimes() {
         Map<String, Object> result = new HashMap<>();
-        ServiceMultiResult<VenueFinanceDto> serviceMultiResult  = adminService.venueStatistics();
+        ServiceMultiResult<VenueFinanceDto> serviceMultiResult = adminService.venueStatistics();
         serviceMultiResult.getResult().forEach(venueFinanceDto -> {
             result.put(String.valueOf(venueFinanceDto.getVenueId()), venueFinanceDto.getShowNumber());
         });
@@ -100,13 +106,14 @@ public class AdminController {
 
     /**
      * 场馆演出收入统计
+     *
      * @return
      */
     @GetMapping("/venueShowIncome")
     @ResponseBody
     public ApiResponse getVenueShowIncome() {
         Map<String, Object> result = new HashMap<>();
-        ServiceMultiResult<VenueFinanceDto> serviceMultiResult  = adminService.venueStatistics();
+        ServiceMultiResult<VenueFinanceDto> serviceMultiResult = adminService.venueStatistics();
         serviceMultiResult.getResult().forEach(venueFinanceDto -> {
             result.put(String.valueOf(venueFinanceDto.getVenueId()), venueFinanceDto.getTotalBenefit());
         });
@@ -115,6 +122,7 @@ public class AdminController {
 
     /**
      * 会员等级分布统计
+     *
      * @return
      */
     @GetMapping("/memberLevel")

@@ -46,6 +46,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 注册
+     *
      * @param mail
      * @param password
      * @return
@@ -70,6 +71,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 注册验证
+     *
      * @param code
      */
     @Transactional
@@ -90,6 +92,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 查找用户信息
+     *
      * @param id
      * @return
      */
@@ -102,6 +105,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 会员选座购买
+     *
      * @param memberId
      * @param showId
      * @param seatName
@@ -131,6 +135,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 付款
+     *
      * @param orderId
      * @param account
      * @param password
@@ -165,6 +170,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 退票
+     *
      * @param orderId
      * @return
      */
@@ -176,7 +182,7 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = memberRepository.findById(order.getMemberId());
         // TODO 默认会员邮箱和支付宝邮箱账号一致
-        payService.recharge(member.getMail(),money);
+        payService.recharge(member.getMail(), money);
 
         // 更新消费金额
         memberRepository.updateConsumption(member.getId(), member.getConsumption() - money);
@@ -205,6 +211,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 修改个人信息
+     *
      * @param id
      * @param memberName
      * @param password
@@ -221,6 +228,7 @@ public class MemberServiceImpl implements MemberService {
 
     /**
      * 停止会员服务
+     *
      * @param memberId
      */
     @Override

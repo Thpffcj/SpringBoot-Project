@@ -26,7 +26,7 @@ public class AddressServiceImplTest extends ApplicationTests {
 
         Assert.assertTrue(serviceResult.isSuccess());
 
-        Assert.assertTrue(serviceResult.getResult().getLongitude() > 0 );
-        Assert.assertTrue(serviceResult.getResult().getLatitude() > 0 );
+        Assert.assertTrue(serviceResult.getResult().getLongitude() > 0);
+        Assert.assertTrue(serviceResult.getResult().getLatitude() > 0);
     }
 }

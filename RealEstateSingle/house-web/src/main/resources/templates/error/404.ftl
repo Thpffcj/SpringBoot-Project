@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en-US">
@@ -7,9 +6,9 @@
 <body class="page-sub-page page-blog-detail" id="page-top">
 
 <div class="wrapper">
-    
+
     <@common.nav/>
-    
+
     <div id="page-content">
         <!-- Breadcrumb -->
         <div class="container">
@@ -29,14 +28,14 @@
                         <img alt="" src="/static/assets/img/error-page-background.png" class="bottom">
                     </div>
                     <h2 class="no-border">页面未找到</h2>
-                    <a class="link-arrow back" href="/index" >返回首页</a>
+                    <a class="link-arrow back" href="/index">返回首页</a>
                 </div>
             </section>
         </div><!-- /.container -->
     </div>
-    
-     <@common.footer/>
-    
+
+    <@common.footer/>
+
 </div>
 
 <@common.js/>

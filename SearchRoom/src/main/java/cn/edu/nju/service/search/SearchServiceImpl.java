@@ -405,6 +405,7 @@ public class SearchServiceImpl implements ISearchService {
 
     /**
      * 获取补全建议关键词
+     *
      * @param prefix
      * @return
      */
@@ -554,6 +555,7 @@ public class SearchServiceImpl implements ISearchService {
 
     /**
      * 城市级别查询
+     *
      * @param cityEnName
      * @param orderBy
      * @param orderDirection
@@ -591,6 +593,7 @@ public class SearchServiceImpl implements ISearchService {
 
     /**
      * 精确范围数据查询
+     *
      * @param mapSearch
      * @return
      */

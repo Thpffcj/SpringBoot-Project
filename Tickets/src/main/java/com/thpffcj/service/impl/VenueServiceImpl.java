@@ -34,6 +34,7 @@ public class VenueServiceImpl implements VenueService {
 
     /**
      * 注册场馆
+     *
      * @param venueForm
      * @return
      */
@@ -52,6 +53,7 @@ public class VenueServiceImpl implements VenueService {
 
     /**
      * 修改场馆信息
+     *
      * @param venueId
      * @param name
      * @param address
@@ -71,6 +73,7 @@ public class VenueServiceImpl implements VenueService {
 
     /**
      * 根据venueId查找场馆
+     *
      * @param venueId
      * @return
      */
@@ -81,6 +84,7 @@ public class VenueServiceImpl implements VenueService {
 
     /**
      * 根据场馆管理员查询场馆
+     *
      * @param managerId
      * @return
      */
@@ -94,13 +98,14 @@ public class VenueServiceImpl implements VenueService {
         Venue venue = venueRepository.findById(venueId);
         VenueDto venueDto = null;
         if (venue != null) {
-            venueDto =  modelMapper.map(venue, VenueDto.class);
+            venueDto = modelMapper.map(venue, VenueDto.class);
         }
         return new ServiceResult<VenueDto>(true, null, venueDto);
     }
 
     /**
      * 根据状态查询场馆
+     *
      * @param status
      * @return
      */
@@ -111,6 +116,7 @@ public class VenueServiceImpl implements VenueService {
 
     /**
      * 修改场馆状态
+     *
      * @param venueId
      * @param status
      */
@@ -122,6 +128,7 @@ public class VenueServiceImpl implements VenueService {
 
     /**
      * 检票
+     *
      * @param orderId
      * @return
      */

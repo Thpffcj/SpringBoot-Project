@@ -81,7 +81,7 @@ public class HouseService {
     }
 
     public HouseUser getHouseUser(Long houseId) {
-        HouseUser houseUser =  houseMapper.selectSaleHouseUser(houseId);
+        HouseUser houseUser = houseMapper.selectSaleHouseUser(houseId);
         return houseUser;
     }
 

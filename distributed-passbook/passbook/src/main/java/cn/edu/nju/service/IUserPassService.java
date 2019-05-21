@@ -11,6 +11,7 @@ public interface IUserPassService {
 
     /**
      * 获取用户个人优惠券信息，即我的优惠券功能实现
+     *
      * @param userId 用户 id
      * @return {@link Response}
      * @throws Exception
@@ -19,6 +20,7 @@ public interface IUserPassService {
 
     /**
      * 获取用户已经消费了的优惠券，即已使用优惠券功能实现
+     *
      * @param userId 用户 id
      * @return {@link Response}
      * @throws Exception
@@ -27,6 +29,7 @@ public interface IUserPassService {
 
     /**
      * 获取用户所有的优惠券
+     *
      * @param userId 用户 id
      * @return {@link Response}
      * @throws Exception
@@ -35,6 +38,7 @@ public interface IUserPassService {
 
     /**
      * 用户使用优惠券
+     *
      * @param pass {@link Pass}
      * @return {@link Response}
      */

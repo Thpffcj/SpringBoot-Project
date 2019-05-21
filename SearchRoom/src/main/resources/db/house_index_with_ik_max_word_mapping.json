@@ -62,7 +62,7 @@
           "analyzer": "ik_max_word",
           "search_analyzer": "ik_max_word"
         },
-        "layoutDesc" : {
+        "layoutDesc": {
           "type": "text",
           "index": "analyzed",
           "analyzer": "ik_max_word",

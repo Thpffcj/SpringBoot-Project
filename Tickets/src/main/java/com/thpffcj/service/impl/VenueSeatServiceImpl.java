@@ -41,6 +41,7 @@ public class VenueSeatServiceImpl implements VenueSeatService {
 
     /**
      * 根据场馆名称和座位名获得座位
+     *
      * @param venueId
      * @param seatName
      * @return

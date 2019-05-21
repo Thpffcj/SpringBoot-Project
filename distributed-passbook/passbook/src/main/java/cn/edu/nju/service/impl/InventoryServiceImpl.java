@@ -68,6 +68,7 @@ public class InventoryServiceImpl implements IInventoryService {
 
     /**
      * 获取系统中可用的优惠券
+     *
      * @param excludeIds 需要排除的优惠券 ids
      * @return {@link PassTemplate}
      */
@@ -119,6 +120,7 @@ public class InventoryServiceImpl implements IInventoryService {
 
     /**
      * 构造优惠券的信息
+     *
      * @param passTemplates {@link PassTemplate}
      * @return {@link PassTemplateInfo}
      */

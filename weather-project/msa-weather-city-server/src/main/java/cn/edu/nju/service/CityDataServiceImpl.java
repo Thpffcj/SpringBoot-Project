@@ -25,7 +25,7 @@ public class CityDataServiceImpl implements CityDataService {
         StringBuffer buffer = new StringBuffer();
         String line = "";
 
-        while ((line = br.readLine()) !=null) {
+        while ((line = br.readLine()) != null) {
             buffer.append(line);
         }
 

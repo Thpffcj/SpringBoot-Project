@@ -20,13 +20,13 @@ public class AuthActionInterceptor implements HandlerInterceptor {
             throws Exception {
         User user = UserContext.getUser();
         if (user == null) {
-            String msg = URLEncoder.encode("请先登录","utf-8");
-            String target = URLEncoder.encode(request.getRequestURL().toString(),"utf-8");
+            String msg = URLEncoder.encode("请先登录", "utf-8");
+            String target = URLEncoder.encode(request.getRequestURL().toString(), "utf-8");
             if ("GET".equalsIgnoreCase(request.getMethod())) {
-                response.sendRedirect("/accounts/signin?errorMsg=" + msg + "&target="+target);
+                response.sendRedirect("/accounts/signin?errorMsg=" + msg + "&target=" + target);
                 return false; // 修复bug,未登录要返回false
-            }else {
-                response.sendRedirect("/accounts/signin?errorMsg="+msg);
+            } else {
+                response.sendRedirect("/accounts/signin?errorMsg=" + msg);
                 return false; // 修复bug,未登录要返回false
             }
         }

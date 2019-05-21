@@ -11,11 +11,12 @@ import java.util.List;
 /**
  * Created by Thpffcj on 2018/2/6.
  */
-@FeignClient(name="msa-weather-eureka-client-zuul", fallback=DataClientFallback.class)
+@FeignClient(name = "msa-weather-eureka-client-zuul", fallback = DataClientFallback.class)
 public interface DataClient {
 
     /**
      * 获取城市列表
+     *
      * @return
      * @throws Exception
      */
@@ -24,6 +25,7 @@ public interface DataClient {
 
     /**
      * 根据城市ID查询天气数据
+     *
      * @param cityId
      * @return
      */

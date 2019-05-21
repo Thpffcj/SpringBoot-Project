@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 /**
  * Created by Thpffcj on 2018/2/3.
  */
-public interface HouseSubscribeRepository extends PagingAndSortingRepository<HouseSubscribe, Long>{
+public interface HouseSubscribeRepository extends PagingAndSortingRepository<HouseSubscribe, Long> {
 
     HouseSubscribe findByHouseIdAndUserId(Long houseId, Long loginUserId);
 

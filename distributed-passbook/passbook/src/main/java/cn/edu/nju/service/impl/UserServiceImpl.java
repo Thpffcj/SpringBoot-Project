@@ -74,6 +74,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 生成 userId
+     *
      * @param prefix 当前用户数
      * @return 用户 id
      */

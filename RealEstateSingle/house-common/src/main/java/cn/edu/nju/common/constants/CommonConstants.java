@@ -15,6 +15,6 @@ public class CommonConstants {
 
     public static final Integer RECOM_SIZE = 3;
 
-    public static final Integer COMMENT_BLOG_TYPE  = 2;
+    public static final Integer COMMENT_BLOG_TYPE = 2;
 
 }

@@ -10,6 +10,7 @@ public interface IInventoryService {
 
     /**
      * 获取库存信息
+     *
      * @param userId 用户 id
      * @return {@link Response}
      * @throws Exception

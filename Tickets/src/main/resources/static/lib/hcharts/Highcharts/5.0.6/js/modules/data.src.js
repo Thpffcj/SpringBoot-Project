@@ -6,14 +6,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(Highcharts) {
+}(function (Highcharts) {
+    (function (Highcharts) {
         /**
          * Data module
          *
@@ -37,7 +37,7 @@
 
 
         // The Data constructor
-        var Data = function(dataOptions, chartOptions) {
+        var Data = function (dataOptions, chartOptions) {
             this.init(dataOptions, chartOptions);
         };
 
@@ -47,7 +47,7 @@
             /**
              * Initialize the Data object with the given options
              */
-            init: function(options, chartOptions) {
+            init: function (options, chartOptions) {
                 this.options = options;
                 this.chartOptions = chartOptions;
                 this.columns = options.columns || this.rowsToColumns(options.rows) || [];
@@ -80,18 +80,18 @@
             },
 
             /**
-             * Get the column distribution. For example, a line series takes a single column for 
+             * Get the column distribution. For example, a line series takes a single column for
              * Y values. A range series takes two columns for low and high values respectively,
              * and an OHLC series takes four columns.
              */
-            getColumnDistribution: function() {
+            getColumnDistribution: function () {
                 var chartOptions = this.chartOptions,
                     options = this.options,
                     xColumns = [],
-                    getValueCount = function(type) {
+                    getValueCount = function (type) {
                         return (Highcharts.seriesTypes[type || 'line'].prototype.pointArrayMap || [0]).length;
                     },
-                    getPointArrayMap = function(type) {
+                    getPointArrayMap = function (type) {
                         return Highcharts.seriesTypes[type || 'line'].prototype.pointArrayMap;
                     },
                     globalType = chartOptions && chartOptions.chart && chartOptions.chart.type,
@@ -100,12 +100,12 @@
                     seriesIndex = 0,
                     i;
 
-                each((chartOptions && chartOptions.series) || [], function(series) {
+                each((chartOptions && chartOptions.series) || [], function (series) {
                     individualCounts.push(getValueCount(series.type || globalType));
                 });
 
                 // Collect the x-column indexes from seriesMapping
-                each((options && options.seriesMapping) || [], function(mapping) {
+                each((options && options.seriesMapping) || [], function (mapping) {
                     xColumns.push(mapping.x || 0);
                 });
 
@@ -116,7 +116,7 @@
 
                 // Loop all seriesMappings and constructs SeriesBuilders from
                 // the mapping options.
-                each((options && options.seriesMapping) || [], function(mapping) {
+                each((options && options.seriesMapping) || [], function (mapping) {
                     var builder = new SeriesBuilder(),
                         name,
                         numberOfValueColumnsNeeded = individualCounts[seriesIndex] || getValueCount(globalType),
@@ -166,7 +166,7 @@
              * When the data is parsed into columns, either by CSV, table, GS or direct input,
              * continue with other operations.
              */
-            dataFound: function() {
+            dataFound: function () {
 
                 if (this.options.switchRowsAndColumns) {
                     this.columns = this.rowsToColumns(this.columns);
@@ -190,7 +190,7 @@
             /**
              * Parse a CSV input string
              */
-            parseCSV: function() {
+            parseCSV: function () {
                 var self = this,
                     options = this.options,
                     csv = options.csv,
@@ -212,7 +212,7 @@
 
                     itemDelimiter = options.itemDelimiter || (csv.indexOf('\t') !== -1 ? '\t' : ',');
 
-                    each(lines, function(line, rowNo) {
+                    each(lines, function (line, rowNo) {
                         var trimmed = self.trim(line),
                             isComment = trimmed.indexOf('#') === 0,
                             isBlank = trimmed === '',
@@ -220,7 +220,7 @@
 
                         if (rowNo >= startRow && rowNo <= endRow && !isComment && !isBlank) {
                             items = line.split(itemDelimiter);
-                            each(items, function(item, colNo) {
+                            each(items, function (item, colNo) {
                                 if (colNo >= startColumn && colNo <= endColumn) {
                                     if (!columns[colNo - startColumn]) {
                                         columns[colNo - startColumn] = [];
@@ -240,7 +240,7 @@
             /**
              * Parse a HTML table
              */
-            parseTable: function() {
+            parseTable: function () {
                 var options = this.options,
                     table = options.table,
                     columns = this.columns,
@@ -255,9 +255,9 @@
                         table = doc.getElementById(table);
                     }
 
-                    each(table.getElementsByTagName('tr'), function(tr, rowNo) {
+                    each(table.getElementsByTagName('tr'), function (tr, rowNo) {
                         if (rowNo >= startRow && rowNo <= endRow) {
-                            each(tr.children, function(item, colNo) {
+                            each(tr.children, function (item, colNo) {
                                 if ((item.tagName === 'TD' || item.tagName === 'TH') && colNo >= startColumn && colNo <= endColumn) {
                                     if (!columns[colNo - startColumn]) {
                                         columns[colNo - startColumn] = [];
@@ -275,7 +275,7 @@
 
             /**
              */
-            parseGoogleSpreadsheet: function() {
+            parseGoogleSpreadsheet: function () {
                 var self = this,
                     options = this.options,
                     googleSpreadsheetKey = options.googleSpreadsheetKey,
@@ -294,7 +294,7 @@
                             googleSpreadsheetKey + '/' + (options.googleSpreadsheetWorksheet || 'od6') +
                             '/public/values?alt=json-in-script&callback=?',
                         error: options.error,
-                        success: function(json) {
+                        success: function (json) {
                             // Prepare the data from the spreadsheat
                             var cells = json.feed.entry,
                                 cell,
@@ -338,7 +338,7 @@
                             }
 
                             // Insert null for empty spreadsheet cells (#5298)
-                            each(columns, function(column) {
+                            each(columns, function (column) {
                                 for (i = 0; i < column.length; i++) {
                                     if (column[i] === undefined) {
                                         column[i] = null;
@@ -355,7 +355,7 @@
             /**
              * Trim a string from whitespace
              */
-            trim: function(str, inside) {
+            trim: function (str, inside) {
                 if (typeof str === 'string') {
                     str = str.replace(/^\s+|\s+$/g, '');
 
@@ -374,7 +374,7 @@
             /**
              * Parse numeric cells in to number types and date types in to true dates.
              */
-            parseTypes: function() {
+            parseTypes: function () {
                 var columns = this.columns,
                     col = columns.length;
 
@@ -387,7 +387,7 @@
             /**
              * Parse a single column. Set properties like .isDatetime and .isNumeric.
              */
-            parseColumn: function(column, col) {
+            parseColumn: function (column, col) {
                 var rawColumns = this.rawColumns,
                     columns = this.columns,
                     row = column.length,
@@ -501,33 +501,33 @@
             dateFormats: {
                 'YYYY-mm-dd': {
                     regex: /^([0-9]{4})[\-\/\.]([0-9]{2})[\-\/\.]([0-9]{2})$/,
-                    parser: function(match) {
+                    parser: function (match) {
                         return Date.UTC(+match[1], match[2] - 1, +match[3]);
                     }
                 },
                 'dd/mm/YYYY': {
                     regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{4})$/,
-                    parser: function(match) {
+                    parser: function (match) {
                         return Date.UTC(+match[3], match[2] - 1, +match[1]);
                     },
                     alternative: 'mm/dd/YYYY' // different format with the same regex
                 },
                 'mm/dd/YYYY': {
                     regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{4})$/,
-                    parser: function(match) {
+                    parser: function (match) {
                         return Date.UTC(+match[3], match[1] - 1, +match[2]);
                     }
                 },
                 'dd/mm/YY': {
                     regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{2})$/,
-                    parser: function(match) {
+                    parser: function (match) {
                         return Date.UTC(+match[3] + 2000, match[2] - 1, +match[1]);
                     },
                     alternative: 'mm/dd/YY' // different format with the same regex
                 },
                 'mm/dd/YY': {
                     regex: /^([0-9]{1,2})[\-\/\.]([0-9]{1,2})[\-\/\.]([0-9]{2})$/,
-                    parser: function(match) {
+                    parser: function (match) {
                         return Date.UTC(+match[3] + 2000, match[1] - 1, +match[2]);
                     }
                 }
@@ -536,7 +536,7 @@
             /**
              * Parse a date and return it as a number. Overridable through options.parseDate.
              */
-            parseDate: function(val) {
+            parseDate: function (val) {
                 var parseDate = this.options.parseDate,
                     ret,
                     key,
@@ -588,7 +588,7 @@
             /**
              * Reorganize rows into columns
              */
-            rowsToColumns: function(rows) {
+            rowsToColumns: function (rows) {
                 var row,
                     rowsLength,
                     col,
@@ -614,13 +614,13 @@
             /**
              * A hook for working directly on the parsed columns
              */
-            parsed: function() {
+            parsed: function () {
                 if (this.options.parsed) {
                     return this.options.parsed.call(this, this.columns);
                 }
             },
 
-            getFreeIndexes: function(numberOfColumns, seriesBuilders) {
+            getFreeIndexes: function (numberOfColumns, seriesBuilders) {
                 var s,
                     i,
                     freeIndexes = [],
@@ -652,10 +652,10 @@
             },
 
             /**
-             * If a complete callback function is provided in the options, interpret the 
+             * If a complete callback function is provided in the options, interpret the
              * columns into a Highcharts options object.
              */
-            complete: function() {
+            complete: function () {
 
                 var columns = this.columns,
                     xColumns = [],
@@ -766,7 +766,6 @@
                     }
 
 
-
                     // Do the callback
                     chartOptions = {
                         series: series
@@ -795,19 +794,19 @@
 
         // Register the Data prototype and data function on Highcharts
         Highcharts.Data = Data;
-        Highcharts.data = function(options, chartOptions) {
+        Highcharts.data = function (options, chartOptions) {
             return new Data(options, chartOptions);
         };
 
         // Extend Chart.init so that the Chart constructor accepts a new configuration
         // option group, data.
-        Highcharts.wrap(Highcharts.Chart.prototype, 'init', function(proceed, userOptions, callback) {
+        Highcharts.wrap(Highcharts.Chart.prototype, 'init', function (proceed, userOptions, callback) {
             var chart = this;
 
             if (userOptions && userOptions.data) {
                 Highcharts.data(Highcharts.extend(userOptions.data, {
 
-                    afterComplete: function(dataOptions) {
+                    afterComplete: function (dataOptions) {
                         var i, series;
 
                         // Merge series configs
@@ -840,12 +839,12 @@
          * Ex: A series builder can be constructed to read column 3 as 'x' and
          * column 7 and 8 as 'y1' and 'y2'.
          * The output would then be points/rows of the form {x: 11, y1: 22, y2: 33}
-         * 
+         *
          * The name of the builder is taken from the second column. In the above
          * example it would be the column with index 7.
          * @constructor
          */
-        SeriesBuilder = function() {
+        SeriesBuilder = function () {
             this.readers = [];
             this.pointIsArray = true;
         };
@@ -856,14 +855,14 @@
          * from the free columns (this is handled by the ColumnCursor instance).
          * @returns {boolean}
          */
-        SeriesBuilder.prototype.populateColumns = function(freeIndexes) {
+        SeriesBuilder.prototype.populateColumns = function (freeIndexes) {
             var builder = this,
                 enoughColumns = true;
 
             // Loop each reader and give it an index if its missing.
             // The freeIndexes.shift() will return undefined if there
             // are no more columns.
-            each(builder.readers, function(reader) {
+            each(builder.readers, function (reader) {
                 if (reader.columnIndex === undefined) {
                     reader.columnIndex = freeIndexes.shift();
                 }
@@ -872,7 +871,7 @@
             // Now, all readers should have columns mapped. If not
             // then return false to signal that this series should
             // not be added.
-            each(builder.readers, function(reader) {
+            each(builder.readers, function (reader) {
                 if (reader.columnIndex === undefined) {
                     enoughColumns = false;
                 }
@@ -888,7 +887,7 @@
          * @param rowIndex
          * @returns {Array | Object}
          */
-        SeriesBuilder.prototype.read = function(columns, rowIndex) {
+        SeriesBuilder.prototype.read = function (columns, rowIndex) {
             var builder = this,
                 pointIsArray = builder.pointIsArray,
                 point = pointIsArray ? [] : {},
@@ -896,7 +895,7 @@
 
             // Loop each reader and ask it to read its value.
             // Then, build an array or point based on the readers names.
-            each(builder.readers, function(reader) {
+            each(builder.readers, function (reader) {
                 var value = columns[reader.columnIndex][rowIndex];
                 if (pointIsArray) {
                     point.push(value);
@@ -930,7 +929,7 @@
          * @param columnIndex {Number | undefined}
          * @param configName
          */
-        SeriesBuilder.prototype.addColumnReader = function(columnIndex, configName) {
+        SeriesBuilder.prototype.addColumnReader = function (columnIndex, configName) {
             this.readers.push({
                 columnIndex: columnIndex,
                 configName: configName
@@ -946,7 +945,7 @@
          * reading data.
          * @returns {Array}
          */
-        SeriesBuilder.prototype.getReferencedColumnIndexes = function() {
+        SeriesBuilder.prototype.getReferencedColumnIndexes = function () {
             var i,
                 referencedColumnIndexes = [],
                 columnReader;
@@ -966,7 +965,7 @@
          * @param configName
          * @returns {boolean}
          */
-        SeriesBuilder.prototype.hasReader = function(configName) {
+        SeriesBuilder.prototype.hasReader = function (configName) {
             var i, columnReader;
             for (i = 0; i < this.readers.length; i = i + 1) {
                 columnReader = this.readers[i];

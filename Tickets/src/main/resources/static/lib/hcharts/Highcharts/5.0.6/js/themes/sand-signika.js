@@ -5,19 +5,19 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(Highcharts) {
+}(function (Highcharts) {
+    (function (Highcharts) {
         /**
          * (c) 2010-2016 Torstein Honsi
          *
          * License: www.highcharts.com/license
-         * 
+         *
          * Sand-Signika theme for Highcharts JS
          * @author Torstein Honsi
          */
@@ -32,7 +32,7 @@
         }, null, document.getElementsByTagName('head')[0]);
 
         // Add the background image to the container
-        Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function(proceed) {
+        Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
             proceed.call(this);
             this.container.style.background = 'url(http://www.highcharts.com/samples/graphics/sand.png)';
         });

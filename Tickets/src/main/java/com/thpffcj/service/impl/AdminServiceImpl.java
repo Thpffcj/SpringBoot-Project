@@ -45,6 +45,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 查找待审核的场馆
+     *
      * @return
      */
     @Override
@@ -60,6 +61,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 查看修改信息待审核的场馆
+     *
      * @return
      */
     @Override
@@ -75,6 +77,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核场馆
+     *
      * @param isApprove
      * @param venueId
      * @return
@@ -91,6 +94,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 找到未结算演出
+     *
      * @return
      */
     @Override
@@ -108,11 +112,12 @@ public class AdminServiceImpl implements AdminService {
             settleAccountDto.setStatus(show.getStatus());
             result.add(settleAccountDto);
         });
-        return  new ServiceMultiResult<>(result.size(), result);
+        return new ServiceMultiResult<>(result.size(), result);
     }
 
     /**
      * 对演出进行结算
+     *
      * @param isApprove
      * @param showName
      * @return
@@ -130,6 +135,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 场馆统计信息
+     *
      * @return
      */
     @Override
@@ -150,6 +156,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 会员统计信息
+     *
      * @return
      */
     @Override

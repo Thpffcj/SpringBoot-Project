@@ -20,8 +20,8 @@ public class CommentService {
     @Autowired
     private UserService userService;
 
-    public List<Comment> getHouseComments(long houseId,int size) {
-        List<Comment> comments = commentMapper.selectComments(houseId,size);
+    public List<Comment> getHouseComments(long houseId, int size) {
+        List<Comment> comments = commentMapper.selectComments(houseId, size);
         comments.forEach(comment -> {
             User user = userService.getUserById(comment.getUserId());
             comment.setAvatar(user.getAvatar());

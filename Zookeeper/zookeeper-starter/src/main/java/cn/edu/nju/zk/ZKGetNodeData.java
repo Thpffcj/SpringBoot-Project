@@ -22,7 +22,8 @@ public class ZKGetNodeData implements Watcher {
     public static final Integer timeout = 5000;
     private static Stat stat = new Stat();
 
-    public ZKGetNodeData() {}
+    public ZKGetNodeData() {
+    }
 
     public ZKGetNodeData(String connectString) {
         try {
@@ -60,18 +61,18 @@ public class ZKGetNodeData implements Watcher {
     @Override
     public void process(WatchedEvent event) {
         try {
-            if(event.getType() == EventType.NodeDataChanged){
+            if (event.getType() == EventType.NodeDataChanged) {
                 ZKGetNodeData zkServer = new ZKGetNodeData(zkServerPath);
                 byte[] resByte = zkServer.getZookeeper().getData("/thpffcj", false, stat);
                 String result = new String(resByte);
                 System.out.println("更改后的值:" + result);
                 System.out.println("版本号变化dataVersion：" + stat.getVersion());
                 countDown.countDown();
-            } else if(event.getType() == EventType.NodeCreated) {
+            } else if (event.getType() == EventType.NodeCreated) {
 
-            } else if(event.getType() == EventType.NodeChildrenChanged) {
+            } else if (event.getType() == EventType.NodeChildrenChanged) {
 
-            } else if(event.getType() == EventType.NodeDeleted) {
+            } else if (event.getType() == EventType.NodeDeleted) {
 
             }
         } catch (KeeperException e) {
@@ -84,6 +85,7 @@ public class ZKGetNodeData implements Watcher {
     public ZooKeeper getZookeeper() {
         return zookeeper;
     }
+
     public void setZookeeper(ZooKeeper zookeeper) {
         this.zookeeper = zookeeper;
     }

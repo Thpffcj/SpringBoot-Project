@@ -12,7 +12,7 @@ public class PageParams {
     private Integer offset;
     private Integer limit;
 
-    public static PageParams build(Integer pageSize,Integer pageNum){
+    public static PageParams build(Integer pageSize, Integer pageNum) {
         if (pageSize == null) {
             pageSize = PAGE_SIZE;
         }
@@ -22,14 +22,14 @@ public class PageParams {
         return new PageParams(pageSize, pageNum);
     }
 
-    public PageParams(){
+    public PageParams() {
         this(PAGE_SIZE, 1);
     }
 
-    public PageParams(Integer pageSize,Integer pageNum){
+    public PageParams(Integer pageSize, Integer pageNum) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
-        this.offset = pageSize * (pageNum -1);
+        this.offset = pageSize * (pageNum - 1);
         this.limit = pageSize;
     }
 

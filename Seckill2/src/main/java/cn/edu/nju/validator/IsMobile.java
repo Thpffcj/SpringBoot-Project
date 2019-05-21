@@ -17,17 +17,17 @@ import javax.validation.Payload;
 /**
  * Created by Thpffcj on 2018/1/23.
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {IsMobileValidator.class })
-public @interface  IsMobile {
+@Constraint(validatedBy = {IsMobileValidator.class})
+public @interface IsMobile {
 
     boolean required() default true;
 
     String message() default "手机号码格式错误";
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 }

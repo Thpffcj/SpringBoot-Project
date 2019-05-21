@@ -14,10 +14,11 @@ public class LogGenerator {
 
     /**
      * 生成 log
+     *
      * @param request {@link HttpServletRequest}
-     * @param userId 用户 id
-     * @param action 日志类型
-     * @param info 日志信息
+     * @param userId  用户 id
+     * @param action  日志类型
+     * @param info    日志信息
      */
     public static void genLog(HttpServletRequest request, Long userId, String action, Object info) {
         log.info(

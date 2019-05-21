@@ -8,14 +8,14 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * (c) 2016 Highsoft AS
          * Authors: Lars A. V. Cabrera
@@ -57,14 +57,14 @@
          * of the x-axes.
          *
          * @return true if the axis is the outermost axis in its dimension;
-         *		 false if not
+         *         false if not
          */
-        Axis.prototype.isOuterAxis = function() {
+        Axis.prototype.isOuterAxis = function () {
             var axis = this,
                 thisIndex = -1,
                 isOuter = true;
 
-            each(this.chart.axes, function(otherAxis, index) {
+            each(this.chart.axes, function (otherAxis, index) {
                 if (otherAxis.side === axis.side) {
                     if (otherAxis === axis) {
                         // Get the index of the axis in question
@@ -90,7 +90,7 @@
          *
          * @return {number} width - the width of the tick label
          */
-        Tick.prototype.getLabelWidth = function() {
+        Tick.prototype.getLabelWidth = function () {
             return this.label.getBBox().width;
         };
 
@@ -103,13 +103,13 @@
          *                           if a value has already been set
          * @return {number} maxLabelLength - the maximum label length of the axis
          */
-        Axis.prototype.getMaxLabelLength = function(force) {
+        Axis.prototype.getMaxLabelLength = function (force) {
             var tickPositions = this.tickPositions,
                 ticks = this.ticks,
                 maxLabelLength = 0;
 
             if (!this.maxLabelLength || force) {
-                each(tickPositions, function(tick) {
+                each(tickPositions, function (tick) {
                     tick = ticks[tick];
                     if (tick && tick.labelLength > maxLabelLength) {
                         maxLabelLength = tick.labelLength;
@@ -123,7 +123,7 @@
         /**
          * Adds the axis defined in axis.options.title
          */
-        Axis.prototype.addTitle = function() {
+        Axis.prototype.addTitle = function () {
             var axis = this,
                 renderer = axis.chart.renderer,
                 axisParent = axis.axisParent,
@@ -156,11 +156,11 @@
                     })[axisTitleOptions.align];
                 }
                 axis.axisTitle = renderer.text(
-                        axisTitleOptions.text,
-                        0,
-                        0,
-                        axisTitleOptions.useHTML
-                    )
+                    axisTitleOptions.text,
+                    0,
+                    0,
+                    axisTitleOptions.useHTML
+                )
                     .attr({
                         zIndex: 7,
                         rotation: axisTitleOptions.rotation || 0,
@@ -168,9 +168,9 @@
                     })
                     .addClass('highcharts-axis-title')
 
-                // Add to axisParent instead of axisGroup, to ignore the space
-                // it takes
-                .add(axisParent);
+                    // Add to axisParent instead of axisGroup, to ignore the space
+                    // it takes
+                    .add(axisParent);
                 axis.axisTitle.isNew = true;
             }
 
@@ -184,7 +184,7 @@
          */
         H.dateFormats = {
             // Week number
-            W: function(timestamp) {
+            W: function (timestamp) {
                 var date = new Date(timestamp),
                     day = date.getUTCDay() === 0 ? 7 : date.getUTCDay(),
                     time = date.getTime(),
@@ -195,7 +195,7 @@
                 return 1 + Math.floor(dayNumber / 7);
             },
             // First letter of the day of the week, e.g. 'M' for 'Monday'.
-            E: function(timestamp) {
+            E: function (timestamp) {
                 return dateFormat('%a', timestamp, true).charAt(0);
             }
         };
@@ -209,7 +209,7 @@
          *
          * @param {function} proceed - the original function
          */
-        wrap(Tick.prototype, 'addLabel', function(proceed) {
+        wrap(Tick.prototype, 'addLabel', function (proceed) {
             var axis = this.axis,
                 isCategoryAxis = axis.options.categories !== undefined,
                 tickPositions = axis.tickPositions,
@@ -227,9 +227,9 @@
          * @param {function} proceed - the original function
          *
          * @return {object} object - an object containing x and y positions
-         *						 for the tick
+         *                         for the tick
          */
-        wrap(Tick.prototype, 'getLabelPosition', function(proceed, x, y, label) {
+        wrap(Tick.prototype, 'getLabelPosition', function (proceed, x, y, label) {
             var retVal = proceed.apply(this, Array.prototype.slice.call(arguments, 1)),
                 axis = this.axis,
                 options = axis.options,
@@ -290,7 +290,7 @@
          * @param {function} proceed - the original function
          * @returns {array} retVal -
          */
-        wrap(Axis.prototype, 'tickSize', function(proceed) {
+        wrap(Axis.prototype, 'tickSize', function (proceed) {
             var axis = this,
                 retVal = proceed.apply(axis, Array.prototype.slice.call(arguments, 1)),
                 labelPadding,
@@ -315,7 +315,7 @@
          *
          * @param {function} proceed - the original function
          */
-        wrap(Axis.prototype, 'getOffset', function(proceed) {
+        wrap(Axis.prototype, 'getOffset', function (proceed) {
             var axis = this,
                 axisOffset = axis.chart.axisOffset,
                 side = axis.side,
@@ -324,8 +324,8 @@
                 options = axis.options,
                 axisTitleOptions = options.title,
                 addTitle = axisTitleOptions &&
-                axisTitleOptions.text &&
-                axisTitleOptions.enabled !== false;
+                    axisTitleOptions.text &&
+                    axisTitleOptions.enabled !== false;
 
             if (axis.options.grid && isObject(axis.options.title)) {
 
@@ -359,7 +359,7 @@
          *
          * @param {function} proceed - the original function
          */
-        wrap(Axis.prototype, 'renderUnsquish', function(proceed) {
+        wrap(Axis.prototype, 'renderUnsquish', function (proceed) {
             if (this.options.grid) {
                 this.labelRotation = 0;
                 this.options.labels.rotation = 0;
@@ -372,7 +372,7 @@
          *
          * @param {function} proceed - the original function
          */
-        wrap(Axis.prototype, 'setOptions', function(proceed, userOptions) {
+        wrap(Axis.prototype, 'setOptions', function (proceed, userOptions) {
             var axis = this;
             if (userOptions.grid && axis.horiz) {
                 userOptions.startOnTick = true;
@@ -388,7 +388,7 @@
          *
          * @param {function} proceed - the original function
          */
-        wrap(Axis.prototype, 'render', function(proceed) {
+        wrap(Axis.prototype, 'render', function (proceed) {
             var axis = this,
                 options = axis.options,
                 labelPadding,
@@ -421,13 +421,13 @@
                 // Add right wall on horizontal axes
                 if (axis.horiz) {
                     axis.rightWall = renderer.path([
-                            'M',
-                            axisGroupBox.x + axis.width + 1, // account for left wall
-                            axisGroupBox.y,
-                            'L',
-                            axisGroupBox.x + axis.width + 1, // account for left wall
-                            axisGroupBox.y + axisGroupBox.height
-                        ])
+                        'M',
+                        axisGroupBox.x + axis.width + 1, // account for left wall
+                        axisGroupBox.y,
+                        'L',
+                        axisGroupBox.x + axis.width + 1, // account for left wall
+                        axisGroupBox.y + axisGroupBox.height
+                    ])
                         .attr({
                             stroke: options.tickColor || '#ccd6eb',
                             'stroke-width': options.tickWidth || 1,
@@ -495,14 +495,14 @@
          *
          * @param {function} proceed - the original function
          */
-        wrap(Chart.prototype, 'render', function(proceed) {
+        wrap(Chart.prototype, 'render', function (proceed) {
             // 25 is optimal height for default fontSize (11px)
             // 25 / 11 ≈ 2.28
             var fontSizeToCellHeightRatio = 25 / 11,
                 fontMetrics,
                 fontSize;
 
-            each(this.axes, function(axis) {
+            each(this.axes, function (axis) {
                 var options = axis.options;
                 if (options.grid) {
                     fontSize = options.labels.style.fontSize;

@@ -49,6 +49,7 @@ public class HouseController {
 
     /**
      * 获取支持城市列表
+     *
      * @return
      */
     @GetMapping("address/support/cities")
@@ -63,6 +64,7 @@ public class HouseController {
 
     /**
      * 获取对应城市支持区域列表
+     *
      * @param cityEnName
      * @return
      */
@@ -78,6 +80,7 @@ public class HouseController {
 
     /**
      * 获取具体城市所支持的地铁线路
+     *
      * @param cityEnName
      * @return
      */
@@ -94,6 +97,7 @@ public class HouseController {
 
     /**
      * 获取对应地铁线路所支持的地铁站点
+     *
      * @param subwayId
      * @return
      */
@@ -110,6 +114,7 @@ public class HouseController {
 
     /**
      * 租房
+     *
      * @param rentSearch
      * @param model
      * @param session
@@ -168,6 +173,7 @@ public class HouseController {
 
     /**
      * 查看房源详情
+     *
      * @param houseId
      * @param model
      * @return
@@ -220,6 +226,7 @@ public class HouseController {
 
     /**
      * 百度地图
+     *
      * @param cityEnName
      * @param model
      * @param session

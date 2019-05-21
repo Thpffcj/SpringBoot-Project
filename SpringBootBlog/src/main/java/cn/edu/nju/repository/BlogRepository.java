@@ -11,6 +11,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 public interface BlogRepository extends ElasticsearchRepository<Blog, String> {
     /**
      * 根据用户名分页查询用户列表
+     *
      * @param pageable
      * @return
      */

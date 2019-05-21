@@ -110,6 +110,7 @@ public class UserPassServiceImpl implements IUserPassService {
 
     /**
      * 根据优惠券状态获取优惠券信息
+     *
      * @param userId 用户 id
      * @param status {@link PassStatus}
      * @return {@link Response}
@@ -173,13 +174,14 @@ public class UserPassServiceImpl implements IUserPassService {
 
     /**
      * 通过获取的 Passes 对象构造 Map
+     *
      * @param passes {@link Pass}
      * @return Map {@link PassTemplate}
      * @throws Exception
      */
     private Map<String, PassTemplate> buildPassTemplateMap(List<Pass> passes) throws Exception {
 
-        String[] patterns = new String[] {"yyyy-MM-dd"};
+        String[] patterns = new String[]{"yyyy-MM-dd"};
 
         byte[] FAMILY_B = Bytes.toBytes(Constants.PassTemplateTable.FAMILY_B);
         byte[] ID = Bytes.toBytes(Constants.PassTemplateTable.ID);
@@ -231,6 +233,7 @@ public class UserPassServiceImpl implements IUserPassService {
 
     /**
      * 通过获取的 PassTemplate 对象构造 Merchants Map
+     *
      * @param passTemplates {@link PassTemplate}
      * @return Map {@link Merchants}
      */
@@ -242,7 +245,7 @@ public class UserPassServiceImpl implements IUserPassService {
         ).collect(Collectors.toList());
         List<Merchants> merchants = merchantsDao.findByIdIn(merchantsIds);
 
-        merchants.forEach(m ->merchantsMap.put(m.getId(), m));
+        merchants.forEach(m -> merchantsMap.put(m.getId(), m));
 
         return merchantsMap;
     }

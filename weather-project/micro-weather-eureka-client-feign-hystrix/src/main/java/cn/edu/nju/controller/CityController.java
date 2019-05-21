@@ -16,7 +16,7 @@ public class CityController {
     private CityClient cityClient;
 
     @GetMapping("/cities")
-    @HystrixCommand(fallbackMethod="defaultCities")
+    @HystrixCommand(fallbackMethod = "defaultCities")
     public String listCity() {
 
         // 通过Feign客户端来查找

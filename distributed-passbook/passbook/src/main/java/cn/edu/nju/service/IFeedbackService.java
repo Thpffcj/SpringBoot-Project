@@ -11,6 +11,7 @@ public interface IFeedbackService {
 
     /**
      * 创建评论
+     *
      * @param feedback {@link Feedback}
      * @return {@link Response}
      */
@@ -18,6 +19,7 @@ public interface IFeedbackService {
 
     /**
      * 获取用户评论
+     *
      * @param userId 用户 id
      * @return {@link Response}
      */

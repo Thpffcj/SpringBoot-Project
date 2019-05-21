@@ -4,7 +4,7 @@ package cn.edu.nju.constant;
  * 评论类型枚举
  * Created by thpffcj on 2019-04-23.
  */
-public enum  FeedbackType {
+public enum FeedbackType {
 
     PASS("pass", "针对优惠券的评论"),
     APP("app", "针对卡包 APP 的评论");

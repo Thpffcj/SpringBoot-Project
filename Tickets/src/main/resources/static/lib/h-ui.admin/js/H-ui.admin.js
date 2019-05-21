@@ -26,8 +26,7 @@ function tabNavallwidth() {
     var w = $tabNavWp.width();
     if (taballwidth + 25 > w) {
         $tabNavmore.show()
-    }
-    else {
+    } else {
         $tabNavmore.hide();
         $tabNav.css({left: 0});
     }
@@ -39,6 +38,7 @@ function Huiasidedisplay() {
         $(".Hui-aside").show();
     }
 }
+
 /*获取皮肤cookie*/
 function getskincookie() {
     var v = $.cookie("Huiskin");
@@ -51,6 +51,7 @@ function getskincookie() {
         $("#skin").attr("href", hrefRes);
     }
 }
+
 /*菜单导航*/
 function Hui_admin_tab(obj) {
     var bStop = false,
@@ -83,8 +84,7 @@ function Hui_admin_tab(obj) {
     if (!bStop) {
         creatIframe(href, title);
         min_titleList();
-    }
-    else {
+    } else {
         show_navLi.removeClass("active").eq(bStopIndex).addClass("active");
         iframe_box.find(".show_iframe").hide().eq(bStopIndex).show().find("iframe").attr("src", href);
     }
@@ -138,8 +138,7 @@ function creatIframe(href, titleName) {
     var w = $tabNavWp.width();
     if (taballwidth + 25 > w) {
         $tabNavmore.show()
-    }
-    else {
+    } else {
         $tabNavmore.hide();
         $tabNav.css({left: 0})
     }
@@ -183,6 +182,7 @@ function removeIframeAll() {
 }
 
 /*弹出层*/
+
 /*
  参数解释：
  title	标题
@@ -218,6 +218,7 @@ function layer_show(title, url, w, h) {
         content: url
     });
 }
+
 /*关闭弹出框口*/
 function layer_close() {
     var index = parent.layer.getFrameIndex(window.name);

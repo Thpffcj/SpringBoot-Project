@@ -7,25 +7,25 @@
  *
  * License: www.highcharts.com/license
  */
-(function(factory) {
+(function (factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory;
     } else {
         factory(Highcharts);
     }
-}(function(Highcharts) {
-    (function(H) {
+}(function (Highcharts) {
+    (function (H) {
         /**
          * License: www.highcharts.com/license
          * Author: Torstein Honsi
-         * 
+         *
          * This is an experimental Highcharts module that draws long data series on a canvas
          * in order to increase performance of the initial load time and tooltip responsiveness.
          *
          * Compatible with HTML5 canvas compatible browsers (not IE < 9).
          *
          *
-         * 
+         *
          * Development plan
          * - Column range.
          * - Heatmap. Modify the heatmap-canvas demo so that it uses this module.
@@ -35,12 +35,12 @@
          * - Check inverted charts.
          * - Check reversed axes.
          * - Chart callback should be async after last series is drawn. (But not necessarily, we don't do
-        	 that with initial series animation).
+         that with initial series animation).
          * - Cache full-size image so we don't have to redraw on hide/show and zoom up. But k-d-tree still
          *   needs to be built.
          * - Test IE9 and IE10.
-         * - Stacking is not perhaps not correct since it doesn't use the translation given in 
-         *   the translate method. If this gets to complicated, a possible way out would be to 
+         * - Stacking is not perhaps not correct since it doesn't use the translation given in
+         *   the translate method. If this gets to complicated, a possible way out would be to
          *   have a simplified renderCanvas method that simply draws the areaPath on a canvas.
          *
          * If this module is taken in as part of the core
@@ -56,12 +56,12 @@
          * - Columns are always one pixel wide. Don't set the threshold too low.
          *
          * Optimizing tips for users
-         * - For scatter plots, use a marker.radius of 1 or less. It results in a rectangle being drawn, which is 
+         * - For scatter plots, use a marker.radius of 1 or less. It results in a rectangle being drawn, which is
          *   considerably faster than a circle.
          * - Set extremes (min, max) explicitly on the axes in order for Highcharts to avoid computing extremes.
          * - Set enableMouseTracking to false on the series to improve total rendering time.
          * - The default threshold is set based on one series. If you have multiple, dense series, the combined
-         *   number of points drawn gets higher, and you may want to set the threshold lower in order to 
+         *   number of points drawn gets higher, and you may want to set the threshold lower in order to
          *   use optimizations.
          */
 
@@ -69,7 +69,8 @@
 
         var win = H.win,
             doc = win.document,
-            noop = function() {},
+            noop = function () {
+            },
             Color = H.Color,
             Series = H.Series,
             seriesTypes = H.seriesTypes,
@@ -99,7 +100,7 @@
             }
             if (proceed) {
                 if (i < arr.length) {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         eachAsync(arr, fn, finalFunc, chunkSize, i);
                     });
                 } else if (finalFunc) {
@@ -111,7 +112,7 @@
         // Set default options
         each(
             ['area', 'arearange', 'bubble', 'column', 'line', 'scatter'],
-            function(type) {
+            function (type) {
                 if (plotOptions[type]) {
                     plotOptions[type].boostThreshold = 5000;
                 }
@@ -122,7 +123,7 @@
          * Override a bunch of methods the same way. If the number of points is below the threshold,
          * run the original method. If not, check for a canvas version or do nothing.
          */
-        each(['translate', 'generatePoints', 'drawTracker', 'drawPoints', 'render'], function(method) {
+        each(['translate', 'generatePoints', 'drawTracker', 'drawPoints', 'render'], function (method) {
             function branch(proceed) {
                 var letItPass = this.options.stacking && (method === 'translate' || method === 'generatePoints');
                 if ((this.processedXData || this.options.data).length < (this.options.boostThreshold || Number.MAX_VALUE) ||
@@ -144,11 +145,12 @@
                     this[method + 'Canvas']();
                 }
             }
+
             wrap(Series.prototype, method, branch);
 
             // A special case for some types - its translate method is already wrapped
             if (method === 'translate') {
-                each(['arearange', 'bubble', 'column'], function(type) {
+                each(['arearange', 'bubble', 'column'], function (type) {
                     if (seriesTypes[type]) {
                         wrap(seriesTypes[type].prototype, method, branch);
                     }
@@ -160,17 +162,17 @@
          * Do not compute extremes when min and max are set.
          * If we use this in the core, we can add the hook to hasExtremes to the methods directly.
          */
-        wrap(Series.prototype, 'getExtremes', function(proceed) {
+        wrap(Series.prototype, 'getExtremes', function (proceed) {
             if (!this.hasExtremes()) {
                 proceed.apply(this, Array.prototype.slice.call(arguments, 1));
             }
         });
-        wrap(Series.prototype, 'setData', function(proceed) {
+        wrap(Series.prototype, 'setData', function (proceed) {
             if (!this.hasExtremes(true)) {
                 proceed.apply(this, Array.prototype.slice.call(arguments, 1));
             }
         });
-        wrap(Series.prototype, 'processData', function(proceed) {
+        wrap(Series.prototype, 'processData', function (proceed) {
             if (!this.hasExtremes(true)) {
                 proceed.apply(this, Array.prototype.slice.call(arguments, 1));
             }
@@ -180,7 +182,7 @@
         H.extend(Series.prototype, {
             pointRange: 0,
             allowDG: false, // No data grouping, let boost handle large data 
-            hasExtremes: function(checkX) {
+            hasExtremes: function (checkX) {
                 var options = this.options,
                     data = options.data,
                     xAxis = this.xAxis && this.xAxis.options,
@@ -193,7 +195,7 @@
              * If implemented in the core, parts of this can probably be shared with other similar
              * methods in Highcharts.
              */
-            destroyGraphics: function() {
+            destroyGraphics: function () {
                 var series = this,
                     points = this.points,
                     point,
@@ -208,7 +210,7 @@
                     }
                 }
 
-                each(['graph', 'area', 'tracker'], function(prop) {
+                each(['graph', 'area', 'tracker'], function (prop) {
                     if (series[prop]) {
                         series[prop] = series[prop].destroy();
                     }
@@ -216,15 +218,15 @@
             },
 
             /**
-             * Create a hidden canvas to draw the graph on. The contents is later copied over 
+             * Create a hidden canvas to draw the graph on. The contents is later copied over
              * to an SVG image element.
              */
-            getContext: function() {
+            getContext: function () {
                 var chart = this.chart,
                     width = chart.plotWidth,
                     height = chart.plotHeight,
                     ctx = this.ctx,
-                    swapXY = function(proceed, x, y, a, b, c, d) {
+                    swapXY = function (proceed, x, y, a, b, c, d) {
                         proceed.call(this, y, x, a, b, c, d);
                     };
 
@@ -233,7 +235,7 @@
                     this.image = chart.renderer.image('', 0, 0, width, height).add(this.group);
                     this.ctx = ctx = this.canvas.getContext('2d');
                     if (chart.inverted) {
-                        each(['moveTo', 'lineTo', 'rect', 'arc'], function(fn) {
+                        each(['moveTo', 'lineTo', 'rect', 'arc'], function (fn) {
                             wrap(ctx, fn, swapXY);
                         });
                     }
@@ -251,20 +253,20 @@
                 return ctx;
             },
 
-            /** 
+            /**
              * Draw the canvas image inside an SVG image
              */
-            canvasToSVG: function() {
+            canvasToSVG: function () {
                 this.image.attr({
                     href: this.canvas.toDataURL('image/png')
                 });
             },
 
-            cvsLineTo: function(ctx, clientX, plotY) {
+            cvsLineTo: function (ctx, clientX, plotY) {
                 ctx.lineTo(clientX, plotY);
             },
 
-            renderCanvas: function() {
+            renderCanvas: function () {
                 var series = this,
                     options = series.options,
                     chart = series.chart,
@@ -289,8 +291,8 @@
                     cvsDrawPoint = this.cvsDrawPoint,
                     cvsLineTo = options.lineWidth ? this.cvsLineTo : false,
                     cvsMarker = r && r <= 1 ?
-                    this.cvsMarkerSquare :
-                    this.cvsMarkerCircle,
+                        this.cvsMarkerSquare :
+                        this.cvsMarkerCircle,
                     strokeBatch = this.cvsStrokeBatch || 1000,
                     enableMouseTracking = options.enableMouseTracking !== false,
                     lastPoint,
@@ -312,9 +314,9 @@
                     minI,
                     maxI,
                     fillColor = series.fillOpacity ?
-                    new Color(series.color).setOpacity(pick(options.fillOpacity, 0.75)).get() :
-                    series.color,
-                    stroke = function() {
+                        new Color(series.color).setOpacity(pick(options.fillOpacity, 0.75)).get() :
+                        series.color,
+                    stroke = function () {
                         if (doFill) {
                             ctx.fillStyle = fillColor;
                             ctx.fill();
@@ -324,7 +326,7 @@
                             ctx.stroke();
                         }
                     },
-                    drawPoint = function(clientX, plotY, yBottom, i) {
+                    drawPoint = function (clientX, plotY, yBottom, i) {
                         if (c === 0) {
                             ctx.beginPath();
 
@@ -361,7 +363,7 @@
                         };
                     },
 
-                    addKDPoint = function(clientX, plotY, i) {
+                    addKDPoint = function (clientX, plotY, i) {
 
                         // The k-d tree requires series points. Reduce the amount of points, since the time to build the 
                         // tree increases exponentially.
@@ -397,7 +399,7 @@
                 );
 
                 series.markerGroup = series.group;
-                addEvent(series, 'destroy', function() {
+                addEvent(series, 'destroy', function () {
                     series.markerGroup = null;
                 });
 
@@ -424,7 +426,7 @@
                 }
 
                 // Loop over the points
-                eachAsync(isStacked ? series.data : (xData || rawData), function(d, i) {
+                eachAsync(isStacked ? series.data : (xData || rawData), function (d, i) {
                     var x,
                         y,
                         clientX,
@@ -516,7 +518,7 @@
                     }
 
                     return !chartDestroyed;
-                }, function() {
+                }, function () {
                     var loadingDiv = chart.loadingDiv,
                         loadingShown = chart.loadingShown;
                     stroke();
@@ -533,7 +535,7 @@
                             opacity: 0
                         });
                         chart.loadingShown = false;
-                        destroyLoadingDiv = setTimeout(function() {
+                        destroyLoadingDiv = setTimeout(function () {
                             if (loadingDiv.parentNode) { // In exporting it is falsy
                                 loadingDiv.parentNode.removeChild(loadingDiv);
                             }
@@ -555,19 +557,19 @@
             }
         });
 
-        seriesTypes.scatter.prototype.cvsMarkerCircle = function(ctx, clientX, plotY, r) {
+        seriesTypes.scatter.prototype.cvsMarkerCircle = function (ctx, clientX, plotY, r) {
             ctx.moveTo(clientX, plotY);
             ctx.arc(clientX, plotY, r, 0, 2 * Math.PI, false);
         };
 
         // Rect is twice as fast as arc, should be used for small markers
-        seriesTypes.scatter.prototype.cvsMarkerSquare = function(ctx, clientX, plotY, r) {
+        seriesTypes.scatter.prototype.cvsMarkerSquare = function (ctx, clientX, plotY, r) {
             ctx.rect(clientX - r, plotY - r, r * 2, r * 2);
         };
         seriesTypes.scatter.prototype.fill = true;
 
         if (seriesTypes.bubble) {
-            seriesTypes.bubble.prototype.cvsMarkerCircle = function(ctx, clientX, plotY, r, i) {
+            seriesTypes.bubble.prototype.cvsMarkerCircle = function (ctx, clientX, plotY, r, i) {
                 ctx.moveTo(clientX, plotY);
                 ctx.arc(clientX, plotY, this.radii && this.radii[i], 0, 2 * Math.PI, false);
             };
@@ -576,7 +578,7 @@
 
 
         extend(seriesTypes.area.prototype, {
-            cvsDrawPoint: function(ctx, clientX, plotY, yBottom, lastPoint) {
+            cvsDrawPoint: function (ctx, clientX, plotY, yBottom, lastPoint) {
                 if (lastPoint && clientX !== lastPoint.clientX) {
                     ctx.moveTo(lastPoint.clientX, lastPoint.yBottom);
                     ctx.lineTo(lastPoint.clientX, lastPoint.plotY);
@@ -590,7 +592,7 @@
         });
 
         extend(seriesTypes.column.prototype, {
-            cvsDrawPoint: function(ctx, clientX, plotY, yBottom) {
+            cvsDrawPoint: function (ctx, clientX, plotY, yBottom) {
                 ctx.rect(clientX - 1, plotY, 1, yBottom - plotY);
             },
             fill: true,
@@ -603,7 +605,7 @@
          * @param   {Number} boostPoint A stripped-down point object
          * @returns {Object}   A Point object as per http://api.highcharts.com/highcharts#Point
          */
-        Series.prototype.getPoint = function(boostPoint) {
+        Series.prototype.getPoint = function (boostPoint) {
             var point = boostPoint;
 
             if (boostPoint && !(boostPoint instanceof this.pointClass)) {
@@ -624,11 +626,11 @@
          * this is handled by Series.destroy that calls Point.destroy, but the fake
          * search points are not registered like that.
          */
-        wrap(Series.prototype, 'destroy', function(proceed) {
+        wrap(Series.prototype, 'destroy', function (proceed) {
             var series = this,
                 chart = series.chart;
             if (chart.hoverPoints) {
-                chart.hoverPoints = grep(chart.hoverPoints, function(point) {
+                chart.hoverPoints = grep(chart.hoverPoints, function (point) {
                     return point.series === series;
                 });
             }
@@ -642,7 +644,7 @@
         /**
          * Return a point instance from the k-d-tree
          */
-        wrap(Series.prototype, 'searchPoint', function(proceed) {
+        wrap(Series.prototype, 'searchPoint', function (proceed) {
             return this.getPoint(
                 proceed.apply(this, [].slice.call(arguments, 1))
             );

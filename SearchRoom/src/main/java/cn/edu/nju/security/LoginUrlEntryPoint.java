@@ -40,6 +40,7 @@ public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
     /**
      * 根据请求跳转到指定的页面，父类是默认使用loginFormUrl
+     *
      * @param request
      * @param response
      * @param exception
@@ -60,6 +61,7 @@ public class LoginUrlEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
     /**
      * 如果是Api接口 返回json数据 否则按照一般流程处理
+     *
      * @param request
      * @param response
      * @param authException

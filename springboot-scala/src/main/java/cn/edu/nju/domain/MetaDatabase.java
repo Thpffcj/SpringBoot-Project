@@ -1,6 +1,8 @@
 package cn.edu.nju.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -11,6 +13,8 @@ import javax.persistence.Table;
 @Table
 public class MetaDatabase {
 
+    @Id
+    @GeneratedValue
     // 数据集 id
     private Integer id;
 

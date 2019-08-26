@@ -64,7 +64,7 @@
 
 **Eureka的基本架构如下图所示**
 
-![]()
+![](https://raw.githubusercontent.com/Thpffcj/SpringBoot-Project/master/advertising-system/pic/Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84.png)
 
 **Eureka Server的高可用**
 
@@ -72,7 +72,7 @@
 - 因为Eureka Server中存储了整个系统中所有的微服务的元数据信息，单节点一旦挂了，所有的服务信息都会丢失，造成整个系统的瘫痪。
 - 解决办法：搭建Eureka Server集群，让各个Server节点之间互相注册，从而实现微服务元数据的复制/备份，即使单个节点失效，其他的Server节点仍可以继续提供服务
 
-![]()
+![](https://raw.githubusercontent.com/Thpffcj/SpringBoot-Project/master/advertising-system/pic/Eureka-Server%E9%9B%86%E7%BE%A4.png)
 
 ### 2. ad-gateway
 
@@ -81,12 +81,12 @@
 - 微服务系统中往往包含很多个功能不同的子系统或微服务，那么，外部应用怎样去访问各种各样的微服务呢？
 - 这也是Zuul所要解决的一个主要问题。在微服务架构中，后端服务往往不直接开放给调用端，而是通过一个服务网关根据请求的url，路由到相应的服务，即实现请求转发，效果如下图所示。
 
-![]()
+![](https://raw.githubusercontent.com/Thpffcj/SpringBoot-Project/master/advertising-system/pic/Zuul%E4%BB%8B%E7%BB%8D.png)
 
 - Zuul提供了服务网关的功能，可以实现负载均衡、反向代理、动态路由、请求转发等功能。
 - Zuul大部分功能都是通过过滤器实现的，Zuul中定义了四种标准的过滤器类型，同时，还支持自定义过滤器。这些过滤器的类型也对应于请求的典型生命周期，如下图所示。
 
-![]()
+![](https://raw.githubusercontent.com/Thpffcj/SpringBoot-Project/master/advertising-system/pic/Zuul%E8%BF%87%E6%BB%A4%E5%99%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png)
 
 - pre：在请求被路由之前调用
 - route：在路由请求时被调用
@@ -103,17 +103,41 @@
 
 **统一响应的格式**
 
-![]()
+![](https://raw.githubusercontent.com/Thpffcj/SpringBoot-Project/master/advertising-system/pic/%E7%BB%9F%E4%B8%80%E5%93%8D%E5%BA%94%E7%9A%84%E6%A0%BC%E5%BC%8F.png)
 
 **统一的异常处理**
 
+![](https://raw.githubusercontent.com/Thpffcj/SpringBoot-Project/master/advertising-system/pic/%E7%BB%9F%E4%B8%80%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png)
+
+### 4. ad-sponsor
+
+**Spring IOC原理拆解**
+
 ![]()
 
-### 4. ad-dashboard
+**Spring MVC模块解析**
 
-### 5. ad-search
+![]()
 
-### 6. ad-sponsor
+**广告投放子系统数据库设计**
+
+![]()
+
+![]()
+
+**数据表设计**
+
+![]()
+
+![]()
+
+![]()
+
+### 5. ad-dashboard
+
+### 6. ad-search
+
+
 
 
 

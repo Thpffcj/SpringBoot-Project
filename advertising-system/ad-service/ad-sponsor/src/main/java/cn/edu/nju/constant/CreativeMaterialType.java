@@ -1,4 +1,4 @@
-package cn.edu.nju;
+package cn.edu.nju.constant;
 
 import lombok.Getter;
 

@@ -18,7 +18,7 @@ public class AdPlanGetRequest {
     private Long userId;
     private List<Long> ids;
 
-    private boolean validate() {
+    public boolean validate() {
         return userId != null && !CollectionUtils.isEmpty(ids);
     }
 }

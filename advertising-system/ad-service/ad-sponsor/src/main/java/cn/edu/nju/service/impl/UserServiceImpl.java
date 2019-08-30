@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Slf4j
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements IUserService {
 
     private final AdUserRepository userRepository;
 
     @Autowired
-    public UserService(AdUserRepository userRepository) {
+    public UserServiceImpl(AdUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

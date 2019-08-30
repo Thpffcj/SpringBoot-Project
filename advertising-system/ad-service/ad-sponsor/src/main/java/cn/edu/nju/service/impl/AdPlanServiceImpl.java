@@ -26,13 +26,13 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
-public class AdPlanService implements IAdPlanService {
+public class AdPlanServiceImpl implements IAdPlanService {
 
     private final AdUserRepository userRepository;
     private final AdPlanRepository planRepository;
 
     @Autowired
-    public AdPlanService(AdPlanRepository planRepository, AdUserRepository userRepository) {
+    public AdPlanServiceImpl(AdPlanRepository planRepository, AdUserRepository userRepository) {
         this.planRepository = planRepository;
         this.userRepository = userRepository;
     }

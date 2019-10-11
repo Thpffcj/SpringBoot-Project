@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:include="venue/common :: head"></div>
+    <link rel="stylesheet" type="text/css" href="/static/lib/webuploader/0.1.5/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/venue/add-venue.css">
+    <link rel="stylesheet" href="../../static/css/other.css" th:href="@{/css/other.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <title>增加演出</title>
+</head>
+<body>
+
+<div>
+    <content class="page-container">
+        <form class="form form-horizontal" id="form-venue-info">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>id：</label>
+                <label class="form-label col-xs-8 col-sm-9 control-label" th:text="${venue.id}"></label>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>密码：</label>
+                <label class="form-label col-xs-8 col-sm-9 control-label" th:text="${venue.password}"></label>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
+                <label class="form-label col-xs-8 col-sm-9 control-label" th:text="${venue.name}"></label>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>地址：</label>
+                <label class="form-label col-xs-8 col-sm-9 control-label" th:text="${venue.address}"></label>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">演出描述：</label>
+                <label class="form-label col-xs-8 col-sm-9 control-label" th:text="${venue.description}"></label>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>状态：</label>
+                <label class="form-label col-xs-8 col-sm-9" control-label
+                       th:text="(${venue.status == 0}) ? '未审核' : '审核通过'"></label>
+            </div>
+
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                    <p style="margin-top: 10px">
+                        <a href="javascript:" class="btn btn-primary my-pop-1" role="button">修改信息</a>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </content>
+</div>
+
+<div class="cd-user-modal cd-user-modal-1">
+    <div class="cd-user-modal-container">
+        <div class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">场馆信息修改申请</div>
+            <form class="form-horizontal" action="info.html" th:action="@{/venue/edit}" method="post">
+                <div class="row cl">
+                    <label for="name" class="col-sm-2 control-label">场馆名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="场馆名称"
+                               required="required"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row cl">
+                    <label for="address" class="col-sm-2 control-label">场馆地址</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="address" id="address" placeholder="场馆地址"
+                               required="required"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row cl">
+                    <label for="description" class="col-sm-2 control-label">场馆描述</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="description" id="description"
+                               placeholder="场馆描述" required="required"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row cl">
+                    <div class="col-sm-offset-2 col-sm-10 col-md-4">
+                        <button type="submit" class=" btn btn-primary">确定</button>
+                        <a href="#" class="btn btn-danger modal-cancel">取消</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:include="venue/common :: footer"></footer>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/static/lib/webuploader/0.1.5/webuploader.min.js"></script>
+<script src="../../static/js/promptForm.js" th:src="@{/js/promptForm.js}"></script>
+<!--/请在上方写此页面业务相关的脚本-->
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+        var edit =/*[[${edit}]]*/ 'false';
+        console.log('edit' + edit);
+        if (edit === true) {
+            var $editPop = $('.my-pop-1');
+            $editPop.attr("disabled", 'disabled');
+            $editPop.text('Edit Waiting For Approval');
+        }
+        var open = /*[[${open}]]*/ 'false';
+        console.log('open' + open);
+        if (open === true) {
+            var $openPop = $('.my-pop-2');
+            $openPop.attr("disabled", 'disabled');
+            $openPop.text('Open Application Waiting For Approval');
+        }
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="/static/css/common.css" rel='stylesheet' type='text/css'/>
+    <link href="/static/css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/lib/layui/layui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/member/login.css">
+</head>
+<body>
+<div class="xunwu-container">
+    <!--<header class="xunwu-header">-->
+    <!--<h1>寻屋</h1>-->
+    <!--</header>-->
+
+    <div class="login-form form-bg" style="padding: 90px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <form class="form-horizontal">
+                        <div class="heading">
+                            <a><span class="select" data-bind="email">会员注册&nbsp;&nbsp;&nbsp;</span></a>|
+                            <a><span class="" data-bind="password">&nbsp;&nbsp;&nbsp;会员登录</span></a>
+                        </div>
+                        <span class="error-message" style="color: red;">
+                        </span>
+
+                        <div class="email-panel">
+                            <div class="form-group">
+                                <input name="email" type="email" class="form-control email" id="email"
+                                       placeholder="邮箱">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="form-group help">
+                                <input name="loginPassword" type="text" class="form-control password" id="loginPassword"
+                                       placeholder="密码">
+                                <i class="fa fa-lock"></i>
+                                <!--<a href="#" class="fa fa-question-circle"></a>-->
+                            </div>
+                        </div>
+
+                        <div class="password-panel" style="display: none;">
+                            <div class="form-group">
+                                <input name="username" type="text" class="form-control username" id="nameOrPhone"
+                                       placeholder="用户名/邮箱">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="form-group help">
+                                <input name="password" type="password" class="form-control code" id="password"
+                                       placeholder="密码">
+                                <i class="fa fa-lock"></i>
+                                <!--<a href="#" class="fa fa-question-circle"></a>-->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button id="submit-btn" type="submit" class="btn btn-default">登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="common :: footer"></div>
+
+<script type="text/javascript" src="/static/lib/layui/layui.js"></script>
+<script th:inline="javascript">
+    $(function () {
+
+        var emailTip = $('.heading span[data-bind="email"]'),
+            passwordTip = $('.heading span[data-bind="password"]');
+
+        $('.login-form .heading span').on('click', function () {
+            var bind = $(this).attr('data-bind');
+            if (bind === 'email') {
+                activeEmailPanel();
+            } else {
+                activeNamePanel();
+            }
+        });
+
+        function activeEmailPanel() {
+            var emailPanel = $('.login-form .email-panel'),
+                passwordPanel = $('.login-form .password-panel');
+            emailTip.addClass('select');
+            passwordTip.removeClass('select');
+            emailPanel.css('display', 'block');
+            passwordPanel.css('display', 'none');
+        }
+
+        function activeNamePanel() {
+            var emailPanel = $('.login-form .email-panel'),
+                passwordPanel = $('.login-form .password-panel');
+            passwordTip.addClass('select');
+            emailTip.removeClass('select');
+            passwordPanel.css('display', 'block');
+            emailPanel.css('display', 'none');
+        }
+
+        $('#submit-btn').on('click', function () {
+            var bind = $('.login-form .heading span.select').attr('data-bind');
+
+            // TODO
+            if (bind === 'email') {
+                var email = $('.login-form form').find('input[name="email"]').val();
+                var password = $('.login-form form').find('input[name="loginPassword"]').val();
+
+                $.ajax({
+                    url: "/member/register",
+                    type: "POST",
+                    data: {
+                        email: email,
+                        password: password
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            layer.msg("已发送验证邮件");
+                        } else {
+                            layer.msg(data.msg);
+                        }
+                    },
+                    error: function () {
+                        layer.closeAll();
+                    }
+                });
+                // 此处必须返回false，阻止常规的form提交
+                return false;
+
+            } else {
+                var mail = $('.login-form form').find('input[name="username"]').val();
+                if (mail.length < 1) {
+                    layer.msg('请输入用户名/手机号', {icon: 5, time: 2000});
+                    return false;
+                }
+                var password = $('.login-form form').find('input[name="password"]').val();
+                if (password.length < 1) {
+                    layer.msg('请输入密码', {icon: 5, time: 2000});
+                    return false;
+                }
+
+                $.ajax({
+                    url: "/member/do_login",
+                    type: "POST",
+                    data: {
+                        mail: mail,
+                        password: password
+                    },
+                    success: function (data) {
+                        // layer.closeAll();
+                        if (data.code == 200) {
+                            // console.log(data.data);
+                            switch (data.data.type) {
+                                case 0:
+                                    window.location.href = "/member/index";
+                                    break;
+                                case 1:
+                                    window.location.href = "/venue/center";
+                                    break;
+                                case 2:
+                                    window.location.href = "/admin/index";
+                                    break;
+                                default:
+                                    window.location.href = "/member/login";
+                            }
+                        } else {
+                            layer.msg(data.msg);
+                        }
+                    },
+                    error: function () {
+                        layer.closeAll();
+                    }
+                });
+                // 此处必须返回false，阻止常规的form提交
+                return false;
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

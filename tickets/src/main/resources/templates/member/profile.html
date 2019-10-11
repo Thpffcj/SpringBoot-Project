@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
+    <link rel="stylesheet" href="../../static/css/other.css" th:href="@{/css/other.css}"/>
+    <link rel="stylesheet" href="../../static/css/w3.css" th:href="@{/css/w3.css}"/>
+    <title>会员信息</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html" th:href="@{index}">演出<span
+                        class="sr-only">(current)</span></a></li>
+                <li><a href="statistics.html" th:href="@{statistics}">个人统计</a></li>
+                <li class="active"><a href="profile.html" th:href="@{profile}">个人信息</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="mainpage">
+
+    <div class="table-responsive">
+        <table class="w3-table w3-bordered w3-striped w3-card-4">
+            <tr>
+                <th>属性</th>
+                <th>会员信息</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td th:text="${member.id}">0000001</td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td th:text="${member.mail}">czqofnju@qq.com</td>
+            </tr>
+            <tr>
+                <td>用户名</td>
+                <td th:text="${member.userName}">Smith</td>
+            </tr>
+            <tr>
+                <td>消费</td>
+                <td th:text="${member.consumption}">0</td>
+            </tr>
+            <tr>
+                <td>会员级别</td>
+                <td th:text="${member.level}">0</td>
+            </tr>
+            <tr>
+                <td>会员积分</td>
+                <td th:text="${member.point}">0</td>
+            </tr>
+        </table>
+    </div>
+    <p style="margin-top: 10px">
+        <button type="button" class="btn btn-info editButton" data-toggle="modal"
+                data-target="#editModal">修改用户信息
+        </button>
+        <button type="button" class="btn btn-danger deleteButton" data-toggle="modal"
+                data-target="#deleteModal">会员资格取消
+        </button>
+    </p>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改用户信息</h4>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="nameM" class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" id="nameM" placeholder="用户名"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-password" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="edit-password" id="edit-password"
+                                   placeholder="密码"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary edit">保存修改</button>
+                </div>
+            </form>
+            <div class="err-msg"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">删除账户</h4>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+
+                    <div class="form-group text-danger">
+                        <p class="col-md-offset-2">你真的确定删除么</p>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordM" class="col-sm-2 control-label">你的密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="password" id="passwordM"
+                                   placeholder="Your Password"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-danger delete">确定删除</button>
+                </div>
+
+            </form>
+
+            <div class="err-msg"></div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--Scripts-->
+<script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script th:inline="javascript">
+    var $edit = $('#editModal');
+    var $delete = $('#deleteModal');
+    var inputs = [];
+    var url = '';
+
+    $('.edit').on('click', function () {
+        var name = $edit.find('input[name="name"]').val();
+        var password = $edit.find('input[name="edit-password"]').val();
+
+        inputs = {name: name, password: password};
+        url = '/member/edit';
+        callAjax(inputs, url, false);
+    });
+
+    $('.delete').on('click', function () {
+        var password = $delete.find('input[name="password"]').val();
+        inputs = {password: password};
+        url = '/member/delete';
+        callAjax(inputs, url, true);
+    });
+
+    function callAjax(inputs, url, isdelete) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: inputs,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+                    if (isdelete) {
+                        window.location.replace("http://localhost:8080/member/login");
+                    } else {
+                        location.reload();
+                        if (data.reason) {
+                            $('.mainpage').append('<div class="alert alert-info alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Great!</strong> ' + data.reason + ' </div>');
+                        }
+                    }
+                } else {
+                    var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>'
+                    $(".err-msg").html(error_msg);
+                }
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>

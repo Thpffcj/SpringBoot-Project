@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
+    <title>寻票</title>
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html" th:href="@{index}">演出<span
+                        class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="statistics.html" th:href="@{statistics}">个人统计</a></li>
+                <li><a href="profile.html" th:href="@{profile}">个人信息</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="mainpage">
+    <div class="panel panel-info">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                   aria-expanded="true" aria-controls="collapseOne">
+                    已付款订单
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="table-responsive ">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>订单编号</th>
+                            <th>演出名称</th>
+                            <th>场馆名称</th>
+                            <th>演出时间</th>
+                            <th>座位</th>
+                            <th>数量</th>
+                            <th>下单时间</th>
+                            <th>状态</th>
+                        </tr>
+                        <tr th:each="bookOrder : ${bookOrders}"
+                            th:class="success">
+                            <td th:text="${#numbers.formatInteger(bookOrder.id,7)}"></td>
+                            <td th:text="${bookOrder.showName}"></td>
+                            <td th:text="${bookOrder.venueName}"></td>
+                            <td th:text="${bookOrder.showTime}"></td>
+                            <td th:text="${bookOrder.seatName}"></td>
+                            <td th:text="${bookOrder.number}"></td>
+                            <td th:text="${bookOrder.orderTime}"></td>
+                            <td th:text="${(bookOrder.status == 1) ? '已付款' : '错误' }"></td>
+                            <td>
+                                <a href="javascript:" type="button" th:if="${bookOrder.status == 1}"
+                                   class="cancelButton" data-toggle="modal" th:name="${bookOrder.id}"
+                                   data-target="#cancelModal">退票
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    退订订单
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                <div class="table-responsive ">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>订单编号</th>
+                            <th>演出名称</th>
+                            <th>场馆名称</th>
+                            <th>演出时间</th>
+                            <th>座位</th>
+                            <th>数量</th>
+                            <th>下单时间</th>
+                            <th>状态</th>
+                        </tr>
+                        <tr th:each="refundOrder : ${refundOrders}"
+                            th:class="warning">
+                            <td th:text="${#numbers.formatInteger(refundOrder.id,7)}"></td>
+                            <td th:text="${refundOrder.showName}"></td>
+                            <td th:text="${refundOrder.venueName}"></td>
+                            <td th:text="${refundOrder.showTime}"></td>
+                            <td th:text="${refundOrder.seatName}"></td>
+                            <td th:text="${refundOrder.number}"></td>
+                            <td th:text="${refundOrder.orderTime}"></td>
+                            <td th:text="${(refundOrder.status == 3) ? '已退票' : '错误' }"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                   aria-expanded="true" aria-controls="collapseThree">
+                    以检票订单
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                <div class="table-responsive ">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>订单编号</th>
+                            <th>演出名称</th>
+                            <th>场馆名称</th>
+                            <th>演出时间</th>
+                            <th>座位</th>
+                            <th>数量</th>
+                            <th>下单时间</th>
+                            <th>状态</th>
+                        </tr>
+                        <tr th:each="checkOrder : ${checkOrders}"
+                            th:class="success">
+                            <td th:text="${#numbers.formatInteger(checkOrder.id,7)}"></td>
+                            <td th:text="${checkOrder.showName}"></td>
+                            <td th:text="${checkOrder.venueName}"></td>
+                            <td th:text="${checkOrder.showTime}"></td>
+                            <td th:text="${checkOrder.seatName}"></td>
+                            <td th:text="${checkOrder.number}"></td>
+                            <td th:text="${checkOrder.orderTime}"></td>
+                            <td th:text="${(checkOrder.status == 2) ? '已检票' : '错误' }"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">取消订单</h4>
+            </div>
+            <form class="form-horizontal">
+                <div class="modal-body">
+
+                    <div class="form-group text-danger">
+                        <p class="col-md-offset-2">您确认取消订单么</p>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-danger delete">确认</button>
+                </div>
+
+            </form>
+
+            <div class="err-msg"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--Scripts-->
+<script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script th:inline="javascript">
+    var $cancel = $('#cancelModal');
+    var $cancelButton = $('.cancelButton');
+    var orderId = 0;
+    var inputs = [];
+    var url = '';
+    $cancelButton.on('click', function () {
+        orderId = $(this).attr('name');
+    });
+    $cancel.on('click', function () {
+        inputs = {orderId: orderId};
+        url = '/member/cancelReservation';
+        callAjax(inputs, url, false);
+    });
+
+    function callAjax(inputs, url, isdelete) {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: inputs,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+                    if (isdelete) {
+                        //TODO 暴力返回主页，待修改
+                        window.location.replace("http://localhost:8080/");
+                    } else {
+                        location.reload();
+                        if (data.reason) {
+                            $('.mainpage').append('<div class="alert alert-info alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> <strong>Great!</strong> ' + data.reason + ' </div>');
+                        }
+                    }
+                } else {
+                    var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>'
+                    $(".err-msg").html(error_msg);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

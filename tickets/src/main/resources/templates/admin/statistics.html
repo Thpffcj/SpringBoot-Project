@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
+    <script src="../../static/js/echarts.min.js" th:src="@{/js/echarts.min.js}"></script>
+    <title>Tickets经理</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a class="" href="index.html" th:href="@{index}">消息<span
+                        class="badge">4</span><span
+                        class="sr-only">(current)</span></a></li>
+                <li><a href="settle-account.html" th:href="@{settlements}">演出结算</a></li>
+                <li class="active"><a href="statistics.html" th:href="@{statistics}">网站统计</a></li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="mainpage">
+
+    <h2>场馆演出次数统计</h2>
+    <div id="venue-show-times" style="width: 1100px;height:400px;"></div>
+
+    <h2>场馆演出收入统计</h2>
+    <div id="venue-show-income" style="width: 1100px;height:400px;"></div>
+
+    <h2>会员级别分布</h2>
+    <div id="member-level" style="width: 1100px;height:400px;"></div>
+    <div class="err-msg"></div>
+
+</div>
+
+<!--Scripts-->
+<script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var venueShowTimesChart = echarts.init(document.getElementById('venue-show-times'));
+    var venueShowIncomeChart = echarts.init(document.getElementById('venue-show-income'));
+    var memberLevelChart = echarts.init(document.getElementById('member-level'));
+    var newData = {};
+
+    // ******************************** 第一张图  *******************************
+    var venueShowTimesOption = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data: ['演出次数']
+        },
+        grid: {
+            left: '5%',
+            right: '6%',
+            bottom: '4%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                name: '场馆编号',
+                type: 'category',
+                data: ['Hotel Name', 'Hotel Name', 'Hotel Name', 'Hotel Name']
+            }
+        ],
+        yAxis: [
+            {
+                name: '次数',
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '演出次数',
+                type: 'bar',
+                data: [60, 72, 71, 74]
+            }
+        ]
+    };
+    venueShowTimesChart.setOption(venueShowTimesOption);
+
+    $.ajax({
+        url: '/admin/venueShowTimes',
+        data: '',
+        dataType: 'json',
+        success: function (data) {
+            // console.log(data);
+            if (data.message) {
+                newData = data.data;
+                venueShowTimesOption.xAxis[0].data = Object.keys(newData);
+                // console.log(hotelOption.xAxis.data);
+                venueShowTimesOption.series[0].data = Object.keys(newData).map(function (k) {
+                    return newData[k]
+                });
+                // console.log(hotelOption);
+                venueShowTimesChart.setOption(venueShowTimesOption);
+            } else {
+                var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+                $(".err-msg").html(error_msg);
+            }
+        }
+    });
+
+    // ******************************** 第二张图  *******************************
+    var venueShowIncomeOption = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data: ['场馆收入']
+        },
+        grid: {
+            left: '5%',
+            right: '6%',
+            bottom: '4%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                name: '场馆编号',
+                type: 'category',
+                data: ['Hotel Name', 'Hotel Name', 'Hotel Name', 'Hotel Name']
+            }
+        ],
+        yAxis: [
+            {
+                name: '总收入',
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '场馆收入',
+                type: 'bar',
+                data: [60, 72, 71, 74]
+            }
+        ]
+    };
+    venueShowIncomeChart.setOption(venueShowIncomeOption);
+    $.ajax({
+        url: '/admin/venueShowIncome',
+        data: '',
+        dataType: 'json',
+        success: function (data) {
+            if (data.message) {
+                newData = data.data;
+                venueShowIncomeOption.xAxis[0].data = Object.keys(newData);
+                venueShowIncomeOption.series[0].data = Object.keys(newData).map(function (k) {
+                    return newData[k]
+                });
+                venueShowIncomeChart.setOption(venueShowIncomeOption);
+            } else {
+                var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+                $(".err-msg").html(error_msg);
+            }
+        }
+    });
+
+    // ******************************** 第三张图  *******************************
+    var memberLevelOption = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data: ['等级1', '等级2', '等级3', '等级4']
+        },
+        series: [
+            {
+                name: '等级占比',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [
+                    {value: 335, name: '等级1'},
+                    {value: 310, name: '等级2'},
+                    {value: 310, name: '等级3'},
+                    {value: 234, name: '等级4'}
+                ]
+            }
+        ]
+    };
+
+    memberLevelChart.setOption(memberLevelOption);
+    $.ajax({
+        url: '/admin/memberLevel',
+        data: '',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            if (data.message) {
+                newData = data.data;
+                memberLevelOption.series[0]['data'] = [];
+                for (var temp in newData) {
+                    obj = {value: newData[temp], name: temp};
+                    memberLevelOption.series[0]['data'].push(obj);
+                }
+
+                console.log(memberLevelOption);
+            } else {
+                var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+                $(".err-msg").html(error_msg);
+            }
+            memberLevelChart.setOption(memberLevelOption);
+        }
+
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:include="venue/common :: head"></div>
+    <link rel="stylesheet" type="text/css" href="/static/lib/webuploader/0.1.5/webuploader.css">
+    <!--<link rel="stylesheet" type="text/css" href="/static/css/venue/add-venue.css">-->
+    <title>申请场馆</title>
+</head>
+<body>
+<div>
+    <content class="page-container">
+        <form class="form form-horizontal" id="form-venue-add">
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>场馆名称：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text" value="" placeholder="场馆名称" id="name"
+                           name="name">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>管理员ID：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text" value="" placeholder="管理员ID" id="managerId" name="managerId">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>场馆密码：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text" value="" placeholder="场馆密码" id="password" name="password">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>场馆地址：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <input type="text" class="input-text" value="" placeholder="场馆地址" id="address" name="address">
+                </div>
+            </div>
+
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2">场馆描述：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                <textarea name="description" cols="" rows="" class="textarea" placeholder="说点什么演出相关之类的..."
+                          datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！"></textarea>
+                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                </div>
+            </div>
+
+            <div class="row cl">
+                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                    <button class="btn btn-primary radius" type="submit"><i
+                            class="Hui-iconfont">&#xe632;</i> 提交审核
+                    </button>
+                    <!--<button onClick="layer_close();" class="btn btn-default radius"-->
+                    <button onClick="removeIframe();" class="btn btn-default radius"
+                            type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;
+                    </button>
+                </div>
+            </div>
+        </form>
+    </content>
+</div>
+
+<footer th:include="venue/common :: footer"></footer>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/static/lib/webuploader/0.1.5/webuploader.min.js"></script>
+<!--/请在上方写此页面业务相关的脚本-->
+
+<script th:inline="javascript">
+
+    $(function () {
+
+        //表单验证
+        $("#form-venue-add").validate({
+            submitHandler: function (form) {
+                $(form).ajaxSubmit({
+                    type: 'post',
+                    url: '/venue/add/venue', // 提交地址
+                    success: function (data) {
+                        if (data.code === 200) {
+                            alert('提交成功！');
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.$('.btn-refresh').click();
+                            parent.layer.close(index);
+                            removeIframe();
+                        } else {
+                            layer.msg(data.message, {icon: 5, time: 2000});
+                        }
+                    },
+                    error: function (request, message, e) {
+                        layer.msg(request.responseText, {icon: 5, time: 2000});
+                    }
+                });
+                return false; //此处必须返回false，阻止常规的form提交
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>

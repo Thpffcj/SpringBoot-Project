@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-theme.min.css" th:href="@{/css/bootstrap-theme.min.css}"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap-select.css" th:href="@{/css/bootstrap-select.css}"/>
+    <link rel="stylesheet" href="../../static/css/show.css" th:href="@{/css/show.css}"/>
+    <link rel="stylesheet" href="../../static/css/other.css" th:href="@{/css/other.css}"/>
+    <title>演出详情</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html" th:href="@{index}">寻票</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html" th:href="@{index}">演出<span
+                        class="sr-only">(current)</span></a></li>
+                <li><a href="statistics.html" th:href="@{statistics}">个人统计</a></li>
+                <li><a href="profile.html" th:href="@{profile}">个人信息</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="mainpage">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 th:text="${show.name}"></h1>
+            <p th:text="${show.type}"></p>
+            <p th:text="${show.performanceTime}"></p>
+            <p th:text="${show.description}"></p>
+            <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
+
+            <div class="dropdown">
+                <select class="selectpicker" name="type" id="type">
+                    <option value="不选座">不选座</option>
+                    <option value="看台">看台</option>
+                    <option value="内场">内场</option>
+                    <option value="VIP">VIP</option>
+                </select>
+            </div>
+
+            <br/>
+
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">购买张数</span>
+                <input type="text" id="number" class="form-control" placeholder="购买张数" aria-describedby="sizing-addon1">
+            </div>
+
+            <br/>
+
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-info reserveButton"
+                        th:name="${show.id}">
+                    购买
+                </button>
+                <button type="button" class="btn btn-info payButton" data-toggle="modal"
+                        data-target="#reserveModal" th:name="${show.id}">
+                    去付钱
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reserveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">买票</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="orderId" class="col-sm-2 control-label">订单编号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="orderId" id="orderId" placeholder="订单编号"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <label for="account" class="col-sm-2 control-label">支付账户</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="account" id="account" placeholder="支付账户"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="password" id="password" placeholder="密码"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary pay">购买</button>
+            </div>
+            <div class="err-msg"></div>
+        </div>
+    </div>
+</div>
+
+<!--Scripts-->
+<script src="../../static/js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="../../static/js/jquery.jsonp-2.4.0.min.js" th:src="@{/js/jquery.jsonp-2.4.0.min.js}"></script>
+<script src="../../static/js/bootstrap-select.js" th:src="@{/js/bootstrap-select.js}"></script>
+
+<script th:inline="javascript">
+
+    var showId = 0;
+
+    $('.reserveButton').on('click', function (e) {
+        var showId = 0;
+        showId = $(this).attr("name");
+        var number = $("#number").val();
+        var type = $("#type").val();
+        var inputs = {showId: showId, type: type, number: number};
+        // console.log(inputs);
+        $.ajax({
+            type: "POST",
+            url: '/member/reserve',
+            data: inputs,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+                    alert("您的订单编号是： " + data.data.id +
+                        "\n您的订单总价是： " + data.data.total +
+                        "\n您的等级享受的折扣是： " + data.data.discount +
+                        "\n您的应付金额是： " + data.data.total * data.data.discount +
+                        "\n请在15分钟内付款，否则订单取消");
+                } else {
+                    var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+                    $(".err-msg").html(error_msg);
+                }
+            }
+        });
+    });
+
+    $('.payButton').on('click', function (e) {
+        e.preventDefault();
+        showId = $(this).attr("name");
+    });
+
+    $('.pay').on('click', function (e) {
+        e.preventDefault();
+        var orderId = $("#orderId").val();
+        var account = $("#account").val();
+        var password = $("#password").val();
+        inputs = {orderId: orderId, account: account, password: password};
+        $.ajax({
+            type: "POST",
+            url: '/member/pay',
+            data: inputs,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+                    location.reload();
+                    alert("支付成功");
+                } else {
+                    var error_msg = '<p class="errtip">	<strong>Error</strong>：' + data.reason + '</p>';
+                    $(".err-msg").html(error_msg);
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

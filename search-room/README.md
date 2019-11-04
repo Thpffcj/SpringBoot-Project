@@ -73,31 +73,31 @@
 
 - 主要可以通过城市来查找自己心仪的房源
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E5%AF%BB%E5%B1%8B%E9%A6%96%E9%A1%B5.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E5%AF%BB%E5%B1%8B%E9%A6%96%E9%A1%B5.png)
 
 ### 寻屋租房
 
 - 通过多重查询条件搜索房源，关键词查询主要使用了elasticsearch
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E5%AF%BB%E5%B1%8B%E7%A7%9F%E6%88%BF.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E5%AF%BB%E5%B1%8B%E7%A7%9F%E6%88%BF.png)
 
 ### 房源详情
 
 - 房源详情可以查看房源的相信信息，同时可以预约看房
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E6%88%BF%E6%BA%90%E8%AF%A6%E6%83%85.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E6%88%BF%E6%BA%90%E8%AF%A6%E6%83%85.png)
 
 ### 地图找房
 
 - 地图找房主要是可以通过地图查询自己想寻找的房源
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E5%9C%B0%E5%9B%BE%E6%89%BE%E6%88%BF.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E5%9C%B0%E5%9B%BE%E6%89%BE%E6%88%BF.png)
 
 ### 个人中心
 
 - 个人中心可以查看自己的待看清单，预约记录，看房记录和编辑个人信息
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83.png)
 
 ***
 
@@ -107,16 +107,16 @@
 
 - 管理员可以通过填写必要信息添加网站房源
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E6%B7%BB%E5%8A%A0%E6%88%BF%E6%BA%90.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E6%B7%BB%E5%8A%A0%E6%88%BF%E6%BA%90.png)
 
 ### 房源管理
 
 - 管理员可以下架，修改和删除房源
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E6%88%BF%E6%BA%90%E7%AE%A1%E7%90%86.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E6%88%BF%E6%BA%90%E7%AE%A1%E7%90%86.png)
 
 ### 预约管理
 
 - 用户预约看房后，管理员可以查看用户信息。经纪人线下带领客户看房后，管理员可以确定带看完成
 
-![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/SearchRoom/readme-pic/%E9%A2%84%E7%BA%A6%E7%AE%A1%E7%90%86.png)
+![](https://github.com/Thpffcj/SpringBoot-Project/blob/master/search-room/readme-pic/%E9%A2%84%E7%BA%A6%E7%AE%A1%E7%90%86.png)
